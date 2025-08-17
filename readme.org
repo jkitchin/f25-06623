@@ -1,61 +1,48 @@
-#+title: s25-06623 and 06-713
+#+title: f25-06623 and 06-713
 
-* Canvas site
+* TODO Canvas site
 :PROPERTIES:
 :URL:      https://canvas.cmu.edu/courses/45085
 :END:
 
-* GitHUB
+* TODO GitHUB
 :PROPERTIES:
 :URL:      https://github.com/jkitchin/s25-06623
 :END:
 
 * Schedule
 
-** [2025-01-13 Mon]
+** [2025-08-26 Tue] Recorded lecture
 
-** [2025-01-15 Wed]
+** [2025-08-28 Thu]
+** [2025-09-02 Tue]
+** [2025-09-04 Thu]
+** [2025-09-09 Tue]
+** [2025-09-11 Thu]
+** [2025-09-16 Tue]
+** [2025-09-18 Thu]
+** [2025-09-23 Tue]
+** [2025-09-25 Thu]
+** [2025-09-30 Tue] Recorded lecture
+** [2025-10-02 Thu]
+** [2025-10-07 Tue]
+** [2025-10-09 Thu]
 
-** [2025-01-20 Mon] NO CLASS - MLK day
+** [2025-10-14 Tue] FALL BREAK
 
-** [2025-01-22 Wed]
+** [2025-10-16 Thu] FALL BREAK
+** [2025-10-21 Tue]
+** [2025-10-23 Thu]
+** [2025-10-28 Tue]
+** [2025-10-30 Thu]
 
-** [2025-01-27 Mon]
-** [2025-01-29 Wed]
-
-** [2025-02-03 Mon]
-** [2025-02-05 Wed]
-
-** [2025-02-10 Mon]
-** [2025-02-12 Wed]
-
-** [2025-02-17 Mon]
-** [2025-02-19 Wed]
-
-** [2025-02-24 Mon]
-** [2025-02-26 Wed]
-
-** [2025-03-03 Mon] NO CLASS - SPRING BREAK
-** [2025-03-05 Wed] NO CLASS - SPRING BREAK
-
-** [2025-03-10 Mon]
-** [2025-03-12 Wed]
-
-** [2025-03-17 Mon]
-** [2025-03-19 Wed]
-
-** [2025-03-24 Mon] NO CLASS - ACS
-** [2025-03-26 Wed] NO CLASS - ACS
-
-** [2025-03-31 Mon]
-** [2025-04-02 Wed]
-
-** [2025-04-07 Mon]
-** [2025-04-09 Wed]
-
-** [2025-04-14 Mon] NO CLASS - Utah
-** [2025-04-16 Wed] NO CLASS - Utah
-
-** [2025-04-21 Mon]
-** [2025-04-23 Wed]
-
+** [2025-11-04 Tue] AICHE
+** [2025-11-06 Thu] AICHE
+** [2025-11-11 Tue]
+** [2025-11-13 Thu]
+** [2025-11-18 Tue]
+** [2025-11-20 Thu]
+** [2025-11-25 Tue]
+** [2025-11-27 Thu] THANKSGiVing
+** [2025-12-02 Tue]
+** [2025-12-04 Thu]
