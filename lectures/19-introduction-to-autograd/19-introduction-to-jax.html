@@ -196,8 +196,8 @@
 
 
 
-
 <li class="toctree-l1"><a class="reference internal" href="../02-integration-1/02-integration-1.html">Integration in Python</a></li>
+
 
 
 
@@ -205,7 +205,9 @@
 
 
 
+
 <li class="toctree-l1"><a class="reference internal" href="../04-fode-2/04-fode-2.html">Families of solutions to FODEs</a></li>
+
 
 <li class="toctree-l1"><a class="reference internal" href="../05-nth-odes/05-nth-odes.html">Higher order differential equations</a></li>
 
@@ -785,7 +787,7 @@ there are big changes.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(array([0.631107  , 0.70190139]), array(-6.58356793))
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(array([0.64201778, 0.70956149]), array(-55.52583767))
 </pre></div>
 </div>
 </div>
@@ -798,7 +800,7 @@ there are big changes.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/cc0edfe5c9836eb2bffca1037163f92374ebca42b3a47e9f6181f1372b44b33a.png" src="../../_images/cc0edfe5c9836eb2bffca1037163f92374ebca42b3a47e9f6181f1372b44b33a.png" />
+<img alt="../../_images/e5dac941fa820730cd5c5ee663ff44ad1357c2f4cf3db9357b7ce8a8fa22c34d.png" src="../../_images/e5dac941fa820730cd5c5ee663ff44ad1357c2f4cf3db9357b7ce8a8fa22c34d.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -813,7 +815,7 @@ there are big changes.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/f1e2e32ea0dbe5bc368b75ccd77c9d86b99cd42f7e6f4cfdbf822a8f9006952e.png" src="../../_images/f1e2e32ea0dbe5bc368b75ccd77c9d86b99cd42f7e6f4cfdbf822a8f9006952e.png" />
+<img alt="../../_images/666ef22ccc62c6b28249f4958915490f3495e389d8aed668aaffd5dbbdd0f0c9.png" src="../../_images/666ef22ccc62c6b28249f4958915490f3495e389d8aed668aaffd5dbbdd0f0c9.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -823,7 +825,7 @@ there are big changes.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/f5f24c0e02ccd5540e8cfaade8889303e47559f859ebd733ae10d0c03b792307.png" src="../../_images/f5f24c0e02ccd5540e8cfaade8889303e47559f859ebd733ae10d0c03b792307.png" />
+<img alt="../../_images/473f1121c7c1d042a0e492979f58433bf678fe997dbfde6f1f92737b16250f01.png" src="../../_images/473f1121c7c1d042a0e492979f58433bf678fe997dbfde6f1f92737b16250f01.png" />
 </div>
 </div>
 </section>
@@ -1238,8 +1240,8 @@ example:</p>
 <p><span class="math notranslate nohighlight">\(f_1(x, y) = x^2 y\)</span></p>
 <p><span class="math notranslate nohighlight">\(f_2(x, y) = 5 x + \sin(y)\)</span></p>
 <p>The Jacobian of this system is:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-564f49ed-e786-43aa-8322-52b19bdaa94e">
-<span class="eqno">(4)<a class="headerlink" href="#equation-564f49ed-e786-43aa-8322-52b19bdaa94e" title="Permalink to this equation">#</a></span>\[\begin{equation} \left[\begin{array}{cc} 2 x y &amp; x^2 \\ 5 &amp; \cos y \\
+<div class="amsmath math notranslate nohighlight" id="equation-10ffcaa6-f3aa-4d53-a79e-7faad3fb9de3">
+<span class="eqno">(4)<a class="headerlink" href="#equation-10ffcaa6-f3aa-4d53-a79e-7faad3fb9de3" title="Permalink to this equation">#</a></span>\[\begin{equation} \left[\begin{array}{cc} 2 x y &amp; x^2 \\ 5 &amp; \cos y \\
 \end{array}\right] \end{equation}\]</div>
 <p>There are two Jacobian functions, <code class="docutils literal notranslate"><span class="pre">jacfwd</span></code> and <code class="docutils literal notranslate"><span class="pre">jacref</span></code>. In theory they do the same thing, but one of them will usually be faster for some systems. <code class="docutils literal notranslate"><span class="pre">jacfwd</span></code> uses a forward pass through the code to compute the Jacobian, while <code class="docutils literal notranslate"><span class="pre">jacrev</span></code> uses a reverse pass. The <a class="reference external" href="https://jax.readthedocs.io/en/latest/notebooks/autodiff_cookbook.html#jacobians-and-hessians-using-jacfwd-and-jacrev">documentation</a> recommends using jacfwd for “tall” Jacobians and jacref for “wide” jacobians. For square jacobians, it does not matter. It is fine to be practical, and try both to see if one is faster than other.</p>
 <div class="cell docutils container">
@@ -1581,8 +1583,8 @@ regression and conclude with an introduction to machine learning.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><div id="lIYrYycNYWoO" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: left"><style>
-#lIYrYycNYWoO {
+<div class="output text_html"><div id="cDWibdpXJDfI" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: left"><style>
+#cDWibdpXJDfI {
    --jq-multiple-choice-bg: #6f78ffff;
    --jq-mc-button-bg: #fafafa;
    --jq-mc-button-border: #e0e0e0e0;
@@ -1799,7 +1801,7 @@ regression and conclude with an introduction to machine learning.</p>
         background-color: var(--jq-correct-color);
     }
 }
-</style></div><script type="application/javascript">var questionslIYrYycNYWoO=[
+</style></div><script type="application/javascript">var questionscDWibdpXJDfI=[
   {
     "question": "Derivatives have useful applications in determining",
     "type": "multiple_choice",
@@ -3104,8 +3106,8 @@ function make_string(qa, outerqDiv, qDiv, aDiv, id) {
  * Ensures show_questions is called after the container div is in the DOM.
  */
 function try_show() {
-  if (document.getElementById("lIYrYycNYWoO")) {
-    show_questions(questionslIYrYycNYWoO, lIYrYycNYWoO);
+  if (document.getElementById("cDWibdpXJDfI")) {
+    show_questions(questionscDWibdpXJDfI, cDWibdpXJDfI);
   } else {
     setTimeout(try_show, 200);
   }

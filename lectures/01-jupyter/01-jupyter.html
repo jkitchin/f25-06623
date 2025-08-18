@@ -196,8 +196,8 @@
 
 
 
-
 <li class="toctree-l1"><a class="reference internal" href="../02-integration-1/02-integration-1.html">Integration in Python</a></li>
+
 
 
 
@@ -205,7 +205,9 @@
 
 
 
+
 <li class="toctree-l1"><a class="reference internal" href="../04-fode-2/04-fode-2.html">Families of solutions to FODEs</a></li>
+
 
 <li class="toctree-l1"><a class="reference internal" href="../05-nth-odes/05-nth-odes.html">Higher order differential equations</a></li>
 
@@ -538,7 +540,6 @@ document.write(`
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#strings">Strings</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#printing-arrays">Printing arrays</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#line-and-cell-magics">Line and cell magics</a></li>
 </ul>
 
             </nav>
@@ -633,29 +634,6 @@ document.write(`
             width="400"
             height="300"
             src="https://www.youtube.com/embed/Upcs6OCgnow"
-            frameborder="0"
-            allowfullscreen
-            
-        ></iframe>
-        </div></div>
-</div>
-<p>This is a whiteboard we can communicate through. You may prefer to have it in another tab:</p>
-<p><a class="reference external" href="https://miro.com/app/board/uXjVMrCsQck=/?share_link_id=306221579517">https://miro.com/app/board/uXjVMrCsQck=/?share_link_id=306221579517</a></p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">IFrame</span>
-
-
-<span class="n">IFrame</span><span class="p">(</span><span class="s1">&#39;https://miro.com/app/board/uXjVMrCsQck=/?share_link_id=306221579517&#39;</span><span class="p">,</span> <span class="mi">1200</span><span class="p">,</span> <span class="mi">600</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html">
-        <iframe
-            width="1200"
-            height="600"
-            src="https://miro.com/app/board/uXjVMrCsQck=/?share_link_id=306221579517"
             frameborder="0"
             allowfullscreen
             
@@ -949,7 +927,7 @@ f(x)
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">22</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">21</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
 <span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">f</span><span class="p">()</span>  <span class="c1"># This is an error because x is required</span>
 
 <span class="ne">TypeError</span>: f() missing 1 required positional argument: &#39;x&#39;
@@ -1020,7 +998,7 @@ f(x)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>  <span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">27</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>  <span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">26</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
     <span class="n">f</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="c1"># This is an error because 2 is a positional argument that comes after the keyword argument a</span>
             <span class="o">^</span>
 <span class="ne">SyntaxError</span>: positional argument follows keyword argument
@@ -1549,7 +1527,7 @@ She has 7 left.
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">61</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">60</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
 <span class="ne">----&gt; </span><span class="mi">1</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;x = </span><span class="si">{</span><span class="n">x</span><span class="si">:</span><span class="s2">1.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="ne">TypeError</span>: unsupported format string passed to numpy.ndarray.__format__
@@ -1645,7 +1623,7 @@ She has 7 left.
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">ZeroDivisionError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">68</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">67</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
 <span class="ne">----&gt; </span><span class="mi">1</span> <span class="mi">1</span> <span class="o">/</span> <span class="mi">0</span>
 
 <span class="ne">ZeroDivisionError</span>: division by zero
@@ -1711,67 +1689,6 @@ We will start using functions to solve integrals and differential equations.</p>
         </div></div>
 </div>
 <p><a class="reference internal" href="../toc.html"><span class="std std-doc">TOC</span></a></p>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="line-and-cell-magics">
-<h1>Line and cell magics<a class="headerlink" href="#line-and-cell-magics" title="Link to this heading">#</a></h1>
-<p>I defined some helpful things for you. You have to load them like this.</p>
-<p>We introduce the search magic here.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">run</span> ~/f25-06623/f25.py
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">OSError</span><span class="g g-Whitespace">                                   </span>Traceback (most recent call last)
-<span class="nn">File /opt/hostedtoolcache/Python/3.12.11/x64/lib/python3.12/site-packages/IPython/core/magics/execution.py:728,</span> in <span class="ni">ExecutionMagics.run</span><span class="nt">(self, parameter_s, runner, file_finder)</span>
-<span class="g g-Whitespace">    </span><span class="mi">727</span>     <span class="n">fpath</span> <span class="o">=</span> <span class="n">arg_lst</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-<span class="ne">--&gt; </span><span class="mi">728</span>     <span class="n">filename</span> <span class="o">=</span> <span class="n">file_finder</span><span class="p">(</span><span class="n">fpath</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">729</span> <span class="k">except</span> <span class="ne">IndexError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-
-<span class="nn">File /opt/hostedtoolcache/Python/3.12.11/x64/lib/python3.12/site-packages/IPython/utils/path.py:90,</span> in <span class="ni">get_py_filename</span><span class="nt">(name)</span>
-<span class="g g-Whitespace">     </span><span class="mi">89</span>         <span class="k">return</span> <span class="n">py_name</span>
-<span class="ne">---&gt; </span><span class="mi">90</span> <span class="k">raise</span> <span class="ne">IOError</span><span class="p">(</span><span class="s2">&quot;File `</span><span class="si">%r</span><span class="s2">` not found.&quot;</span> <span class="o">%</span> <span class="n">name</span><span class="p">)</span>
-
-<span class="ne">OSError</span>: File `&#39;/home/runner/f25-06623/f25.py&#39;` not found.
-
-<span class="n">The</span> <span class="n">above</span> <span class="n">exception</span> <span class="n">was</span> <span class="n">the</span> <span class="n">direct</span> <span class="n">cause</span> <span class="n">of</span> <span class="n">the</span> <span class="n">following</span> <span class="n">exception</span><span class="p">:</span>
-
-<span class="ne">Exception</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">72</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">get_ipython</span><span class="p">()</span><span class="o">.</span><span class="n">run_line_magic</span><span class="p">(</span><span class="s1">&#39;run&#39;</span><span class="p">,</span> <span class="s1">&#39;~/f25-06623/f25.py&#39;</span><span class="p">)</span>
-
-<span class="nn">File /opt/hostedtoolcache/Python/3.12.11/x64/lib/python3.12/site-packages/IPython/core/interactiveshell.py:2504,</span> in <span class="ni">InteractiveShell.run_line_magic</span><span class="nt">(self, magic_name, line, _stack_depth)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2502</span>     <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;local_ns&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_local_scope</span><span class="p">(</span><span class="n">stack_depth</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2503</span> <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">builtin_trap</span><span class="p">:</span>
-<span class="ne">-&gt; </span><span class="mi">2504</span>     <span class="n">result</span> <span class="o">=</span> <span class="n">fn</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2506</span> <span class="c1"># The code below prevents the output from being displayed</span>
-<span class="g g-Whitespace">   </span><span class="mi">2507</span> <span class="c1"># when using magics with decorator @output_can_be_silenced</span>
-<span class="g g-Whitespace">   </span><span class="mi">2508</span> <span class="c1"># when the last Python token in the expression is a &#39;;&#39;.</span>
-<span class="g g-Whitespace">   </span><span class="mi">2509</span> <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">fn</span><span class="p">,</span> <span class="n">magic</span><span class="o">.</span><span class="n">MAGIC_OUTPUT_CAN_BE_SILENCED</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
-
-<span class="nn">File /opt/hostedtoolcache/Python/3.12.11/x64/lib/python3.12/site-packages/IPython/core/magics/execution.py:739,</span> in <span class="ni">ExecutionMagics.run</span><span class="nt">(self, parameter_s, runner, file_finder)</span>
-<span class="g g-Whitespace">    </span><span class="mi">737</span>     <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;nt&#39;</span> <span class="ow">and</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;^&#39;.*&#39;$&quot;</span><span class="p">,</span><span class="n">fpath</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">738</span>         <span class="n">warn</span><span class="p">(</span><span class="s1">&#39;For Windows, use double quotes to wrap a filename: </span><span class="si">%r</span><span class="s1">un &quot;mypath</span><span class="se">\\</span><span class="s1">myfile.py&quot;&#39;</span><span class="p">)</span>
-<span class="ne">--&gt; </span><span class="mi">739</span>     <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">e</span>
-<span class="g g-Whitespace">    </span><span class="mi">740</span> <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">741</span>     <span class="k">if</span> <span class="n">fpath</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">meta_path</span><span class="p">:</span>
-
-<span class="ne">Exception</span>: File `&#39;/home/runner/f25-06623/f25.py&#39;` not found.
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">search</span>
-
-How do you write a function?
-</pre></div>
-</div>
-</div>
-</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -1863,7 +1780,6 @@ How do you write a function?
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#strings">Strings</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#printing-arrays">Printing arrays</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#line-and-cell-magics">Line and cell magics</a></li>
 </ul>
 
   </nav></div>

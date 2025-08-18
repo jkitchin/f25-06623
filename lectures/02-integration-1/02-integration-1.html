@@ -196,8 +196,8 @@
 
 
 
-
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Integration in Python</a></li>
+
 
 
 
@@ -205,7 +205,9 @@
 
 
 
+
 <li class="toctree-l1"><a class="reference internal" href="../04-fode-2/04-fode-2.html">Families of solutions to FODEs</a></li>
+
 
 <li class="toctree-l1"><a class="reference internal" href="../05-nth-odes/05-nth-odes.html">Higher order differential equations</a></li>
 
@@ -530,6 +532,7 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#the-great-integration-adventure">The Great Integration Adventure</a></li>
 </ul>
 
             </nav>
@@ -1099,12 +1102,7 @@ At X=0.65 V=0.701 m^3
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">?</span>sp.integrate.cumtrapz
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Object `sp.integrate.cumtrapz` not found.
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">?</span>sp.integrate.cumulative_trapezoid
 </pre></div>
 </div>
 </div>
@@ -1265,7 +1263,7 @@ For non-polynomial functions, the formula is an approximation to the integral an
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The answer is 40.996012819169536!!!
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2222/2765388034.py:5: IntegrationWarning: The maximum number of subdivisions (50) has been achieved.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2236/2765388034.py:5: IntegrationWarning: The maximum number of subdivisions (50) has been achieved.
   If increasing the limit yields no improvement it is advised to analyze 
   the integrand in order to determine the difficulties.  If the position of a 
   local difficulty can be determined (singularity, discontinuity) one will 
@@ -1842,7 +1840,7 @@ For non-polynomial functions, the formula is an approximation to the integral an
     <path d="M12 0c6.623 0 12 5.377 12 12s-5.377 12-12 12-12-5.377-12-12 5.377-12 12-12zm0 1c6.071 0 11 4.929 11 11s-4.929 11-11 11-11-4.929-11-11 4.929-11 11-11zm0 10.293l5.293-5.293.707.707-5.293 5.293 5.293 5.293-.707.707-5.293-5.293-5.293 5.293-.707-.707 5.293-5.293-5.293-5.293.707-.707 5.293 5.293z"/>
   </symbol>
 </svg>
-</div><div class="output text_html"><div style="height:40px"></div><div class="flip-container" id="amzunIJEFgHN" data-topics='[]' data-known-widgets='true' data-local-storage='false' tabindex="0" style="outline:none;"></div><div style="height:40px"></div><div class="next" id="amzunIJEFgHN-next" onclick="window.checkFlip('amzunIJEFgHN')"> </div> <div style="height:40px"></div></div><script type="application/javascript">/*!
+</div><div class="output text_html"><div style="height:40px"></div><div class="flip-container" id="szivWSCbmpFQ" data-topics='[]' data-known-widgets='true' data-local-storage='false' tabindex="0" style="outline:none;"></div><div style="height:40px"></div><div class="next" id="szivWSCbmpFQ-next" onclick="window.checkFlip('szivWSCbmpFQ')"> </div> <div style="height:40px"></div></div><script type="application/javascript">/*!
  * swiped-events.js - v1.1.4
  * Pure JavaScript swipe events
  * https://github.com/john-doherty/swiped-events
@@ -2638,7 +2636,7 @@ window.setTopics = function(idOrElem, topics) {
 
 (function() {
     var observer = new MutationObserver(function(mutations, obs) {
-        var el = document.getElementById("amzunIJEFgHN");
+        var el = document.getElementById("szivWSCbmpFQ");
         if (el) {
             el.dataset.url = "";
             el.dataset.cards = JSON.stringify([{"front": "np.trapz", "back": "Trapezoid method for data integration", "seqNum": 0}, {"front": "scipy.integrate.simps", "back": "Simpson's method for data integration", "seqNum": 1}, {"front": "scipy.integrate.cumtrapz", "back": "Cumulative data integration", "seqNum": 2}, {"front": "scipy.integrate.quad", "back": "Gaussian quadrature to integrate functions<br>Returns integrand, error estimate", "seqNum": 3}]);
@@ -2650,7 +2648,7 @@ window.setTopics = function(idOrElem, topics) {
             el.dataset.shuffleCards = false;
             el.dataset.title = "";
             el.dataset.subject = "";
-            createCards("amzunIJEFgHN");
+            createCards("szivWSCbmpFQ");
             obs.disconnect();
         }
     });
@@ -2665,8 +2663,8 @@ window.setTopics = function(idOrElem, topics) {
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><div id="IGiVSdWDoFNV" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: left"><style>
-#IGiVSdWDoFNV {
+<div class="output text_html"><div id="wToIrGEQnoBx" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: left"><style>
+#wToIrGEQnoBx {
    --jq-multiple-choice-bg: #6f78ffff;
    --jq-mc-button-bg: #fafafa;
    --jq-mc-button-border: #e0e0e0e0;
@@ -2883,7 +2881,7 @@ window.setTopics = function(idOrElem, topics) {
         background-color: var(--jq-correct-color);
     }
 }
-</style></div><script type="application/javascript">var questionsIGiVSdWDoFNV=[
+</style></div><script type="application/javascript">var questionswToIrGEQnoBx=[
   {
     "question": "Which is the correct argument in matplotlib to plot data using black circles connected with a solid line?",
     "type": "multiple_choice",
@@ -4188,8 +4186,8 @@ function make_string(qa, outerqDiv, qDiv, aDiv, id) {
  * Ensures show_questions is called after the container div is in the DOM.
  */
 function try_show() {
-  if (document.getElementById("IGiVSdWDoFNV")) {
-    show_questions(questionsIGiVSdWDoFNV, IGiVSdWDoFNV);
+  if (document.getElementById("wToIrGEQnoBx")) {
+    show_questions(questionswToIrGEQnoBx, wToIrGEQnoBx);
   } else {
     setTimeout(try_show, 200);
   }
@@ -4201,6 +4199,22 @@ function try_show() {
 }
 </script></div>
 </div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="the-great-integration-adventure">
+<h1>The Great Integration Adventure<a class="headerlink" href="#the-great-integration-adventure" title="Link to this heading">#</a></h1>
+<p><em>A cybrid tale by Pyter Python</em></p>
+<p>Once upon a time in the land of Numpyland, there lived a young coder named Pyter Python who had a peculiar problem: he needed to find the area under curves, but all he had were mysterious dots of data scattered like breadcrumbs in a digital forest.</p>
+<p>“Fear not!” declared his wise mentor, Professor Trapezoid. “We shall connect these dots with straight lines and create little geometric shapes called trapezoids. Each trapezoid’s area is simply <code class="docutils literal notranslate"><span class="pre">0.5</span> <span class="pre">*</span> <span class="pre">width</span> <span class="pre">*</span> <span class="pre">(y1</span> <span class="pre">+</span> <span class="pre">y2)</span></code>, and if we add them all up…” <em>POOF!</em> The area magically appeared!</p>
+<p>Pyter was amazed, but soon discovered that his trusty sidekick <code class="docutils literal notranslate"><span class="pre">numpy.trapezoid()</span></code> could do all the tedious calculations in one swift command. “It’s like having a calculator that never gets tired!” he exclaimed.</p>
+<p>But then Pyter met Simpson, a quirky mathematician who claimed his method was superior. “Instead of boring straight lines,” Simpson boasted, “I use elegant parabolas! They hug the curves better, like a mathematical embrace!” Indeed, <code class="docutils literal notranslate"><span class="pre">scipy.integrate.simpson()</span></code> proved more accurate for Pyter’s polynomial friends.</p>
+<p>As Pyter’s adventures continued, he encountered the legendary function <code class="docutils literal notranslate"><span class="pre">scipy.integrate.quad()</span></code> - a mystical creature from the ancient Fortran kingdoms. This powerful being could integrate ANY function, even those stretching to infinity! It whispered estimates of errors and used adaptive magic to ensure precision.</p>
+<p>“Watch this!” quad demonstrated, effortlessly computing the volume of spheres and solving reactor design problems that would make engineers weep with joy. It even tackled the infamous error function, a beast so complex it required its own special lair in <code class="docutils literal notranslate"><span class="pre">scipy.special</span></code>.</p>
+<p>During his journey, Pyter learned that integration wasn’t just mathematical wizardry - it was the key to understanding everything from diffusion in steel to the volumes of mysterious plug flow reactors. Each problem was like a puzzle waiting to be solved with the right integration spell.</p>
+<p>As the sun set over Numpyland, Pyter realized he had gained more than just coding skills. He had discovered that with the right tools - <code class="docutils literal notranslate"><span class="pre">trapezoid()</span></code> for data, <code class="docutils literal notranslate"><span class="pre">simpson()</span></code> for precision, and <code class="docutils literal notranslate"><span class="pre">quad()</span></code> for functions - no area under a curve could escape his computational grasp.</p>
+<p>And they all lived numerically ever after.</p>
+<p><em>The End</em></p>
+<hr class="docutils" />
+<p><em>“Remember,” Pyter always said, “when in doubt, integrate it out!”</em></p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -4284,6 +4298,7 @@ function try_show() {
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#the-great-integration-adventure">The Great Integration Adventure</a></li>
 </ul>
 
   </nav></div>
