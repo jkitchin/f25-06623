@@ -62,7 +62,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'lectures/23-gp/23-gp';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Index" href="../index.html" />
+    <link rel="next" title="Build statistics" href="../../execution-statistics.html" />
     <link rel="prev" title="Advanced topics in ML" href="../22-ml-2/22-ml-2-jax.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -265,8 +265,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../21-machine-learning/21-machine-learning-jax.html">Introduction to machine learning</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../22-ml-2/22-ml-2-jax.html">Advanced topics in ML</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Gaussian process regression</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../index.html">Index</a></li>
-
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">About the book</span></p>
 <ul class="nav bd-sidenav">
@@ -629,7 +627,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/afad9007e60d565598087ff1a2740e7182e7b338ab2b898b61961363ee750d99.png" src="../../_images/afad9007e60d565598087ff1a2740e7182e7b338ab2b898b61961363ee750d99.png" />
+<img alt="../../_images/681ffa2ec2e12e0c5e08a4cc88c54700481272e30e784f54afba0d28e92b5a11.png" src="../../_images/681ffa2ec2e12e0c5e08a4cc88c54700481272e30e784f54afba0d28e92b5a11.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -753,7 +751,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([-0.00344391,  0.80843613,  1.00371191])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.02187944, 0.78806315, 0.99610451])
 </pre></div>
 </div>
 </div>
@@ -766,7 +764,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.7621685 , 0.77214352])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.74310617, 0.75275503])
 </pre></div>
 </div>
 </div>
@@ -783,7 +781,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/ca98ec26067f3f84906cc99ace5b1778ff55d6a0833d61777cb0249dda02edef.png" src="../../_images/ca98ec26067f3f84906cc99ace5b1778ff55d6a0833d61777cb0249dda02edef.png" />
+<img alt="../../_images/f325e687dfe9ada9b05fae42ccba61a0aad8ee636f7d29b20eb2fd7e65323291.png" src="../../_images/f325e687dfe9ada9b05fae42ccba61a0aad8ee636f7d29b20eb2fd7e65323291.png" />
 </div>
 </div>
 <p>That is not bad, but clearly not great. With a <span class="math notranslate nohighlight">\(\lambda=0.15\)</span>, only one data point is contributing to the estimate, the other points have only small contributions because they are far from points we are estimating. This is a feature of the <em>assumption</em> we made about the covariance with <span class="math notranslate nohighlight">\(\lambda\)</span>. This means we do not have enough data to make a very good estimate. We can see this if we try this with a much more dense data set.</p>
@@ -818,7 +816,7 @@ document.write(`
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Known data step size is 0.05
 </pre></div>
 </div>
-<img alt="../../_images/2b4f181a33e374e984bfb74cd6295aac28af3a17355847e24b8e7f4160544b20.png" src="../../_images/2b4f181a33e374e984bfb74cd6295aac28af3a17355847e24b8e7f4160544b20.png" />
+<img alt="../../_images/929d391f065e66f944e17b2e208adf57d59727e1c8f08c654c1dfad831ea1463.png" src="../../_images/929d391f065e66f944e17b2e208adf57d59727e1c8f08c654c1dfad831ea1463.png" />
 </div>
 </div>
 <p>Now you can see that we do very well in estimating the values. The length scale here might even be considered too short, since it is evident we are fitting trends in the noise.</p>
@@ -850,7 +848,7 @@ document.write(`
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Known data step size is 0.05
 </pre></div>
 </div>
-<img alt="../../_images/9cb61988280c2614b14dabacbdeb2e0390273c4026475bdcb4adf70dc0886691.png" src="../../_images/9cb61988280c2614b14dabacbdeb2e0390273c4026475bdcb4adf70dc0886691.png" />
+<img alt="../../_images/8781baaeed6358ae50aec1fffb583330c8f1465040201de026d5939471069bcb.png" src="../../_images/8781baaeed6358ae50aec1fffb583330c8f1465040201de026d5939471069bcb.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -891,7 +889,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/d0b29210f5ba5fc9320fa0906ce7a899b61d9712a3a041d7aefd204df1707723.png" src="../../_images/d0b29210f5ba5fc9320fa0906ce7a899b61d9712a3a041d7aefd204df1707723.png" />
+<img alt="../../_images/bf711080b92bac81a787ba033d45b538809a33167ee8f14e4e79437ca5afa0b2.png" src="../../_images/bf711080b92bac81a787ba033d45b538809a33167ee8f14e4e79437ca5afa0b2.png" />
 </div>
 </div>
 </section>
@@ -920,7 +918,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/b900caa4d7a99a31caa8800db21281475fa39d70fd69514a2930bae00ea4901e.png" src="../../_images/b900caa4d7a99a31caa8800db21281475fa39d70fd69514a2930bae00ea4901e.png" />
+<img alt="../../_images/a38b023cbf6bcf63a0b963aaa885aec929bc96b044a6706d18c61f1925bbe2fa.png" src="../../_images/a38b023cbf6bcf63a0b963aaa885aec929bc96b044a6706d18c61f1925bbe2fa.png" />
 </div>
 </div>
 </section>
@@ -971,10 +969,10 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([1.        , 0.06902443])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([1.        , 0.07359044])
 </pre></div>
 </div>
-<img alt="../../_images/4125ff166e4c0bc1ebb46c11ecdc05a61e2dc45dded826f2e59a959f17d25652.png" src="../../_images/4125ff166e4c0bc1ebb46c11ecdc05a61e2dc45dded826f2e59a959f17d25652.png" />
+<img alt="../../_images/3f4df99a1d111877dc9af1cd57601c0b05cb019b80645736b98d871517ee193c.png" src="../../_images/3f4df99a1d111877dc9af1cd57601c0b05cb019b80645736b98d871517ee193c.png" />
 </div>
 </div>
 <p>Note that we still see some wiggles in the fit, indicating some minor degree of overfitting with the optimal hyperparameters. That is happening because we fit to all the data, and do not use any to estimate how good our fits are. You can use train/test data splits for GPR for this purpose as well, but it is out of the scope of the lecture today.</p>
@@ -1009,7 +1007,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/3aa1502daf1d1dbb4e8dfa462049bdc514e6981fa55d31aba87cb2bc17d90c44.png" src="../../_images/3aa1502daf1d1dbb4e8dfa462049bdc514e6981fa55d31aba87cb2bc17d90c44.png" />
+<img alt="../../_images/a1000addc0ec9b9854ec6df5015915f57dcfd8989202590cdc30da866e1476bb.png" src="../../_images/a1000addc0ec9b9854ec6df5015915f57dcfd8989202590cdc30da866e1476bb.png" />
 </div>
 </div>
 <p>As before, we setup a log likelihood function and maximize it to get estimates for the parameters.</p>
@@ -1030,18 +1028,18 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  message: Desired error not necessarily achieved due to precision loss.
-  success: False
-   status: 2
-      fun: 7.523969906756931
-        x: [-1.355e-05  6.401e-01 -1.509e+00]
-      nit: 32
-      jac: [ 3.278e-06  2.909e-05  2.557e-05]
- hess_inv: [[ 2.399e-03  2.150e-03 -7.534e-04]
-            [ 2.150e-03  2.530e-03 -8.605e-04]
-            [-7.534e-04 -8.605e-04  3.240e-04]]
-     nfev: 745
-     njev: 183
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  message: Optimization terminated successfully.
+  success: True
+   status: 0
+      fun: 7.451118345214796
+        x: [ 1.903e-05  6.486e-01 -1.472e+00]
+      nit: 27
+      jac: [ 9.179e-06  3.576e-07 -5.126e-06]
+ hess_inv: [[ 5.725e+00  4.136e-03  2.244e-02]
+            [ 4.136e-03  2.456e-02  1.466e-02]
+            [ 2.244e-02  1.466e-02  4.630e-02]]
+     nfev: 140
+     njev: 35
 </pre></div>
 </div>
 </div>
@@ -1069,7 +1067,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/549bf196e81206f2c39b89f73a027114a0714b528a68781a193862e91e1eb5b7.png" src="../../_images/549bf196e81206f2c39b89f73a027114a0714b528a68781a193862e91e1eb5b7.png" />
+<img alt="../../_images/156d20b1e4b5b950092f7424d03b205363c6ef3355b03f46203ea9a9fd6a618d.png" src="../../_images/156d20b1e4b5b950092f7424d03b205363c6ef3355b03f46203ea9a9fd6a618d.png" />
 </div>
 </div>
 <p>Note that now, we get linear extrapolation, <em>because we are using a linear kernel</em>. Note also that the hyperparameters do not mean anything in particular to us. They do not include the slope or intercept. We can work those out pretty easily though. The intercept is just a prediction at <span class="math notranslate nohighlight">\(x=0\)</span>:</p>
@@ -1082,7 +1080,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([3.0049222])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([2.97116689])
 </pre></div>
 </div>
 </div>
@@ -1095,7 +1093,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(1.9918699732918383)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(2.017884704865789)
 </pre></div>
 </div>
 </div>
@@ -1107,7 +1105,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([1.98597457, 3.02027143])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([2.01184925, 2.98665702])
 </pre></div>
 </div>
 </div>
@@ -1143,7 +1141,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/eeb0d16b1cbd53fdc7055cce42be7239687d463ff2aaec422c5a69819a52f222.png" src="../../_images/eeb0d16b1cbd53fdc7055cce42be7239687d463ff2aaec422c5a69819a52f222.png" />
+<img alt="../../_images/eafc7b3389e7d8787d02277e083587923882b88d4da989ecb8531847f7975ba1.png" src="../../_images/eafc7b3389e7d8787d02277e083587923882b88d4da989ecb8531847f7975ba1.png" />
 </div>
 </div>
 </section>
@@ -1161,7 +1159,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/bd4b3172a4c616863e921bb2eeadf88e827657cb31108fca3d1725e519838c58.png" src="../../_images/bd4b3172a4c616863e921bb2eeadf88e827657cb31108fca3d1725e519838c58.png" />
+<img alt="../../_images/f867df759ca6219abd3fdd2017f7e3990c196a56e528a4be3ab19de256312abc.png" src="../../_images/f867df759ca6219abd3fdd2017f7e3990c196a56e528a4be3ab19de256312abc.png" />
 </div>
 </div>
 <p>This looks like a sin wave superimposed on a line. A periodic kernel is defined as</p>
@@ -1189,19 +1187,19 @@ document.write(`
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  message: Optimization terminated successfully.
   success: True
    status: 0
-      fun: 25.462482251884055
-        x: [ 2.815e-07  4.056e-01 -1.631e+00  6.172e-01  9.261e-01
-             3.465e-01]
-      nit: 69
-      jac: [ 9.537e-07  2.384e-06  2.384e-07  7.153e-07 -1.907e-06
-             2.861e-06]
- hess_inv: [[ 2.060e+00  1.322e-02 ...  2.559e-03  6.714e-03]
-            [ 1.322e-02  2.074e-02 ...  2.743e-03  3.693e-04]
+      fun: 25.479189319461476
+        x: [-2.695e-06  3.993e-01 -1.663e+00  6.171e-01  9.288e-01
+            -3.463e-01]
+      nit: 40
+      jac: [-1.431e-06 -1.431e-06 -1.669e-06 -1.431e-06 -2.861e-06
+             1.431e-06]
+ hess_inv: [[ 2.201e+00 -1.298e-03 ...  1.891e-04 -1.039e-02]
+            [-1.298e-03  2.325e-02 ...  3.597e-03 -8.358e-04]
             ...
-            [ 2.559e-03  2.743e-03 ...  1.359e-03  2.822e-04]
-            [ 6.714e-03  3.693e-04 ...  2.822e-04  1.110e-02]]
-     nfev: 595
-     njev: 85
+            [ 1.891e-04  3.597e-03 ...  1.856e-03 -8.594e-05]
+            [-1.039e-02 -8.358e-04 ... -8.594e-05  1.421e-02]]
+     nfev: 336
+     njev: 48
 </pre></div>
 </div>
 </div>
@@ -1232,7 +1230,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/12cbacce2b5a8ac0f5aac9a9450516e56f6458e5670cdb4ded7b61b05b4f966c.png" src="../../_images/12cbacce2b5a8ac0f5aac9a9450516e56f6458e5670cdb4ded7b61b05b4f966c.png" />
+<img alt="../../_images/94caa663e91ae345412120b6f9643408a99c28ab7bb988c727a54c27e1008dd0.png" src="../../_images/94caa663e91ae345412120b6f9643408a99c28ab7bb988c727a54c27e1008dd0.png" />
 </div>
 </div>
 <p>Note that we get oscillatory + linear extrapolation behavior! That is again <em>because of properties of the kernel</em> and <em>not because the model learned anything</em>.</p>
@@ -1266,8 +1264,8 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><div id="jJAjSEgbtgGC" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: left"><style>
-#jJAjSEgbtgGC {
+<div class="output text_html"><div id="tjJbYFfupZpU" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: left"><style>
+#tjJbYFfupZpU {
    --jq-multiple-choice-bg: #6f78ffff;
    --jq-mc-button-bg: #fafafa;
    --jq-mc-button-border: #e0e0e0e0;
@@ -1484,7 +1482,7 @@ document.write(`
         background-color: var(--jq-correct-color);
     }
 }
-</style></div><script type="application/javascript">var questionsjJAjSEgbtgGC=[{"question": "A smaller lengthscale than the optimum will result in", "type": "multiple_choice", "answers": [{"answer": "A more accurate model", "correct": false}, {"answer": "Overfitting", "correct": true}, {"answer": "Underfitting", "correct": false}, {"answer": "A linear model", "correct": false}], "tag": "hyperparameters lengthscale", "lecture_file": "23_gp"}, {"question": "When using a gaussian kernel, a point has near-zero covariance with another point if it is x distance away. x = ?", "type": "multiple_choice", "answers": [{"answer": "Lengthscale", "correct": false}, {"answer": "0.5*Lengthscale", "correct": false}, {"answer": "2*Lengthscale", "correct": true}, {"answer": "4*Lengthscale", "correct": false}], "tag": "hyperparameters lengthscale", "lecture_file": "23_gp"}, {"question": "To calculate the weights of a GPR model, we would need", "type": "multiple_choice", "answers": [{"answer": "The x-values of the train data set", "correct": false}, {"answer": "The x-values of the test data set", "correct": false}, {"answer": "Noise in the data", "correct": false}, {"answer": "All of the above", "correct": true}], "tag": "hyperparameters", "lecture_file": "23_gp"}, {"question": "We can use multiple covariance functions in a single model", "type": "multiple_choice", "answers": [{"answer": "TRUE", "correct": true}, {"answer": "FALSE", "correct": false}, {"answer": "-", "correct": false}, {"answer": "-", "correct": false}], "tag": "kernel", "lecture_file": "23_gp"}, {"question": "A kernel is analogous to", "type": "multiple_choice", "answers": [{"answer": "a change of basis", "correct": true}, {"answer": "activation functions", "correct": false}, {"answer": "Both of the above", "correct": false}, {"answer": "None of the above", "correct": false}], "tag": "kernel", "lecture_file": "23_gp"}, {"question": "Which of the following are hyperparameters of a GPR model?", "type": "multiple_choice", "answers": [{"answer": "Lengthscale", "correct": false}, {"answer": "Noise", "correct": false}, {"answer": "Kernel", "correct": false}, {"answer": "All of the above", "correct": true}], "tag": "hyperparameters", "lecture_file": "23_gp"}, {"question": "Gaussian Process Regression is", "type": "multiple_choice", "answers": [{"answer": "Deterministic and parametric", "correct": false}, {"answer": "Probabilistic and non-parametric", "correct": true}, {"answer": "Probabilistic and parametric", "correct": false}, {"answer": "Deterministic and non-parametric", "correct": false}], "tag": "kernel", "lecture_file": "23_gp"}, {"question": "The sum of two independent gaussian distribution functions is", "type": "multiple_choice", "answers": [{"answer": "a constant", "correct": false}, {"answer": "linear", "correct": false}, {"answer": "gaussian", "correct": true}, {"answer": "Periodic", "correct": false}], "tag": "kernel", "lecture_file": "23_gp"}, {"question": "The nature of extrapolation of a GPR model beyond the training data range would be determined by", "type": "multiple_choice", "answers": [{"answer": "The kernel", "correct": true}, {"answer": "The number of data points", "correct": false}, {"answer": "Noise", "correct": false}, {"answer": "None of the above", "correct": false}], "tag": "kernel extrapolation", "lecture_file": "23_gp"}, {"question": "What would be the result if we use a linear kernal for a dataset that roughly follows a sinusoidal trend.", "type": "multiple_choice", "answers": [{"answer": "We will get a coding error", "correct": false}, {"answer": "the model will still perfectly fit", "correct": false}, {"answer": "the model will have a low uncertainty", "correct": false}, {"answer": "The model will have a high uncertainty ", "correct": true}], "tag": "kernel uncertainty", "lecture_file": "23_gp"}];
+</style></div><script type="application/javascript">var questionstjJbYFfupZpU=[{"question": "A smaller lengthscale than the optimum will result in", "type": "multiple_choice", "answers": [{"answer": "A more accurate model", "correct": false}, {"answer": "Overfitting", "correct": true}, {"answer": "Underfitting", "correct": false}, {"answer": "A linear model", "correct": false}], "tag": "hyperparameters lengthscale", "lecture_file": "23_gp"}, {"question": "When using a gaussian kernel, a point has near-zero covariance with another point if it is x distance away. x = ?", "type": "multiple_choice", "answers": [{"answer": "Lengthscale", "correct": false}, {"answer": "0.5*Lengthscale", "correct": false}, {"answer": "2*Lengthscale", "correct": true}, {"answer": "4*Lengthscale", "correct": false}], "tag": "hyperparameters lengthscale", "lecture_file": "23_gp"}, {"question": "To calculate the weights of a GPR model, we would need", "type": "multiple_choice", "answers": [{"answer": "The x-values of the train data set", "correct": false}, {"answer": "The x-values of the test data set", "correct": false}, {"answer": "Noise in the data", "correct": false}, {"answer": "All of the above", "correct": true}], "tag": "hyperparameters", "lecture_file": "23_gp"}, {"question": "We can use multiple covariance functions in a single model", "type": "multiple_choice", "answers": [{"answer": "TRUE", "correct": true}, {"answer": "FALSE", "correct": false}, {"answer": "-", "correct": false}, {"answer": "-", "correct": false}], "tag": "kernel", "lecture_file": "23_gp"}, {"question": "A kernel is analogous to", "type": "multiple_choice", "answers": [{"answer": "a change of basis", "correct": true}, {"answer": "activation functions", "correct": false}, {"answer": "Both of the above", "correct": false}, {"answer": "None of the above", "correct": false}], "tag": "kernel", "lecture_file": "23_gp"}, {"question": "Which of the following are hyperparameters of a GPR model?", "type": "multiple_choice", "answers": [{"answer": "Lengthscale", "correct": false}, {"answer": "Noise", "correct": false}, {"answer": "Kernel", "correct": false}, {"answer": "All of the above", "correct": true}], "tag": "hyperparameters", "lecture_file": "23_gp"}, {"question": "Gaussian Process Regression is", "type": "multiple_choice", "answers": [{"answer": "Deterministic and parametric", "correct": false}, {"answer": "Probabilistic and non-parametric", "correct": true}, {"answer": "Probabilistic and parametric", "correct": false}, {"answer": "Deterministic and non-parametric", "correct": false}], "tag": "kernel", "lecture_file": "23_gp"}, {"question": "The sum of two independent gaussian distribution functions is", "type": "multiple_choice", "answers": [{"answer": "a constant", "correct": false}, {"answer": "linear", "correct": false}, {"answer": "gaussian", "correct": true}, {"answer": "Periodic", "correct": false}], "tag": "kernel", "lecture_file": "23_gp"}, {"question": "The nature of extrapolation of a GPR model beyond the training data range would be determined by", "type": "multiple_choice", "answers": [{"answer": "The kernel", "correct": true}, {"answer": "The number of data points", "correct": false}, {"answer": "Noise", "correct": false}, {"answer": "None of the above", "correct": false}], "tag": "kernel extrapolation", "lecture_file": "23_gp"}, {"question": "What would be the result if we use a linear kernal for a dataset that roughly follows a sinusoidal trend.", "type": "multiple_choice", "answers": [{"answer": "We will get a coding error", "correct": false}, {"answer": "the model will still perfectly fit", "correct": false}, {"answer": "the model will have a low uncertainty", "correct": false}, {"answer": "The model will have a high uncertainty ", "correct": true}], "tag": "kernel uncertainty", "lecture_file": "23_gp"}];
 
 if (typeof Question === 'undefined') {
 // Make a random ID
@@ -2547,8 +2545,8 @@ function make_string(qa, outerqDiv, qDiv, aDiv, id) {
  * Ensures show_questions is called after the container div is in the DOM.
  */
 function try_show() {
-  if (document.getElementById("jJAjSEgbtgGC")) {
-    show_questions(questionsjJAjSEgbtgGC, jJAjSEgbtgGC);
+  if (document.getElementById("tjJbYFfupZpU")) {
+    show_questions(questionstjJbYFfupZpU, tjJbYFfupZpU);
   } else {
     setTimeout(try_show, 200);
   }
@@ -2603,11 +2601,11 @@ function try_show() {
       </div>
     </a>
     <a class="right-next"
-       href="../index.html"
+       href="../../execution-statistics.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Index</p>
+        <p class="prev-next-title">Build statistics</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
