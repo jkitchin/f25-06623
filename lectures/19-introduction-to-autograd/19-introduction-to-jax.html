@@ -184,7 +184,7 @@
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lectures</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../toc.html">06-623 Mathematical modeling of chemical engineering processes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../00-intro/00-intro.html">Introduction to 06-623, 06-713 and Jupyter Lab</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../00-intro/00-intro.html">Introduction to 06-623 and Jupyter Lab</a></li>
 
 
 
@@ -792,7 +792,7 @@ there are big changes.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(array([0.64690142, 0.70289281]), array(-33.97508067))
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(array([0.62873036, 0.69366665]), array(-26.21463623))
 </pre></div>
 </div>
 </div>
@@ -805,7 +805,7 @@ there are big changes.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/0cd29522374613fa8890f077d3f0dc0721e27ec950b6ba261700105b78e1993b.png" src="../../_images/0cd29522374613fa8890f077d3f0dc0721e27ec950b6ba261700105b78e1993b.png" />
+<img alt="../../_images/44df45bf533b2d54d9be8e68309117f22cd5e63168354d6d8d1e878d5d7d898f.png" src="../../_images/44df45bf533b2d54d9be8e68309117f22cd5e63168354d6d8d1e878d5d7d898f.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -820,7 +820,7 @@ there are big changes.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/b4e0165f68aee70edc724a391768fbb47039103744520c91c6e60857a8348221.png" src="../../_images/b4e0165f68aee70edc724a391768fbb47039103744520c91c6e60857a8348221.png" />
+<img alt="../../_images/a9031ae0bdb5b61217ad8f2e9aaa14132106a0b24f0fe8d2a7e9e821fa034b32.png" src="../../_images/a9031ae0bdb5b61217ad8f2e9aaa14132106a0b24f0fe8d2a7e9e821fa034b32.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -830,7 +830,7 @@ there are big changes.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/7f75877510ad5f04e2f8a9831448b3441562fe2afdc0b69ce545b7c9f8f6a2f1.png" src="../../_images/7f75877510ad5f04e2f8a9831448b3441562fe2afdc0b69ce545b7c9f8f6a2f1.png" />
+<img alt="../../_images/8a98066e99cef3f82e7e9b4a5851aa69966494723b3567767fc3ac324dd9a849.png" src="../../_images/8a98066e99cef3f82e7e9b4a5851aa69966494723b3567767fc3ac324dd9a849.png" />
 </div>
 </div>
 </section>
@@ -1245,8 +1245,8 @@ example:</p>
 <p><span class="math notranslate nohighlight">\(f_1(x, y) = x^2 y\)</span></p>
 <p><span class="math notranslate nohighlight">\(f_2(x, y) = 5 x + \sin(y)\)</span></p>
 <p>The Jacobian of this system is:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-9755b5d9-5a48-4b5b-86b4-83dfb4eb7754">
-<span class="eqno">(4)<a class="headerlink" href="#equation-9755b5d9-5a48-4b5b-86b4-83dfb4eb7754" title="Permalink to this equation">#</a></span>\[\begin{equation} \left[\begin{array}{cc} 2 x y &amp; x^2 \\ 5 &amp; \cos y \\
+<div class="amsmath math notranslate nohighlight" id="equation-5e3b0392-e1ca-42ca-b8ab-d95f557e8715">
+<span class="eqno">(4)<a class="headerlink" href="#equation-5e3b0392-e1ca-42ca-b8ab-d95f557e8715" title="Permalink to this equation">#</a></span>\[\begin{equation} \left[\begin{array}{cc} 2 x y &amp; x^2 \\ 5 &amp; \cos y \\
 \end{array}\right] \end{equation}\]</div>
 <p>There are two Jacobian functions, <code class="docutils literal notranslate"><span class="pre">jacfwd</span></code> and <code class="docutils literal notranslate"><span class="pre">jacref</span></code>. In theory they do the same thing, but one of them will usually be faster for some systems. <code class="docutils literal notranslate"><span class="pre">jacfwd</span></code> uses a forward pass through the code to compute the Jacobian, while <code class="docutils literal notranslate"><span class="pre">jacrev</span></code> uses a reverse pass. The <a class="reference external" href="https://jax.readthedocs.io/en/latest/notebooks/autodiff_cookbook.html#jacobians-and-hessians-using-jacfwd-and-jacrev">documentation</a> recommends using jacfwd for “tall” Jacobians and jacref for “wide” jacobians. For square jacobians, it does not matter. It is fine to be practical, and try both to see if one is faster than other.</p>
 <div class="cell docutils container">
@@ -1588,8 +1588,8 @@ regression and conclude with an introduction to machine learning.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><div id="COrgpWOlnWTY" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: left"><style>
-#COrgpWOlnWTY {
+<div class="output text_html"><div id="uzhVkkYMMNLo" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: left"><style>
+#uzhVkkYMMNLo {
    --jq-multiple-choice-bg: #6f78ffff;
    --jq-mc-button-bg: #fafafa;
    --jq-mc-button-border: #e0e0e0e0;
@@ -1806,7 +1806,7 @@ regression and conclude with an introduction to machine learning.</p>
         background-color: var(--jq-correct-color);
     }
 }
-</style></div><script type="application/javascript">var questionsCOrgpWOlnWTY=[
+</style></div><script type="application/javascript">var questionsuzhVkkYMMNLo=[
   {
     "question": "Derivatives have useful applications in determining",
     "type": "multiple_choice",
@@ -3111,8 +3111,8 @@ function make_string(qa, outerqDiv, qDiv, aDiv, id) {
  * Ensures show_questions is called after the container div is in the DOM.
  */
 function try_show() {
-  if (document.getElementById("COrgpWOlnWTY")) {
-    show_questions(questionsCOrgpWOlnWTY, COrgpWOlnWTY);
+  if (document.getElementById("uzhVkkYMMNLo")) {
+    show_questions(questionsuzhVkkYMMNLo, uzhVkkYMMNLo);
   } else {
     setTimeout(try_show, 200);
   }
