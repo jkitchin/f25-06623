@@ -214,6 +214,10 @@
 
 
 
+<li class="toctree-l1"><a class="reference internal" href="../06-genAI/06-genai.html">Generative AI aka LLMs in scientific programming</a></li>
+
+
+
 <li class="toctree-l1"><a class="reference internal" href="../07-nla-1/07-nla-1.html">Introduction to nonlinear algebra</a></li>
 
 
@@ -559,8 +563,8 @@ document.write(`
 <p><span class="math notranslate nohighlight">\(y''(x) \approx \frac{y_{i-1} - 2 y_i + y_{i+1}}{h^2} \)</span></p>
 <p><span class="math notranslate nohighlight">\(y'(x) \approx \frac{y_{i+1} - y_{i-1}}{2 h} \)</span></p>
 <p>We define a function <span class="math notranslate nohighlight">\(y''(x) = F(x, y, y')\)</span>. At each node in our discretized region, we will have an equation that looks like <span class="math notranslate nohighlight">\(y''(x) - F(x, y, y') = 0\)</span>, which will be nonlinear in the unknown solution <span class="math notranslate nohighlight">\(y\)</span>. The set of equations to solve is:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-545fe517-c699-4ead-bace-5af58b3c31d7">
-<span class="eqno">(2)<a class="headerlink" href="#equation-545fe517-c699-4ead-bace-5af58b3c31d7" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
+<div class="amsmath math notranslate nohighlight" id="equation-01514d16-7db9-41bd-81b1-e7a755882926">
+<span class="eqno">(2)<a class="headerlink" href="#equation-01514d16-7db9-41bd-81b1-e7a755882926" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
 y_0 - \alpha &amp;=&amp; 0 \\
 \frac{y_{i-1} - 2 y_i + y_{i+1}}{h^2} + (3 y_i) \left(\frac{y_{i+1} - y_{i-1}}{2 h}\right) &amp;=&amp; 0 \\
 y_L - \beta &amp;=&amp;0
@@ -1300,8 +1304,8 @@ solve_bvp<span class="o">?</span>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><div id="jSLDcOotuWMD" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: left"><style>
-#jSLDcOotuWMD {
+<div class="output text_html"><div id="apRwHpdZsxvt" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: left"><style>
+#apRwHpdZsxvt {
    --jq-multiple-choice-bg: #6f78ffff;
    --jq-mc-button-bg: #fafafa;
    --jq-mc-button-border: #e0e0e0e0;
@@ -1518,7 +1522,7 @@ solve_bvp<span class="o">?</span>
         background-color: var(--jq-correct-color);
     }
 }
-</style></div><script type="application/javascript">var questionsjSLDcOotuWMD=[
+</style></div><script type="application/javascript">var questionsapRwHpdZsxvt=[
   {
     "question": "Using finite difference method, find the values of y', <br>if y = [3.,  5.,  7.,  9., 11., 13.]<br>h = 0.2, and the end points are at 1, 15.",
     "type": "multiple_choice",
@@ -2823,8 +2827,8 @@ function make_string(qa, outerqDiv, qDiv, aDiv, id) {
  * Ensures show_questions is called after the container div is in the DOM.
  */
 function try_show() {
-  if (document.getElementById("jSLDcOotuWMD")) {
-    show_questions(questionsjSLDcOotuWMD, jSLDcOotuWMD);
+  if (document.getElementById("apRwHpdZsxvt")) {
+    show_questions(questionsapRwHpdZsxvt, apRwHpdZsxvt);
   } else {
     setTimeout(try_show, 200);
   }
