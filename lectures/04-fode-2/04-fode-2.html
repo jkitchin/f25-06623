@@ -211,7 +211,6 @@
 
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Families of solutions to FODEs</a></li>
 
-
 <li class="toctree-l1"><a class="reference internal" href="../05-nth-odes/05-nth-odes.html">Higher order differential equations</a></li>
 
 
@@ -533,7 +532,6 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#the-equation-whisperer">The Equation Whisperer</a></li>
 </ul>
 
             </nav>
@@ -552,6 +550,8 @@ document.write(`
 </ul>
 <section class="tex2jax_ignore mathjax_ignore" id="families-of-solutions-to-fodes">
 <h1>Families of solutions to FODEs<a class="headerlink" href="#families-of-solutions-to-fodes" title="Link to this heading">#</a></h1>
+<a class="reference internal image-reference" href="../../_images/pp-families.png"><img alt="../../_images/pp-families.png" src="../../_images/pp-families.png" style="width: 300px;" />
+</a>
 <p>Consider <span class="math notranslate nohighlight">\(y' = x - y\)</span>.</p>
 <p>We can interpret this equation as one that defines a direction field. That is, at any given point (x, y) we can compute the derivative of a solution at that point. We will consider how to make a plot that shows this field, and that will help us estimate what solutions to the ODE might look like for different initial values.</p>
 <p>To do this, we should compute the derivative on an array of regularly spaced points in both <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span>, and then make a plot of that data.</p>
@@ -795,8 +795,8 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><div id="XRXUatuOnUeT" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: left"><style>
-#XRXUatuOnUeT {
+<div class="output text_html"><div id="iTKtwgyxKNLI" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: left"><style>
+#iTKtwgyxKNLI {
    --jq-multiple-choice-bg: #6f78ffff;
    --jq-mc-button-bg: #fafafa;
    --jq-mc-button-border: #e0e0e0e0;
@@ -1013,7 +1013,7 @@ document.write(`
         background-color: var(--jq-correct-color);
     }
 }
-</style></div><script type="application/javascript">var questionsXRXUatuOnUeT=[
+</style></div><script type="application/javascript">var questionsiTKtwgyxKNLI=[
   {
     "question": "Which is the correct argument in matplotlib to plot data using black circles connected with a solid line?",
     "type": "multiple_choice",
@@ -2174,8 +2174,8 @@ function make_string(qa, outerqDiv, qDiv, aDiv, id) {
  * Ensures show_questions is called after the container div is in the DOM.
  */
 function try_show() {
-  if (document.getElementById("XRXUatuOnUeT")) {
-    show_questions(questionsXRXUatuOnUeT, XRXUatuOnUeT);
+  if (document.getElementById("iTKtwgyxKNLI")) {
+    show_questions(questionsiTKtwgyxKNLI, iTKtwgyxKNLI);
   } else {
     setTimeout(try_show, 200);
   }
@@ -2284,7 +2284,7 @@ Net flow into B = 0.0 gal/min
         t: [ 0.000e+00  1.606e-01 ...  1.972e+02  2.000e+02]
         y: [[ 1.833e+00  1.823e+00 ...  1.401e+00  1.400e+00]
             [ 1.300e+00  1.326e+00 ...  1.798e+00  1.799e+00]]
-      sol: &lt;scipy.integrate._ivp.common.OdeSolution object at 0x7fa937740980&gt;
+      sol: &lt;scipy.integrate._ivp.common.OdeSolution object at 0x7f2789ab8e90&gt;
  t_events: None
  y_events: None
      nfev: 134
@@ -2548,8 +2548,8 @@ Net flow into B = 0.0 gal/min
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><div id="AZiPITCbhGFw" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: left"><style>
-#AZiPITCbhGFw {
+<div class="output text_html"><div id="HBuhoolsPnlK" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: left"><style>
+#HBuhoolsPnlK {
    --jq-multiple-choice-bg: #6f78ffff;
    --jq-mc-button-bg: #fafafa;
    --jq-mc-button-border: #e0e0e0e0;
@@ -2766,7 +2766,7 @@ Net flow into B = 0.0 gal/min
         background-color: var(--jq-correct-color);
     }
 }
-</style></div><script type="application/javascript">var questionsAZiPITCbhGFw=[
+</style></div><script type="application/javascript">var questionsHBuhoolsPnlK=[
   {
     "question": "<p>Given</p><br><pre><code>a = np.linspace(0, 5, 2)<br>b = np.linspace(5, 10, 3)<br>c = np.linspace(10, 15, 5)<br><br>A, _,  _ = np.meshgrid(a, b, c)<br></code></pre><br><p>What is the shape of the array A?</p>",
     "type": "multiple_choice",
@@ -4071,8 +4071,8 @@ function make_string(qa, outerqDiv, qDiv, aDiv, id) {
  * Ensures show_questions is called after the container div is in the DOM.
  */
 function try_show() {
-  if (document.getElementById("AZiPITCbhGFw")) {
-    show_questions(questionsAZiPITCbhGFw, AZiPITCbhGFw);
+  if (document.getElementById("HBuhoolsPnlK")) {
+    show_questions(questionsHBuhoolsPnlK, HBuhoolsPnlK);
   } else {
     setTimeout(try_show, 200);
   }
@@ -4084,19 +4084,15 @@ function try_show() {
 }
 </script></div>
 </div>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="the-equation-whisperer">
-<h1>The Equation Whisperer<a class="headerlink" href="#the-equation-whisperer" title="Link to this heading">#</a></h1>
-<p><em>A cybrid fiction</em></p>
-<p>Dr. Elena Blackwood pressed her palm against the cool glass screen displaying thousands of tiny arrows, each one pointing toward an inevitable future. The direction field sprawled before her like a mathematical constellation, revealing the hidden currents that governed the twin reactors humming beneath the facility.</p>
-<p>“Tank Alpha is approaching critical concentration,” her technician announced, his voice tight with concern. The curves on the monitor showed the telltale spiral of runaway chemical reactions—a classic predator-prey dynamic between catalyst and inhibitor molecules.</p>
-<p>Elena studied the phase portrait, watching the solution trajectory loop around the equilibrium point like a moth circling flame. She understood the language of differential equations better than any human tongue. The initial conditions had been set carelessly, and now the system danced on the knife’s edge between stability and chaos.</p>
-<p>“We need to adjust the flow rates,” she murmured, her fingers dancing across the control panel. Each modification was like conducting an orchestra of mathematics—a delicate balance between the coupled equations that described the chemical ballet occurring in both tanks.</p>
-<p>The arrows began to shift subtly, their vectors rotating toward safer regions of the solution space. By manipulating the boundary conditions and introducing precise perturbations, Elena guided the system away from the dangerous attractor that had been pulling it toward disaster.</p>
-<p>“Look,” she whispered, pointing to the display where the wild oscillations were gradually dampening into gentle, predictable cycles. “The mathematics never lies—it only reveals what was always true.”</p>
-<p>Her colleague watched in amazement as the once-chaotic system settled into a stable limit cycle, the twin reactors now synchronized in perfect mathematical harmony.</p>
-<p>Elena smiled, knowing that in the language of equations, she had just rewritten fate itself.</p>
-</section>
+<div class="admonition tip">
+  <div class="admonition-title">🐍 Pyter Python’s Secret Study Habit</div>
+  <div class="admonition-content">
+    <p>Pyter Python was known around the classroom jungle for cracking coding problems with a grin. His friends assumed he was just naturally clever. But Pyter had a quiet habit that made all the difference: <strong>he kept a daily logbook</strong>.</p>
+    <p>Every afternoon, Pyter curled up under his lamp, blue-and-yellow scales glowing, and opened his log. He jotted down what he learned—commands that clicked, errors that confused him, and how he fixed them. He scribbled tiny arrows and flowcharts in the margins to remind himself how each idea connected.</p>
+    <p>The next morning, before class, he re‑read yesterday’s page. If he’d solved a tricky bug, he practiced the fix again. If he’d stumbled, he noted what <em>not</em> to do. Day by day, his logbook became a map of his learning, not just a pile of memories.</p>
+    <p>Soon, when classmates got stuck, Pyter flipped to the right page, pointed to a doodle, and said, “Try this!” They realized Pyter wasn’t just smart—he was <em>consistent</em>. His habit of <strong>recording</strong> and <strong>reviewing daily</strong> turned challenges into progress and progress into confidence.</p>
+  </div>
+</div></section>
 
     <script type="text/x-thebe-config">
     {
@@ -4172,7 +4168,6 @@ function try_show() {
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#the-equation-whisperer">The Equation Whisperer</a></li>
 </ul>
 
   </nav></div>
