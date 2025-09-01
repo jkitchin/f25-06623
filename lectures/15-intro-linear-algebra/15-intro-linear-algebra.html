@@ -276,6 +276,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../21-machine-learning/21-machine-learning-jax.html">Introduction to machine learning</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../22-ml-2/22-ml-2-jax.html">Advanced topics in ML</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../23-gp/23-gp.html">Gaussian process regression</a></li>
+
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">About the book</span></p>
 <ul class="nav bd-sidenav">
@@ -1374,8 +1375,8 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><div id="wtcnEjpekPbv" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: left"><style>
-#wtcnEjpekPbv {
+<div class="output text_html"><div id="FhMqHreQRsvb" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: left"><style>
+#FhMqHreQRsvb {
    --jq-multiple-choice-bg: #6f78ffff;
    --jq-mc-button-bg: #fafafa;
    --jq-mc-button-border: #e0e0e0e0;
@@ -1592,7 +1593,7 @@ document.write(`
         background-color: var(--jq-correct-color);
     }
 }
-</style></div><script type="application/javascript">var questionswtcnEjpekPbv=[
+</style></div><script type="application/javascript">var questionsFhMqHreQRsvb=[
   {
     "question": "<p>What will be the output of the following code:</p><br><p><code>x = np.array([4, 3, 2, 1])<br>for I in x:<br>    print(I)</code></p>",
     "type": "multiple_choice",
@@ -2897,8 +2898,8 @@ function make_string(qa, outerqDiv, qDiv, aDiv, id) {
  * Ensures show_questions is called after the container div is in the DOM.
  */
 function try_show() {
-  if (document.getElementById("wtcnEjpekPbv")) {
-    show_questions(questionswtcnEjpekPbv, wtcnEjpekPbv);
+  if (document.getElementById("FhMqHreQRsvb")) {
+    show_questions(questionsFhMqHreQRsvb, FhMqHreQRsvb);
   } else {
     setTimeout(try_show, 200);
   }
@@ -3331,8 +3332,8 @@ function try_show() {
 <h1>Solving linear algebraic equations<a class="headerlink" href="#solving-linear-algebraic-equations" title="Link to this heading">#</a></h1>
 <p>One of the key reasons to develop the tools above is for solving linear equations. Let’s consider an example.</p>
 <p>Given these equations, find [x1, x2, x3]</p>
-<div class="amsmath math notranslate nohighlight" id="equation-aea7c523-92e4-4f56-a3f4-812ccf82d103">
-<span class="eqno">(3)<a class="headerlink" href="#equation-aea7c523-92e4-4f56-a3f4-812ccf82d103" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
+<div class="amsmath math notranslate nohighlight" id="equation-0edd3c0d-3cb4-4ca2-aefd-cb6a70a28105">
+<span class="eqno">(3)<a class="headerlink" href="#equation-0edd3c0d-3cb4-4ca2-aefd-cb6a70a28105" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
 x_1 - x_2 + x_3 &amp;=&amp; 0 \\
 10 x_2 + 25 x_3 &amp;=&amp; 90 \\
 20 x_1 + 10 x_2 &amp;=&amp; 80
@@ -3510,7 +3511,7 @@ x_1 - x_2 + x_3 &amp;=&amp; 0 \\
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/2728f974b3b849657e1900325fe06b2b9221e87f29806d81f853ff3145cf7c7c.png" src="../../_images/2728f974b3b849657e1900325fe06b2b9221e87f29806d81f853ff3145cf7c7c.png" />
+<img alt="../../_images/5b57f783c8e7408930826e4496ce0e6435592e935f89f8cbdf37012b5a463572.png" src="../../_images/5b57f783c8e7408930826e4496ce0e6435592e935f89f8cbdf37012b5a463572.png" />
 </div>
 </div>
 <p>As usual, there is a function we can use to solve this.</p>
@@ -3553,7 +3554,7 @@ x_1 - x_2 + x_3 &amp;=&amp; 0 \\
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/941ddd258b879e9278b15577d2ed1a11fa89ba4e9730e553607d0cd3a4721d61.png" src="../../_images/941ddd258b879e9278b15577d2ed1a11fa89ba4e9730e553607d0cd3a4721d61.png" />
+<img alt="../../_images/cec7003e2760ab54026f9d459bc417ca1f93699f6ae9b0f93f4c2b21f5c56490.png" src="../../_images/cec7003e2760ab54026f9d459bc417ca1f93699f6ae9b0f93f4c2b21f5c56490.png" />
 </div>
 </div>
 <p>You can see by inspection that solve must not be using an inverse to solve these equations; if it did, it would take much longer to solve them. It is remarkable that we can solve ~5000 simultaneous equations here in about 1-2 seconds!</p>
@@ -3567,8 +3568,8 @@ x_1 - x_2 + x_3 &amp;=&amp; 0 \\
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><div id="XExVtckqrSEh" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: left"><style>
-#XExVtckqrSEh {
+<div class="output text_html"><div id="rSkOSSKnpvAK" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: left"><style>
+#rSkOSSKnpvAK {
    --jq-multiple-choice-bg: #6f78ffff;
    --jq-mc-button-bg: #fafafa;
    --jq-mc-button-border: #e0e0e0e0;
@@ -3785,7 +3786,7 @@ x_1 - x_2 + x_3 &amp;=&amp; 0 \\
         background-color: var(--jq-correct-color);
     }
 }
-</style></div><script type="application/javascript">var questionsXExVtckqrSEh=[
+</style></div><script type="application/javascript">var questionsrSkOSSKnpvAK=[
   {
     "question": "A = np.array([[1, 2, 3], [3, 2, 1]])<br>B = np.array([4, 5, 6])<br>A @ B  = C<br>We can say that",
     "type": "multiple_choice",
@@ -4994,8 +4995,8 @@ function make_string(qa, outerqDiv, qDiv, aDiv, id) {
  * Ensures show_questions is called after the container div is in the DOM.
  */
 function try_show() {
-  if (document.getElementById("XExVtckqrSEh")) {
-    show_questions(questionsXExVtckqrSEh, XExVtckqrSEh);
+  if (document.getElementById("rSkOSSKnpvAK")) {
+    show_questions(questionsrSkOSSKnpvAK, rSkOSSKnpvAK);
   } else {
     setTimeout(try_show, 200);
   }
@@ -5019,8 +5020,8 @@ function try_show() {
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><div id="NxmAOJncgaUi" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: left"><style>
-#NxmAOJncgaUi {
+<div class="output text_html"><div id="HPBOGvnIRfZl" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: left"><style>
+#HPBOGvnIRfZl {
    --jq-multiple-choice-bg: #6f78ffff;
    --jq-mc-button-bg: #fafafa;
    --jq-mc-button-border: #e0e0e0e0;
@@ -5237,7 +5238,7 @@ function try_show() {
         background-color: var(--jq-correct-color);
     }
 }
-</style></div><script type="application/javascript">var questionsNxmAOJncgaUi=[
+</style></div><script type="application/javascript">var questionsHPBOGvnIRfZl=[
   {
     "question": "np.tri(2, k = 1) + np.diag([1, 2]) = ?",
     "type": "multiple_choice",
@@ -6542,8 +6543,8 @@ function make_string(qa, outerqDiv, qDiv, aDiv, id) {
  * Ensures show_questions is called after the container div is in the DOM.
  */
 function try_show() {
-  if (document.getElementById("NxmAOJncgaUi")) {
-    show_questions(questionsNxmAOJncgaUi, NxmAOJncgaUi);
+  if (document.getElementById("HPBOGvnIRfZl")) {
+    show_questions(questionsHPBOGvnIRfZl, HPBOGvnIRfZl);
   } else {
     setTimeout(try_show, 200);
   }

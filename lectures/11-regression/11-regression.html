@@ -276,6 +276,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../21-machine-learning/21-machine-learning-jax.html">Introduction to machine learning</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../22-ml-2/22-ml-2-jax.html">Advanced topics in ML</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../23-gp/23-gp.html">Gaussian process regression</a></li>
+
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">About the book</span></p>
 <ul class="nav bd-sidenav">
@@ -1116,7 +1117,7 @@ nlinfit<span class="o">??</span>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/e6ff476736747246bf629fae8cbea537581be7e45f6d704753eed9f4b0d08dfa.png" src="../../_images/e6ff476736747246bf629fae8cbea537581be7e45f6d704753eed9f4b0d08dfa.png" />
+<img alt="../../_images/ab3f2b0ac2b5e808eb921add080ea9ffd5c49a5c35375eeca48fa324f7e06286.png" src="../../_images/ab3f2b0ac2b5e808eb921add080ea9ffd5c49a5c35375eeca48fa324f7e06286.png" />
 </div>
 </div>
 <p>So the idea is we can generate a distribution of the parameters</p>
@@ -1132,10 +1133,10 @@ nlinfit<span class="o">??</span>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(np.float64(1.3205172674873773), np.float64(0.009686054030178599))
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(np.float64(1.3205602589091112), np.float64(0.009670716039367202))
 </pre></div>
 </div>
-<img alt="../../_images/3eec3f6e0de16d89aa32290ec35edfb033c8838c2ffce6df8d090736ccc86181.png" src="../../_images/3eec3f6e0de16d89aa32290ec35edfb033c8838c2ffce6df8d090736ccc86181.png" />
+<img alt="../../_images/9d795549c68ad6db457da621cb7f768977debd1c4e898a8905a2f8d8c794471c.png" src="../../_images/9d795549c68ad6db457da621cb7f768977debd1c4e898a8905a2f8d8c794471c.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1211,8 +1212,8 @@ nlpredict<span class="o">?</span>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><div id="fVBuJXIocChE" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: left"><style>
-#fVBuJXIocChE {
+<div class="output text_html"><div id="kEpLQhZYURqY" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: left"><style>
+#kEpLQhZYURqY {
    --jq-multiple-choice-bg: #6f78ffff;
    --jq-mc-button-bg: #fafafa;
    --jq-mc-button-border: #e0e0e0e0;
@@ -1429,7 +1430,7 @@ nlpredict<span class="o">?</span>
         background-color: var(--jq-correct-color);
     }
 }
-</style></div><script type="application/javascript">var questionsfVBuJXIocChE=[
+</style></div><script type="application/javascript">var questionskEpLQhZYURqY=[
   {
     "question": "When using minimize() for regression, which of the following objective functions would cause the model to shift towards the outliers to a greater extent than the rest:<br>a: (y_pred - y)^2<br>b: (y_pred - y)<br>c: |ypred - y|",
     "type": "multiple_choice",
@@ -2734,8 +2735,8 @@ function make_string(qa, outerqDiv, qDiv, aDiv, id) {
  * Ensures show_questions is called after the container div is in the DOM.
  */
 function try_show() {
-  if (document.getElementById("fVBuJXIocChE")) {
-    show_questions(questionsfVBuJXIocChE, fVBuJXIocChE);
+  if (document.getElementById("kEpLQhZYURqY")) {
+    show_questions(questionskEpLQhZYURqY, kEpLQhZYURqY);
   } else {
     setTimeout(try_show, 200);
   }
