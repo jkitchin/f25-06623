@@ -551,6 +551,8 @@ document.write(`
 <ul class="simple">
 <li><p>KEYWORDS: scipy.integrate.solve_bvp, numpy.polyfit</p></li>
 </ul>
+<a class="reference internal image-reference" href="../../_images/pp-bvp.png"><img alt="../../_images/pp-bvp.png" src="../../_images/pp-bvp.png" style="width: 300px;" />
+</a>
 <p>So far we have focused on <em>initial value</em> ordinary differential equations. That means all the initial conditions are defined at the <em>same</em> independent variable value.</p>
 <p>Sometimes that is not the case, and the initial conditions are defined at <em>different</em> independent variable values. These problems are called <em>boundary value</em> problems, because we only know part of the solution at different boundaries.</p>
 <p>We cannot solve these directly with <code class="docutils literal notranslate"><span class="pre">solve_ivp</span></code>, we need some different approaches.</p>
@@ -563,10 +565,10 @@ document.write(`
 <p><span class="math notranslate nohighlight">\(y''(x) \approx \frac{y_{i-1} - 2 y_i + y_{i+1}}{h^2} \)</span></p>
 <p><span class="math notranslate nohighlight">\(y'(x) \approx \frac{y_{i+1} - y_{i-1}}{2 h} \)</span></p>
 <p>We define a function <span class="math notranslate nohighlight">\(y''(x) = F(x, y, y')\)</span>. At each node in our discretized region, we will have an equation that looks like <span class="math notranslate nohighlight">\(y''(x) - F(x, y, y') = 0\)</span>, which will be nonlinear in the unknown solution <span class="math notranslate nohighlight">\(y\)</span>. The set of equations to solve is:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-09e69728-8b8b-412c-9eaf-92463b4af8c8">
-<span class="eqno">(2)<a class="headerlink" href="#equation-09e69728-8b8b-412c-9eaf-92463b4af8c8" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
-y_0 - \alpha &amp;=&amp; 0 \\
-\frac{y_{i-1} - 2 y_i + y_{i+1}}{h^2} + (3 y_i) \left(\frac{y_{i+1} - y_{i-1}}{2 h}\right) &amp;=&amp; 0 \\
+<div class="amsmath math notranslate nohighlight" id="equation-91496168-3027-4a49-9e48-b3ea8df6cc3a">
+<span class="eqno">(2)<a class="headerlink" href="#equation-91496168-3027-4a49-9e48-b3ea8df6cc3a" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
+y_0 - \alpha &amp;=&amp; 0 \
+\frac{y_{i-1} - 2 y_i + y_{i+1}}{h^2} + (3 y_i) \left(\frac{y_{i+1} - y_{i-1}}{2 h}\right) &amp;=&amp; 0 \
 y_L - \beta &amp;=&amp;0
 \end{eqnarray}\]</div>
 <p>Since we use a nonlinear solver, we will have to provide an initial guess to the solution. We will in this case assume a line. In other cases, a bad initial guess may lead to no solution.</p>
@@ -1304,8 +1306,8 @@ solve_bvp<span class="o">?</span>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><div id="EFKdHnrfiGhx" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: left"><style>
-#EFKdHnrfiGhx {
+<div class="output text_html"><div id="PMsHXzluTeSW" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: left"><style>
+#PMsHXzluTeSW {
    --jq-multiple-choice-bg: #6f78ffff;
    --jq-mc-button-bg: #fafafa;
    --jq-mc-button-border: #e0e0e0e0;
@@ -1522,7 +1524,7 @@ solve_bvp<span class="o">?</span>
         background-color: var(--jq-correct-color);
     }
 }
-</style></div><script type="application/javascript">var questionsEFKdHnrfiGhx=[
+</style></div><script type="application/javascript">var questionsPMsHXzluTeSW=[
   {
     "question": "Using finite difference method, find the values of y', <br>if y = [3.,  5.,  7.,  9., 11., 13.]<br>h = 0.2, and the end points are at 1, 15.",
     "type": "multiple_choice",
@@ -2827,8 +2829,8 @@ function make_string(qa, outerqDiv, qDiv, aDiv, id) {
  * Ensures show_questions is called after the container div is in the DOM.
  */
 function try_show() {
-  if (document.getElementById("EFKdHnrfiGhx")) {
-    show_questions(questionsEFKdHnrfiGhx, EFKdHnrfiGhx);
+  if (document.getElementById("PMsHXzluTeSW")) {
+    show_questions(questionsPMsHXzluTeSW, PMsHXzluTeSW);
   } else {
     setTimeout(try_show, 200);
   }

@@ -551,6 +551,8 @@ document.write(`
 <ul class="simple">
 <li><p>KEYWORDS: scipy.optimize.root, numpy.roots, numpy.polyder, numpy.polyval, numpy.polyint, numpy.poly1d</p></li>
 </ul>
+<a class="reference internal image-reference" href="../../_images/pp-nla-2.png"><img alt="../../_images/pp-nla-2.png" src="../../_images/pp-nla-2.png" style="width: 300px;" />
+</a>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="special-nonlinear-systems-polynomials">
 <h1>Special nonlinear systems - polynomials<a class="headerlink" href="#special-nonlinear-systems-polynomials" title="Link to this heading">#</a></h1>
@@ -1011,8 +1013,8 @@ document.write(`
 </div>
 <p>Analogously to systems of ordinary differential equations, with systems of nonlinear equations we define functions that will return a zero for each equation in the system. Then we have to pass an initial guess for each variable to root, and it will return an array of values, one for each variable.</p>
 <p>It is considerably more difficult to visualize systems of nonlinear equations. With two equations and two unknowns it is sometimes easy to plot solutions, but not always.</p>
-<div class="amsmath math notranslate nohighlight" id="equation-ad504305-d877-4ddf-b12a-e7787cfe32c3">
-<span class="eqno">(1)<a class="headerlink" href="#equation-ad504305-d877-4ddf-b12a-e7787cfe32c3" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-a73b75d2-3200-4810-af5b-d72e8cb8f769">
+<span class="eqno">(1)<a class="headerlink" href="#equation-a73b75d2-3200-4810-af5b-d72e8cb8f769" title="Permalink to this equation">#</a></span>\[\begin{align}
 y &amp;=&amp; x^2 \\
 y &amp;=&amp; 8 - x^2
 \end{align}\]</div>
@@ -1307,8 +1309,8 @@ y &amp;=&amp; 8 - x^2
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><div id="yPrvHFVxHxrZ" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: left"><style>
-#yPrvHFVxHxrZ {
+<div class="output text_html"><div id="HIqbaXKLRFXl" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: left"><style>
+#HIqbaXKLRFXl {
    --jq-multiple-choice-bg: #6f78ffff;
    --jq-mc-button-bg: #fafafa;
    --jq-mc-button-border: #e0e0e0e0;
@@ -1525,7 +1527,7 @@ y &amp;=&amp; 8 - x^2
         background-color: var(--jq-correct-color);
     }
 }
-</style></div><script type="application/javascript">var questionsyPrvHFVxHxrZ=[
+</style></div><script type="application/javascript">var questionsHIqbaXKLRFXl=[
   {
     "question": "What will be the input to np.roots() to find the roots of the equation:<br>$5x^4 - 10x^2 + 20x - 50 = 0$",
     "type": "multiple_choice",
@@ -2830,8 +2832,8 @@ function make_string(qa, outerqDiv, qDiv, aDiv, id) {
  * Ensures show_questions is called after the container div is in the DOM.
  */
 function try_show() {
-  if (document.getElementById("yPrvHFVxHxrZ")) {
-    show_questions(questionsyPrvHFVxHxrZ, yPrvHFVxHxrZ);
+  if (document.getElementById("HIqbaXKLRFXl")) {
+    show_questions(questionsHIqbaXKLRFXl, HIqbaXKLRFXl);
   } else {
     setTimeout(try_show, 200);
   }
@@ -2843,7 +2845,14 @@ function try_show() {
 }
 </script></div>
 </div>
-</section>
+<a class="reference internal image-reference" href="../../_images/pp-allnighter.png"><img alt="../../_images/pp-allnighter.png" src="../../_images/pp-allnighter.png" style="width: 300px;" />
+</a>
+<div class="admonition warning" name="html-admonition" style="background: #E6F3FF; padding: 12px; border: 1px solid #F5C16C; border-radius: 8px">
+  <h1 class="title">The All-Nighter's Paradox</h1>
+<p>Lazlo Python stretched his droopy coils across his unmade bed, laptop balanced precariously on his stomach as he scrolled through the advanced nonlinear algebra lecture notes at 2:47 AM 🌙. His half-closed eyes suddenly widened with panic - the assignment on polynomial root-finding and systems of nonlinear equations was due in 6 hours! With a resigned sigh and a flick of his lazy tongue, he cracked open an energy drink 🥤 and dove headfirst into <code class="docutils literal notranslate"><span class="pre">numpy.roots()</span></code> and <code class="docutils literal notranslate"><span class="pre">scipy.optimize.root</span></code>. By sunrise, something magical happened: every concept clicked perfectly! He could visualize contour plots, explain cubic equations of state, and even derive analytical derivatives using <code class="docutils literal notranslate"><span class="pre">numpy.polyder()</span></code> ⚡. The cramming superpower was real - his brain became a perfect polynomial calculator, storing coefficients and solutions with photographic precision.</p>
+<p>But as Lazlo stumbled to his morning chemical engineering class, something terrifying began to happen 😱. The knowledge that felt so solid just hours ago started dissolving like sugar in water. When Professor Chen asked about the difference between <code class="docutils literal notranslate"><span class="pre">np.polyval()</span></code> and <code class="docutils literal notranslate"><span class="pre">np.poly1d()</span></code>, Lazlo’s mind went completely blank - not even a residual memory remained. Meanwhile, his classmate Pyter Python sat confidently in the front row, his bright blue and yellow scales gleaming as he systematically worked through each problem 📚. Pyter had spent just 30 minutes each day for the past week, building his understanding brick by brick: first mastering simple polynomials, then moving to systems of equations, finally tackling visualization techniques. While Lazlo frantically googled “numpy roots vs fsolve” under his desk, Pyter was already connecting these concepts to thermodynamic applications and van der Waals equations.</p>
+<p>The cruel irony hit Lazlo like a ton of textbooks 📖💥: his all-nighter had created the illusion of mastery through temporary memorization, but zero actual learning. His brain had become a leaky bucket - information poured in fast but drained out just as quickly. Pyter’s daily practice sessions, though seemingly less intense, had created lasting neural pathways and deep conceptual understanding. That afternoon, as Lazlo stared at his mediocre assignment grade, he finally understood the difference between cramming for recall and studying for comprehension. Real learning wasn’t about pulling computational all-nighters - it was about consistent, deliberate practice that transformed scattered facts into interconnected knowledge that stuck around long after the caffeine wore off ☕➡️🧠.</p>
+</div></section>
 
     <script type="text/x-thebe-config">
     {
