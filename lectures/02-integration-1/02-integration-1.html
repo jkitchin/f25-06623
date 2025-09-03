@@ -204,6 +204,7 @@
 
 
 
+
 <li class="toctree-l1"><a class="reference internal" href="../03-fode-1/03-fode-1.html">Solutions to first-order differential equations by integration</a></li>
 
 
@@ -542,6 +543,7 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
 </ul>
 
             </nav>
@@ -560,7 +562,7 @@ document.write(`
 <a class="reference internal image-reference" href="../../_images/integration.png"><img alt="../../_images/integration.png" class="align-center" src="../../_images/integration.png" style="width: 300px;" />
 </a>
 <ul class="simple">
-<li><p>KEYWORDS: integration, trapz, cumtrapz, quad</p></li>
+<li><p>KEYWORDS: integration, trapezoid, simpson, cumulative_trapezoid, quad</p></li>
 </ul>
 <p>Integration is used for many purposes in scientific problem solving. It can:</p>
 <ol class="arabic simple">
@@ -1088,6 +1090,7 @@ At X=0.65 V=0.701 m^3
 <img alt="../../_images/dd5bb6742b41bcc48e360dc841dbaa7ed63525efa8805095728ca8f898f169ef.png" src="../../_images/dd5bb6742b41bcc48e360dc841dbaa7ed63525efa8805095728ca8f898f169ef.png" />
 </div>
 </div>
+<p>We can add the initial condition (like an integration constant) with an optional argument <code class="docutils literal notranslate"><span class="pre">initial</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sp</span>
@@ -1109,13 +1112,6 @@ At X=0.65 V=0.701 m^3
 </pre></div>
 </div>
 <img alt="../../_images/04edc2258b750b74d51b04d770facebef286181de538c53b45f2f39a8c3fff62.png" src="../../_images/04edc2258b750b74d51b04d770facebef286181de538c53b45f2f39a8c3fff62.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">?</span>sp.integrate.cumulative_trapezoid
-</pre></div>
-</div>
 </div>
 </div>
 <p>What if you want to know the volume required for an intermediate conversion? For that you need interpolation. We will cover that later in the course when we talk more about dealing with data.</p>
@@ -1274,7 +1270,7 @@ For non-polynomial functions, the formula is an approximation to the integral an
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The answer is 40.996012819169536!!!
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2282/2765388034.py:5: IntegrationWarning: The maximum number of subdivisions (50) has been achieved.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2407/2765388034.py:5: IntegrationWarning: The maximum number of subdivisions (50) has been achieved.
   If increasing the limit yields no improvement it is advised to analyze 
   the integrand in order to determine the difficulties.  If the position of a 
   local difficulty can be determined (singularity, discontinuity) one will 
@@ -1475,7 +1471,7 @@ For non-polynomial functions, the formula is an approximation to the integral an
 <li><p>Numerical integration of data</p>
 <ul>
 <li><p>I recommend you rely on library implementations of the trapezoid method or Simpson’s method where possible.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">numpy.trapz</span></code>, <code class="docutils literal notranslate"><span class="pre">scipy.integrate.cumtrapz</span></code>, and <code class="docutils literal notranslate"><span class="pre">scipy.integrate.simps</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">numpy.trapezoid</span></code>, <code class="docutils literal notranslate"><span class="pre">scipy.integrate.cumulative_trapezoid</span></code>, and <code class="docutils literal notranslate"><span class="pre">scipy.integrate.simpson</span></code>.</p></li>
 </ul>
 </li>
 <li><p>Integration of functions by quadrature</p>
@@ -1851,7 +1847,7 @@ For non-polynomial functions, the formula is an approximation to the integral an
     <path d="M12 0c6.623 0 12 5.377 12 12s-5.377 12-12 12-12-5.377-12-12 5.377-12 12-12zm0 1c6.071 0 11 4.929 11 11s-4.929 11-11 11-11-4.929-11-11 4.929-11 11-11zm0 10.293l5.293-5.293.707.707-5.293 5.293 5.293 5.293-.707.707-5.293-5.293-5.293 5.293-.707-.707 5.293-5.293-5.293-5.293.707-.707 5.293 5.293z"/>
   </symbol>
 </svg>
-</div><div class="output text_html"><div style="height:40px"></div><div class="flip-container" id="QIWfKTBjVJBg" data-topics='[]' data-known-widgets='true' data-local-storage='false' tabindex="0" style="outline:none;"></div><div style="height:40px"></div><div class="next" id="QIWfKTBjVJBg-next" onclick="window.checkFlip('QIWfKTBjVJBg')"> </div> <div style="height:40px"></div></div><script type="application/javascript">/*!
+</div><div class="output text_html"><div style="height:40px"></div><div class="flip-container" id="nROxwyKLaBFP" data-topics='[]' data-known-widgets='true' data-local-storage='false' tabindex="0" style="outline:none;"></div><div style="height:40px"></div><div class="next" id="nROxwyKLaBFP-next" onclick="window.checkFlip('nROxwyKLaBFP')"> </div> <div style="height:40px"></div></div><script type="application/javascript">/*!
  * swiped-events.js - v1.1.4
  * Pure JavaScript swipe events
  * https://github.com/john-doherty/swiped-events
@@ -2647,10 +2643,10 @@ window.setTopics = function(idOrElem, topics) {
 
 (function() {
     var observer = new MutationObserver(function(mutations, obs) {
-        var el = document.getElementById("QIWfKTBjVJBg");
+        var el = document.getElementById("nROxwyKLaBFP");
         if (el) {
             el.dataset.url = "";
-            el.dataset.cards = JSON.stringify([{"front": "np.trapz", "back": "Trapezoid method for data integration", "seqNum": 0}, {"front": "scipy.integrate.simps", "back": "Simpson's method for data integration", "seqNum": 1}, {"front": "scipy.integrate.cumtrapz", "back": "Cumulative data integration", "seqNum": 2}, {"front": "scipy.integrate.quad", "back": "Gaussian quadrature to integrate functions<br>Returns integrand, error estimate", "seqNum": 3}]);
+            el.dataset.cards = JSON.stringify([{"front": "np.trapezoid", "back": "Trapezoid method for data integration", "seqNum": 0}, {"front": "scipy.integrate.simpson", "back": "Simpson's method for data integration", "seqNum": 1}, {"front": "scipy.integrate.cumulative_trapezoid", "back": "Cumulative data integration", "seqNum": 2}, {"front": "scipy.integrate.quad", "back": "Gaussian quadrature to integrate functions<br>Returns integrand, error estimate", "seqNum": 3}]);
             el.dataset.frontColors = JSON.stringify(["var(--asparagus)", "var(--terra-cotta)", "var(--cyan-process)"]);
             el.dataset.backColors = JSON.stringify(["var(--dark-blue-gray)"]);
             el.dataset.textColors = JSON.stringify(["var(--snow)"]);
@@ -2659,7 +2655,7 @@ window.setTopics = function(idOrElem, topics) {
             el.dataset.shuffleCards = false;
             el.dataset.title = "";
             el.dataset.subject = "";
-            createCards("QIWfKTBjVJBg");
+            createCards("nROxwyKLaBFP");
             obs.disconnect();
         }
     });
@@ -2674,8 +2670,8 @@ window.setTopics = function(idOrElem, topics) {
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><div id="AIyhJHQMyolY" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: left"><style>
-#AIyhJHQMyolY {
+<div class="output text_html"><div id="scWDEPJRApXc" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: left"><style>
+#scWDEPJRApXc {
    --jq-multiple-choice-bg: #6f78ffff;
    --jq-mc-button-bg: #fafafa;
    --jq-mc-button-border: #e0e0e0e0;
@@ -2892,7 +2888,7 @@ window.setTopics = function(idOrElem, topics) {
         background-color: var(--jq-correct-color);
     }
 }
-</style></div><script type="application/javascript">var questionsAIyhJHQMyolY=[
+</style></div><script type="application/javascript">var questionsscWDEPJRApXc=[
   {
     "question": "Which is the correct argument in matplotlib to plot data using black circles connected with a solid line?",
     "type": "multiple_choice",
@@ -4197,8 +4193,8 @@ function make_string(qa, outerqDiv, qDiv, aDiv, id) {
  * Ensures show_questions is called after the container div is in the DOM.
  */
 function try_show() {
-  if (document.getElementById("AIyhJHQMyolY")) {
-    show_questions(questionsAIyhJHQMyolY, AIyhJHQMyolY);
+  if (document.getElementById("scWDEPJRApXc")) {
+    show_questions(questionsscWDEPJRApXc, scWDEPJRApXc);
   } else {
     setTimeout(try_show, 200);
   }
@@ -4209,6 +4205,37 @@ function try_show() {
 }
 }
 </script></div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="exercises">
+<h1>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h1>
+<ol class="arabic simple">
+<li><p>Trapezoid Method on a Trigonometric Function</p></li>
+</ol>
+<p>Approximate
+<span class="math notranslate nohighlight">\(\int_{0}^{\pi} \sin(x) \, dx\)</span>
+using numpy.trapezoid with 10, 50, and 200 evenly spaced points.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>•	Compare each result to the exact value (2).
+•	Plot how the error decreases as the number of points increases.
+</pre></div>
+</div>
+<p>⸻</p>
+<ol class="arabic simple" start="2">
+<li><p>Simpson’s Rule on an Exponential Decay</p></li>
+</ol>
+<p>Use scipy.integrate.simpson to evaluate
+<span class="math notranslate nohighlight">\(\int_{0}^{5} e^{-x} \, dx\)</span>
+and compare the result to the analytical answer <span class="math notranslate nohighlight">\(1 - e^{-5}\)</span>.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>•	How many points are needed to get 4-decimal-place accuracy?
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>Use scipy.integrate.quad to compute
+<span class="math notranslate nohighlight">\(\int_{0}^{1} \frac{\ln(1+x)}{x+1} \, dx\)</span></p></li>
+</ol>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>•	Report the numerical result.
+•	Since there is no simple closed-form solution, discuss how you would check whether your result is trustworthy.
+</pre></div>
 </div>
 <a class="reference internal image-reference" href="../../_images/pyter-lazlo.png"><img alt="../../_images/pyter-lazlo.png" src="../../_images/pyter-lazlo.png" style="width: 300px;" />
 </a>
@@ -4318,6 +4345,7 @@ function try_show() {
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
 </ul>
 
   </nav></div>
