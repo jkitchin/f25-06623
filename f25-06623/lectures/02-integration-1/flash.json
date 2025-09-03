@@ -1,14 +1,14 @@
 [
     {
-        "front": "np.trapz",
+        "front": "np.trapezoid",
         "back": "Trapezoid method for data integration"
     },
     {
-        "front": "scipy.integrate.simps",
+        "front": "scipy.integrate.simpson",
         "back": "Simpson's method for data integration"
     },
     {
-        "front": "scipy.integrate.cumtrapz",
+        "front": "scipy.integrate.cumulative_trapezoid",
         "back": "Cumulative data integration"
     },
     {
