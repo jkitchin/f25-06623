@@ -564,20 +564,22 @@ document.write(`
 <h2>Solving nonlinear BVPs by finite differences<a class="headerlink" href="#solving-nonlinear-bvps-by-finite-differences" title="Link to this heading">#</a></h2>
 <p>Adapted from Example 8.7 in <span class="underline">Numerical Methods in Engineering with Python</span> by Jaan Kiusalaas.</p>
 <p>We want to solve <span class="math notranslate nohighlight">\(y''(x) = -3 y(x) y'(x)\)</span> with <span class="math notranslate nohighlight">\(y(0) = 0\)</span> and <span class="math notranslate nohighlight">\(y(2) = 1\)</span>.</p>
-<p><img alt="image.png" src="../../_images/bvp-fd.png" /></p>
+<a class="reference internal image-reference" href="../../_images/bvp-fd.png"><img alt="../../_images/bvp-fd.png" src="../../_images/bvp-fd.png" style="width: 600px;" />
+</a>
 <p>This is a boundary value problem <em>not an initial value problem</em>. First we consider using a finite difference method. We discretize the region and approximate the derivatives as:</p>
 <p><span class="math notranslate nohighlight">\(y''(x) \approx \frac{y_{i-1} - 2 y_i + y_{i+1}}{h^2} \)</span></p>
 <p><span class="math notranslate nohighlight">\(y'(x) \approx \frac{y_{i+1} - y_{i-1}}{2 h} \)</span></p>
 <p>We define a function <span class="math notranslate nohighlight">\(y''(x) = F(x, y, y')\)</span>. At each node in our discretized region, we will have an equation that looks like <span class="math notranslate nohighlight">\(y''(x) - F(x, y, y') = 0\)</span>, which will be nonlinear in the unknown solution <span class="math notranslate nohighlight">\(y\)</span>. The set of equations to solve is:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-42fa1dc9-19f8-4ca0-bd57-99693a9fdea2">
-<span class="eqno">(2)<a class="headerlink" href="#equation-42fa1dc9-19f8-4ca0-bd57-99693a9fdea2" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
+<div class="amsmath math notranslate nohighlight" id="equation-f2e0a32f-6f8a-42b2-ab86-6bbece623ddf">
+<span class="eqno">(2)<a class="headerlink" href="#equation-f2e0a32f-6f8a-42b2-ab86-6bbece623ddf" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
 y_0 - \alpha &amp;=&amp; 0 \
 \frac{y_{i-1} - 2 y_i + y_{i+1}}{h^2} + (3 y_i) \left(\frac{y_{i+1} - y_{i-1}}{2 h}\right) &amp;=&amp; 0 \
 y_L - \beta &amp;=&amp;0
 \end{eqnarray}\]</div>
 <p>Since we use a nonlinear solver, we will have to provide an initial guess to the solution. We will in this case assume a line. In other cases, a bad initial guess may lead to no solution.</p>
 <p>Let’s pause and ask how many equations do we get, what are the unknowns, and how many are there?</p>
-<p><img alt="image.png" src="../../_images/bvp-2.png" /></p>
+<a class="reference internal image-reference" href="../../_images/bvp-2.png"><img alt="../../_images/bvp-2.png" src="../../_images/bvp-2.png" style="width: 500px;" />
+</a>
 <p>Note in this case the boundary conditions can be independently solved. This is not always the case though, so we leave this in the general form. If you add more points to the discretization, you get more unknowns, and an equal number of new equations.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1310,8 +1312,8 @@ solve_bvp<span class="o">?</span>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><div id="vbNFnMoRywFi" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: left"><style>
-#vbNFnMoRywFi {
+<div class="output text_html"><div id="gyiiKuTjDBAe" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: left"><style>
+#gyiiKuTjDBAe {
    --jq-multiple-choice-bg: #6f78ffff;
    --jq-mc-button-bg: #fafafa;
    --jq-mc-button-border: #e0e0e0e0;
@@ -1528,7 +1530,7 @@ solve_bvp<span class="o">?</span>
         background-color: var(--jq-correct-color);
     }
 }
-</style></div><script type="application/javascript">var questionsvbNFnMoRywFi=[
+</style></div><script type="application/javascript">var questionsgyiiKuTjDBAe=[
   {
     "question": "Using finite difference method, find the values of y', <br>if y = [3.,  5.,  7.,  9., 11., 13.]<br>h = 0.2, and the end points are at 1, 15.",
     "type": "multiple_choice",
@@ -2833,8 +2835,8 @@ function make_string(qa, outerqDiv, qDiv, aDiv, id) {
  * Ensures show_questions is called after the container div is in the DOM.
  */
 function try_show() {
-  if (document.getElementById("vbNFnMoRywFi")) {
-    show_questions(questionsvbNFnMoRywFi, vbNFnMoRywFi);
+  if (document.getElementById("gyiiKuTjDBAe")) {
+    show_questions(questionsgyiiKuTjDBAe, gyiiKuTjDBAe);
   } else {
     setTimeout(try_show, 200);
   }
@@ -2846,7 +2848,19 @@ function try_show() {
 }
 </script></div>
 </div>
-</section>
+<a class="reference internal image-reference" href="../../_images/pp-bb.png"><img alt="../../_images/pp-bb.png" src="../../_images/pp-bb.png" style="width: 100px;" />
+</a>
+<div class="admonition warning" name="html-admonition" style="background: #E6F3FF; padding: 12px; border: 1px solid #F5C16C; border-radius: 8px">
+  <h1 class="title">Pyter’s Balanced Boundaries</h1>
+<p>Pyter Python loved learning, but he once found himself slithering endlessly through notes, late into the night, with little time for anything else. His coils would tighten with stress, and the joy of discovery began to fade.</p>
+<p>One day, Pyter decided he needed boundaries. “Studying is important,” he told himself, “but so are the things that keep me strong and happy.”</p>
+<p>He began planning his days with intention. Before diving into problem sets, Pyter made sure he had a hearty meal of fresh greens and grains. Eating well gave him steady energy, instead of the ups and downs of quick snacks.</p>
+<p>Each afternoon, Pyter uncoiled and stretched his long body in playful exercise. He slithered through obstacle courses, balancing on branches and strengthening his muscles. Exercise cleared his mind and made returning to equations much easier.</p>
+<p>In the evenings, Pyter made space for friends. They laughed, swapped stories, and sometimes even studied together. Social time reminded Pyter that learning was part of a bigger, joyful life.</p>
+<p>And at night, Pyter curled up in a cozy coil and slept deeply. With good rest, he found that his thinking was sharper and his focus stronger the next day.</p>
+<p>To his surprise, these boundaries didn’t slow him down—they sped him up! With food, movement, friends, and sleep woven into his week, his study sessions became more productive and enjoyable. Instead of dragging through material, Pyter could think at the “speed of thought.”</p>
+<p>By respecting his own limits, Pyter discovered something powerful: balance isn’t a distraction from studying—it’s the secret to loving it.</p>
+</div></section>
 </section>
 
     <script type="text/x-thebe-config">
