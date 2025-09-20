@@ -536,7 +536,10 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#an-application">An application</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pyter-s-memory-tricks">Pyter’s Memory Tricks</a></li>
+</ul>
+</li>
 </ul>
 
             </nav>
@@ -1118,8 +1121,8 @@ We will store 4000 bushels.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><div id="pHtOoQQgcxPa" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: left"><style>
-#pHtOoQQgcxPa {
+<div class="output text_html"><div id="HnkVYbjWXqqF" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: left"><style>
+#HnkVYbjWXqqF {
    --jq-multiple-choice-bg: #6f78ffff;
    --jq-mc-button-bg: #fafafa;
    --jq-mc-button-border: #e0e0e0e0;
@@ -1336,7 +1339,7 @@ We will store 4000 bushels.
         background-color: var(--jq-correct-color);
     }
 }
-</style></div><script type="application/javascript">var questionspHtOoQQgcxPa=[{"question": "What will be the output of:<br>a = dict()<br>a['one'] = 1<br>print(a)", "type": "multiple_choice", "answers": [{"answer": "Error", "correct": false}, {"answer": "['one': 1]", "correct": false}, {"answer": "{'one': 1}", "correct": true}, {"answer": "{'one': '1'}", "correct": false}], "tag": "dictionary", "lecture_file": "13_constrained_optimization"}, {"question": "Which of the following is not a correct entry in a python dictionary", "type": "multiple_choice", "answers": [{"answer": "{1:'1'}", "correct": false}, {"answer": "{'a': 1}", "correct": false}, {"answer": "{5.23: 5}", "correct": false}, {"answer": "{[1, 2]: 'ab'}", "correct": true}], "tag": "dictionary", "lecture_file": "13_constrained_optimization"}, {"question": "Which of the following can be a way of printing the 'n'-th key in a dictionary 'dict'", "type": "multiple_choice", "answers": [{"answer": "dict.keys()[n]", "correct": false}, {"answer": "dict.keys(n)", "correct": false}, {"answer": "list(dict.keys())[n]", "correct": true}, {"answer": "dict.items()[n]", "correct": false}], "tag": "dictionary", "lecture_file": "13_constrained_optimization"}, {"question": "What can be a way of accessing the 'n'-th key and value separately from a dictionary", "type": "multiple_choice", "answers": [{"answer": "dict.keys()[n], dict.values()[n]", "correct": false}, {"answer": "d.items()[n]", "correct": false}, {"answer": "dict.keys(n), dict.values(n)", "correct": false}, {"answer": "for key, value in dict.items():<br>    print(key, value)", "correct": true}], "tag": "dictionary", "lecture_file": "13_constrained_optimization"}, {"question": "Constraints in scipy.optimize.minimize need to be functions which", "type": "multiple_choice", "answers": [{"answer": "always return zero when satisfied", "correct": false}, {"answer": "can return zero or are greater than zero when satisfied", "correct": true}, {"answer": "can return zero or are less than zero when satisfied", "correct": false}, {"answer": "can only return values which are less than zero", "correct": false}], "tag": "scipy constraints", "lecture_file": "13_constrained_optimization"}, {"question": "For multiple constraints, the argument 'constraints' in scipy.optimize.minimize needs to be", "type": "multiple_choice", "answers": [{"answer": "a dictionary", "correct": false}, {"answer": "a list", "correct": false}, {"answer": "a list of dictionaries", "correct": true}, {"answer": "a dictionary of lists", "correct": false}], "tag": "scipy constraints", "lecture_file": "13_constrained_optimization"}, {"question": "<pre><code class=\"language-python\">def f(X):\n    return -X[0]\n\nconstraints = {'type':'ineq', 'fun': f}\n</code></pre>\n<p>is a </p>", "type": "multiple_choice", "answers": [{"answer": "negativity constraint", "correct": true}, {"answer": "positivity constraint", "correct": false}, {"answer": "equality constraint", "correct": false}, {"answer": "None of the above", "correct": false}], "tag": "scipy constraints", "lecture_file": "13_constrained_optimization"}, {"question": "Which equation from the options can be expressed as the following constraint function:<br><br>def f(X):<br>    x, y = X<br>    return -(2x + 3y - 11)<br>constraints = {'type':'ineq', 'fun':f}", "type": "multiple_choice", "answers": [{"answer": "2x + 3y + 11 <= 0", "correct": false}, {"answer": "2x + 3y <= 11", "correct": true}, {"answer": "2x + 3y >=11", "correct": false}, {"answer": "-2x-3y <=11", "correct": false}], "tag": "scipy constraints", "lecture_file": "13_constrained_optimization"}, {"question": "Which of the following solvers cannot be used with constraints in scipy.optimize.minimize", "type": "multiple_choice", "answers": [{"answer": "BFGS", "correct": true}, {"answer": "SLSQP", "correct": false}, {"answer": "trust-constr", "correct": false}, {"answer": "COBYLA", "correct": false}], "tag": "scipy constraints", "lecture_file": "13_constrained_optimization"}, {"question": "The default solver in scipy.optimize.minimize when using constraints is", "type": "multiple_choice", "answers": [{"answer": "BFGS", "correct": false}, {"answer": "SLSQP", "correct": true}, {"answer": "trust-constr", "correct": false}, {"answer": "COBYLA", "correct": false}], "tag": "scipy constraints", "lecture_file": "13_constrained_optimization"}];
+</style></div><script type="application/javascript">var questionsHnkVYbjWXqqF=[{"question": "What will be the output of:<br>a = dict()<br>a['one'] = 1<br>print(a)", "type": "multiple_choice", "answers": [{"answer": "Error", "correct": false}, {"answer": "['one': 1]", "correct": false}, {"answer": "{'one': 1}", "correct": true}, {"answer": "{'one': '1'}", "correct": false}], "tag": "dictionary", "lecture_file": "13_constrained_optimization"}, {"question": "Which of the following is not a correct entry in a python dictionary", "type": "multiple_choice", "answers": [{"answer": "{1:'1'}", "correct": false}, {"answer": "{'a': 1}", "correct": false}, {"answer": "{5.23: 5}", "correct": false}, {"answer": "{[1, 2]: 'ab'}", "correct": true}], "tag": "dictionary", "lecture_file": "13_constrained_optimization"}, {"question": "Which of the following can be a way of printing the 'n'-th key in a dictionary 'dict'", "type": "multiple_choice", "answers": [{"answer": "dict.keys()[n]", "correct": false}, {"answer": "dict.keys(n)", "correct": false}, {"answer": "list(dict.keys())[n]", "correct": true}, {"answer": "dict.items()[n]", "correct": false}], "tag": "dictionary", "lecture_file": "13_constrained_optimization"}, {"question": "What can be a way of accessing the 'n'-th key and value separately from a dictionary", "type": "multiple_choice", "answers": [{"answer": "dict.keys()[n], dict.values()[n]", "correct": false}, {"answer": "d.items()[n]", "correct": false}, {"answer": "dict.keys(n), dict.values(n)", "correct": false}, {"answer": "for key, value in dict.items():<br>    print(key, value)", "correct": true}], "tag": "dictionary", "lecture_file": "13_constrained_optimization"}, {"question": "Constraints in scipy.optimize.minimize need to be functions which", "type": "multiple_choice", "answers": [{"answer": "always return zero when satisfied", "correct": false}, {"answer": "can return zero or are greater than zero when satisfied", "correct": true}, {"answer": "can return zero or are less than zero when satisfied", "correct": false}, {"answer": "can only return values which are less than zero", "correct": false}], "tag": "scipy constraints", "lecture_file": "13_constrained_optimization"}, {"question": "For multiple constraints, the argument 'constraints' in scipy.optimize.minimize needs to be", "type": "multiple_choice", "answers": [{"answer": "a dictionary", "correct": false}, {"answer": "a list", "correct": false}, {"answer": "a list of dictionaries", "correct": true}, {"answer": "a dictionary of lists", "correct": false}], "tag": "scipy constraints", "lecture_file": "13_constrained_optimization"}, {"question": "<pre><code class=\"language-python\">def f(X):\n    return -X[0]\n\nconstraints = {'type':'ineq', 'fun': f}\n</code></pre>\n<p>is a </p>", "type": "multiple_choice", "answers": [{"answer": "negativity constraint", "correct": true}, {"answer": "positivity constraint", "correct": false}, {"answer": "equality constraint", "correct": false}, {"answer": "None of the above", "correct": false}], "tag": "scipy constraints", "lecture_file": "13_constrained_optimization"}, {"question": "Which equation from the options can be expressed as the following constraint function:<br><br>def f(X):<br>    x, y = X<br>    return -(2x + 3y - 11)<br>constraints = {'type':'ineq', 'fun':f}", "type": "multiple_choice", "answers": [{"answer": "2x + 3y + 11 <= 0", "correct": false}, {"answer": "2x + 3y <= 11", "correct": true}, {"answer": "2x + 3y >=11", "correct": false}, {"answer": "-2x-3y <=11", "correct": false}], "tag": "scipy constraints", "lecture_file": "13_constrained_optimization"}, {"question": "Which of the following solvers cannot be used with constraints in scipy.optimize.minimize", "type": "multiple_choice", "answers": [{"answer": "BFGS", "correct": true}, {"answer": "SLSQP", "correct": false}, {"answer": "trust-constr", "correct": false}, {"answer": "COBYLA", "correct": false}], "tag": "scipy constraints", "lecture_file": "13_constrained_optimization"}, {"question": "The default solver in scipy.optimize.minimize when using constraints is", "type": "multiple_choice", "answers": [{"answer": "BFGS", "correct": false}, {"answer": "SLSQP", "correct": true}, {"answer": "trust-constr", "correct": false}, {"answer": "COBYLA", "correct": false}], "tag": "scipy constraints", "lecture_file": "13_constrained_optimization"}];
 
 if (typeof Question === 'undefined') {
 // Make a random ID
@@ -2399,8 +2402,8 @@ function make_string(qa, outerqDiv, qDiv, aDiv, id) {
  * Ensures show_questions is called after the container div is in the DOM.
  */
 function try_show() {
-  if (document.getElementById("pHtOoQQgcxPa")) {
-    show_questions(questionspHtOoQQgcxPa, pHtOoQQgcxPa);
+  if (document.getElementById("HnkVYbjWXqqF")) {
+    show_questions(questionsHnkVYbjWXqqF, HnkVYbjWXqqF);
   } else {
     setTimeout(try_show, 200);
   }
@@ -2412,6 +2415,31 @@ function try_show() {
 }
 </script></div>
 </div>
+<a class="reference internal image-reference" href="../../_images/pp-co.png"><img alt="../../_images/pp-co.png" src="../../_images/pp-co.png" style="width: 300px;" />
+</a>
+<!DOCTYPE html>
+<html>
+<body>
+    <div class="admonition warning" name="html-admonition" style="background: #B0E2FF; padding: 20px; border: 2px solid #87CEFA; border-radius: 10px; margin: 20px; font-family: Arial, sans-serif;">
+        <h1 class="title" style="margin-top: 0;">Pyter Python and the Constrained Quest 🐍✨</h1>
+<p>One sunny afternoon, Pyter Python—a bright blue-and-yellow snake with round glasses and boundless curiosity—coiled beside his tidy notebook. On the page was a doodle of a soda can and a single line: <em>“Find the cheapest can that holds exactly 355 cm³.”</em></p>
+<p>“Aha,” Pyter hissed cheerfully. “That’s <strong>constrained optimization</strong>: I’m still hunting for the best answer, but I have to obey the rules.” He pictured a rolling valley with a fence winding across it. Unconstrained problems let you wander anywhere to find the lowest point; constrained problems make you search for the lowest point <em>along the fence</em>.</p>
+<p>Pyter tried the <em>elimination trick</em> first. “If volume links diameter to length, I can solve for one variable in terms of the other, and then minimize cost in just one dimension.” His pencil danced; the curve dipped; a neat yellow sticky note read: <em>“Minimum found!”</em></p>
+<p>But Pyter wanted more. He rolled up his sleeves (well, metaphorically) and told his computer about the rules directly. “Equality means the rule is satisfied when the function returns <code class="docutils literal notranslate"><span class="pre">0</span></code>. Inequality means the function should be ≥ 0 at the solution.” He tucked those rules into tidy dictionaries and set the solver loose.</p>
+<p>Soon he was juggling multiple constraints like a pro—budget here, storage there, non-negativity everywhere—letting the solver choose the best plan that honored every fence post. “Beautiful,” he whispered, eyes sparkling. “The lowest point that follows the rules.”</p>
+<section id="pyter-s-memory-tricks">
+<h2>Pyter’s Memory Tricks<a class="headerlink" href="#pyter-s-memory-tricks" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Equality</strong> → return <code class="docutils literal notranslate"><span class="pre">0</span></code> when satisfied (<em>exactly on the fence</em>).</p></li>
+<li><p><strong>Inequality</strong> → return ≥ 0 when satisfied (<em>on or inside the fence</em>).</p></li>
+<li><p><strong>Constraints live in dictionaries</strong> you hand to the solver.</p></li>
+<li><p><strong>Visualize</strong> the valley and the fence before you compute.</p></li>
+<li><p><strong>Start smart</strong>: good initial guesses help you find the right valley floor.</p></li>
+</ul>
+<p>As the sun set, Pyter drew one last sketch: himself sliding along a fence to a golden star at the lowest point. He closed his notebook with a satisfied flick of his tail. “Constraints don’t cage me,” he grinned. “They guide me to the best place I’m allowed to be.”
+</div></p>
+</body>
+</html></section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -2486,7 +2514,10 @@ function try_show() {
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#an-application">An application</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pyter-s-memory-tricks">Pyter’s Memory Tricks</a></li>
+</ul>
+</li>
 </ul>
 
   </nav></div>
