@@ -555,7 +555,8 @@ document.write(`
 <ul class="simple">
 <li><p>KEYWORDS: scipy.optimize.minimize, scipy.optimize.curve_fit, pycse.nlinfit</p></li>
 </ul>
-<p><img alt="curve-fitting" src="https://imgs.xkcd.com/comics/curve_fitting.png" /></p>
+<a class="reference internal image-reference" href="../../_images/regression.png"><img alt="../../_images/regression.png" src="../../_images/regression.png" style="width: 300px;" />
+</a>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="regression-of-data-is-a-form-of-function-minimization">
 <h1>Regression of data is a form of function minimization<a class="headerlink" href="#regression-of-data-is-a-form-of-function-minimization" title="Link to this heading">#</a></h1>
@@ -1120,7 +1121,7 @@ nlinfit<span class="o">??</span>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/adcbdb76b6be8c31cfbbb9faca21a32110f5640c4c940387eb95b67f09b034d2.png" src="../../_images/adcbdb76b6be8c31cfbbb9faca21a32110f5640c4c940387eb95b67f09b034d2.png" />
+<img alt="../../_images/49862e55f9de5234fb4af12280d976d6d01c618cf3978bde66876878b4d5dd45.png" src="../../_images/49862e55f9de5234fb4af12280d976d6d01c618cf3978bde66876878b4d5dd45.png" />
 </div>
 </div>
 <p>So the idea is we can generate a distribution of the parameters</p>
@@ -1136,10 +1137,10 @@ nlinfit<span class="o">??</span>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(np.float64(1.3205769870008857), np.float64(0.009684724057198425))
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(np.float64(1.3206265043425105), np.float64(0.009699600130255089))
 </pre></div>
 </div>
-<img alt="../../_images/b43318721df52cd196b451447a172ab146f209eb9bc84d0f6ac7a2e33abb6b9a.png" src="../../_images/b43318721df52cd196b451447a172ab146f209eb9bc84d0f6ac7a2e33abb6b9a.png" />
+<img alt="../../_images/41f5fd89027d6387d041aebdb3c93a6763b37792aad91f7c94a5131da782254d.png" src="../../_images/41f5fd89027d6387d041aebdb3c93a6763b37792aad91f7c94a5131da782254d.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1215,8 +1216,8 @@ nlpredict<span class="o">?</span>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><div id="tSEMTfLwgykI" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: left"><style>
-#tSEMTfLwgykI {
+<div class="output text_html"><div id="yEhdVHLMjzRZ" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: left"><style>
+#yEhdVHLMjzRZ {
    --jq-multiple-choice-bg: #6f78ffff;
    --jq-mc-button-bg: #fafafa;
    --jq-mc-button-border: #e0e0e0e0;
@@ -1433,7 +1434,7 @@ nlpredict<span class="o">?</span>
         background-color: var(--jq-correct-color);
     }
 }
-</style></div><script type="application/javascript">var questionstSEMTfLwgykI=[
+</style></div><script type="application/javascript">var questionsyEhdVHLMjzRZ=[
   {
     "question": "When using minimize() for regression, which of the following objective functions would cause the model to shift towards the outliers to a greater extent than the rest:<br>a: (y_pred - y)^2<br>b: (y_pred - y)<br>c: |ypred - y|",
     "type": "multiple_choice",
@@ -2738,8 +2739,8 @@ function make_string(qa, outerqDiv, qDiv, aDiv, id) {
  * Ensures show_questions is called after the container div is in the DOM.
  */
 function try_show() {
-  if (document.getElementById("tSEMTfLwgykI")) {
-    show_questions(questionstSEMTfLwgykI, tSEMTfLwgykI);
+  if (document.getElementById("yEhdVHLMjzRZ")) {
+    show_questions(questionsyEhdVHLMjzRZ, yEhdVHLMjzRZ);
   } else {
     setTimeout(try_show, 200);
   }
@@ -2751,7 +2752,15 @@ function try_show() {
 }
 </script></div>
 </div>
-</section>
+<a class="reference internal image-reference" href="../../_images/deliberate-practice.png"><img alt="../../_images/deliberate-practice.png" src="../../_images/deliberate-practice.png" style="width: 300px;" />
+</a>
+<div class="admonition warning" name="html-admonition" style="background: #FFF3CD; padding: 12px; border: 1px solid #F5C16C; border-radius: 8px">
+  <h1 class="title">At the Speed of Thought: Pyter and Lazlo’s Study Habits</h1>
+<p>Pyter Python and Lazlo were classmates in the same chemical engineering course, but their study habits could not have been more different. Lazlo had a simple routine: he went to class, listened just enough to jot down the main equations, and then relied heavily on his notes and the internet when homework came around. He usually finished the assignments, but each problem felt like a small battle. Lazlo would scroll through lecture slides, flip pages in the textbook, and search online for a trick or example that might match the question. Progress was steady but slow, like dragging a heavy cart uphill.</p>
+<p>Pyter, in contrast, approached learning with deliberate practice. After class, instead of leaping into the homework, he opened his tidy notebook filled with old undergraduate problems. “If I can’t do the basics at speed, how can I hope to master the new?” he reasoned. He worked through problems he already knew well, reinforcing the mechanics until they became second nature. Then he sought out seemingly simple problems, ones that might hide subtle pitfalls, testing himself to make sure nothing “easy” would trip him up later. Only after this warm-up did Pyter tackle the assigned homework.</p>
+<p>But Pyter wasn’t satisfied with just solving each problem once. He tried to invent alternate solutions—using a graphical approach where he’d first solved algebraically, or rewriting a derivation from a different starting assumption. When all the methods converged on the same answer, Pyter smiled; the redundancy confirmed his understanding.</p>
+<p>The result was striking. In group study sessions, Lazlo often paused mid-problem to dig through his notes. Pyter, by contrast, seemed to glide: equations flowed from him as naturally as speech, his pencil keeping pace with his thoughts. Lazlo worked at the speed of searching. Pyter worked at the speed of thought.</p>
+</div></section>
 
     <script type="text/x-thebe-config">
     {

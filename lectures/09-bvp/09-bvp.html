@@ -569,8 +569,8 @@ document.write(`
 <p><span class="math notranslate nohighlight">\(y''(x) \approx \frac{y_{i-1} - 2 y_i + y_{i+1}}{h^2} \)</span></p>
 <p><span class="math notranslate nohighlight">\(y'(x) \approx \frac{y_{i+1} - y_{i-1}}{2 h} \)</span></p>
 <p>We define a function <span class="math notranslate nohighlight">\(y''(x) = F(x, y, y')\)</span>. At each node in our discretized region, we will have an equation that looks like <span class="math notranslate nohighlight">\(y''(x) - F(x, y, y') = 0\)</span>, which will be nonlinear in the unknown solution <span class="math notranslate nohighlight">\(y\)</span>. The set of equations to solve is:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-d4e81206-6481-4ed8-a93a-98a9911377a5">
-<span class="eqno">(2)<a class="headerlink" href="#equation-d4e81206-6481-4ed8-a93a-98a9911377a5" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
+<div class="amsmath math notranslate nohighlight" id="equation-42fa1dc9-19f8-4ca0-bd57-99693a9fdea2">
+<span class="eqno">(2)<a class="headerlink" href="#equation-42fa1dc9-19f8-4ca0-bd57-99693a9fdea2" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
 y_0 - \alpha &amp;=&amp; 0 \
 \frac{y_{i-1} - 2 y_i + y_{i+1}}{h^2} + (3 y_i) \left(\frac{y_{i+1} - y_{i-1}}{2 h}\right) &amp;=&amp; 0 \
 y_L - \beta &amp;=&amp;0
@@ -1310,8 +1310,8 @@ solve_bvp<span class="o">?</span>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><div id="TFGYFrdlNsHg" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: left"><style>
-#TFGYFrdlNsHg {
+<div class="output text_html"><div id="vbNFnMoRywFi" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: left"><style>
+#vbNFnMoRywFi {
    --jq-multiple-choice-bg: #6f78ffff;
    --jq-mc-button-bg: #fafafa;
    --jq-mc-button-border: #e0e0e0e0;
@@ -1528,7 +1528,7 @@ solve_bvp<span class="o">?</span>
         background-color: var(--jq-correct-color);
     }
 }
-</style></div><script type="application/javascript">var questionsTFGYFrdlNsHg=[
+</style></div><script type="application/javascript">var questionsvbNFnMoRywFi=[
   {
     "question": "Using finite difference method, find the values of y', <br>if y = [3.,  5.,  7.,  9., 11., 13.]<br>h = 0.2, and the end points are at 1, 15.",
     "type": "multiple_choice",
@@ -2833,8 +2833,8 @@ function make_string(qa, outerqDiv, qDiv, aDiv, id) {
  * Ensures show_questions is called after the container div is in the DOM.
  */
 function try_show() {
-  if (document.getElementById("TFGYFrdlNsHg")) {
-    show_questions(questionsTFGYFrdlNsHg, TFGYFrdlNsHg);
+  if (document.getElementById("vbNFnMoRywFi")) {
+    show_questions(questionsvbNFnMoRywFi, vbNFnMoRywFi);
   } else {
     setTimeout(try_show, 200);
   }
