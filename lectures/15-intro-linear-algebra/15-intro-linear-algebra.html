@@ -252,6 +252,7 @@
 
 
 
+
 <li class="toctree-l1"><a class="reference internal" href="../16-linear-algebra/16-linear-algebra.html">Linear algebraic equations</a></li>
 
 
@@ -549,6 +550,7 @@ document.write(`
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#solving-linear-algebraic-equations">Solving linear algebraic equations</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#coding-questions">Coding Questions</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#owning-it-the-power-of-personal-responsibility">Owning It: The Power of Personal Responsibility</a></li>
 </ul>
 
             </nav>
@@ -567,6 +569,8 @@ document.write(`
 <ul class="simple">
 <li><p>KEYWORDS: numpy.transpose, numpy.eye, numpy.diag, numpy.tri, &#64;, numpy.allclose, numpy.linalg.det, numpy.linalg.inv, numpy.linalg.matrix_rank, numpy.linalg.cond, numpy.linalg.solve</p></li>
 </ul>
+<a class="reference internal image-reference" href="../../_images/pp-la.png"><img alt="../../_images/pp-la.png" src="../../_images/pp-la.png" style="width: 300px;" />
+</a>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>We will introduce a lot of new commands today. You should get some paper and take notes on what they are for review later.</p>
@@ -1378,8 +1382,8 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><div id="aVFdbVTZmYxl" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: left"><style>
-#aVFdbVTZmYxl {
+<div class="output text_html"><div id="yZBzxpTkKDGn" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: left"><style>
+#yZBzxpTkKDGn {
    --jq-multiple-choice-bg: #6f78ffff;
    --jq-mc-button-bg: #fafafa;
    --jq-mc-button-border: #e0e0e0e0;
@@ -1596,7 +1600,7 @@ document.write(`
         background-color: var(--jq-correct-color);
     }
 }
-</style></div><script type="application/javascript">var questionsaVFdbVTZmYxl=[
+</style></div><script type="application/javascript">var questionsyZBzxpTkKDGn=[
   {
     "question": "<p>What will be the output of the following code:</p><br><p><code>x = np.array([4, 3, 2, 1])<br>for I in x:<br>    print(I)</code></p>",
     "type": "multiple_choice",
@@ -2901,8 +2905,8 @@ function make_string(qa, outerqDiv, qDiv, aDiv, id) {
  * Ensures show_questions is called after the container div is in the DOM.
  */
 function try_show() {
-  if (document.getElementById("aVFdbVTZmYxl")) {
-    show_questions(questionsaVFdbVTZmYxl, aVFdbVTZmYxl);
+  if (document.getElementById("yZBzxpTkKDGn")) {
+    show_questions(questionsyZBzxpTkKDGn, yZBzxpTkKDGn);
   } else {
     setTimeout(try_show, 200);
   }
@@ -3335,8 +3339,8 @@ function try_show() {
 <h1>Solving linear algebraic equations<a class="headerlink" href="#solving-linear-algebraic-equations" title="Link to this heading">#</a></h1>
 <p>One of the key reasons to develop the tools above is for solving linear equations. Let’s consider an example.</p>
 <p>Given these equations, find [x1, x2, x3]</p>
-<div class="amsmath math notranslate nohighlight" id="equation-263b45a2-c6eb-49e0-8c64-ecb9bc3dd9be">
-<span class="eqno">(3)<a class="headerlink" href="#equation-263b45a2-c6eb-49e0-8c64-ecb9bc3dd9be" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
+<div class="amsmath math notranslate nohighlight" id="equation-022e500e-be3b-48f9-8658-de46cf7eed2a">
+<span class="eqno">(3)<a class="headerlink" href="#equation-022e500e-be3b-48f9-8658-de46cf7eed2a" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
 x_1 - x_2 + x_3 &amp;=&amp; 0 \\
 10 x_2 + 25 x_3 &amp;=&amp; 90 \\
 20 x_1 + 10 x_2 &amp;=&amp; 80
@@ -3514,7 +3518,7 @@ x_1 - x_2 + x_3 &amp;=&amp; 0 \\
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/d547a641defe67b837ad15230d1f885da14620c58f03a397ecf4ce5b9679181a.png" src="../../_images/d547a641defe67b837ad15230d1f885da14620c58f03a397ecf4ce5b9679181a.png" />
+<img alt="../../_images/c3371ec800b6748fa819b1ee59b75a165d358676c40632d30026a87a6b0ea967.png" src="../../_images/c3371ec800b6748fa819b1ee59b75a165d358676c40632d30026a87a6b0ea967.png" />
 </div>
 </div>
 <p>As usual, there is a function we can use to solve this.</p>
@@ -3557,7 +3561,7 @@ x_1 - x_2 + x_3 &amp;=&amp; 0 \\
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/8eb9e3df64b7452fa8258f737b3b84b68565c2c8641503aa20f84a256beb4dd9.png" src="../../_images/8eb9e3df64b7452fa8258f737b3b84b68565c2c8641503aa20f84a256beb4dd9.png" />
+<img alt="../../_images/44fbd70288fabbbe1869256cecac33ba5e91c3bbafd24999ce52b5301d1c6ad3.png" src="../../_images/44fbd70288fabbbe1869256cecac33ba5e91c3bbafd24999ce52b5301d1c6ad3.png" />
 </div>
 </div>
 <p>You can see by inspection that solve must not be using an inverse to solve these equations; if it did, it would take much longer to solve them. It is remarkable that we can solve ~5000 simultaneous equations here in about 1-2 seconds!</p>
@@ -3571,8 +3575,8 @@ x_1 - x_2 + x_3 &amp;=&amp; 0 \\
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><div id="LbevCHiBtsut" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: left"><style>
-#LbevCHiBtsut {
+<div class="output text_html"><div id="OriYCWtrCtoR" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: left"><style>
+#OriYCWtrCtoR {
    --jq-multiple-choice-bg: #6f78ffff;
    --jq-mc-button-bg: #fafafa;
    --jq-mc-button-border: #e0e0e0e0;
@@ -3789,7 +3793,7 @@ x_1 - x_2 + x_3 &amp;=&amp; 0 \\
         background-color: var(--jq-correct-color);
     }
 }
-</style></div><script type="application/javascript">var questionsLbevCHiBtsut=[
+</style></div><script type="application/javascript">var questionsOriYCWtrCtoR=[
   {
     "question": "A = np.array([[1, 2, 3], [3, 2, 1]])<br>B = np.array([4, 5, 6])<br>A @ B  = C<br>We can say that",
     "type": "multiple_choice",
@@ -4998,8 +5002,8 @@ function make_string(qa, outerqDiv, qDiv, aDiv, id) {
  * Ensures show_questions is called after the container div is in the DOM.
  */
 function try_show() {
-  if (document.getElementById("LbevCHiBtsut")) {
-    show_questions(questionsLbevCHiBtsut, LbevCHiBtsut);
+  if (document.getElementById("OriYCWtrCtoR")) {
+    show_questions(questionsOriYCWtrCtoR, OriYCWtrCtoR);
   } else {
     setTimeout(try_show, 200);
   }
@@ -5023,8 +5027,8 @@ function try_show() {
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><div id="VnStwhfdRdxs" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: left"><style>
-#VnStwhfdRdxs {
+<div class="output text_html"><div id="vzPACCKlQrCr" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: left"><style>
+#vzPACCKlQrCr {
    --jq-multiple-choice-bg: #6f78ffff;
    --jq-mc-button-bg: #fafafa;
    --jq-mc-button-border: #e0e0e0e0;
@@ -5241,7 +5245,7 @@ function try_show() {
         background-color: var(--jq-correct-color);
     }
 }
-</style></div><script type="application/javascript">var questionsVnStwhfdRdxs=[
+</style></div><script type="application/javascript">var questionsvzPACCKlQrCr=[
   {
     "question": "np.tri(2, k = 1) + np.diag([1, 2]) = ?",
     "type": "multiple_choice",
@@ -6546,8 +6550,8 @@ function make_string(qa, outerqDiv, qDiv, aDiv, id) {
  * Ensures show_questions is called after the container div is in the DOM.
  */
 function try_show() {
-  if (document.getElementById("VnStwhfdRdxs")) {
-    show_questions(questionsVnStwhfdRdxs, VnStwhfdRdxs);
+  if (document.getElementById("vzPACCKlQrCr")) {
+    show_questions(questionsvzPACCKlQrCr, vzPACCKlQrCr);
   } else {
     setTimeout(try_show, 200);
   }
@@ -6575,7 +6579,27 @@ function try_show() {
 </div>
 </div>
 </div>
+<a class="reference internal image-reference" href="../../_images/owning-it-0.png"><img alt="../../_images/owning-it-0.png" src="../../_images/owning-it-0.png" style="width: 300px;" />
+</a>
+<div class="admonition warning" name="html-admonition" style="background: #B0E2FF; padding: 20px; border: 2px solid #87CEFA; border-radius: 10px; margin: 20px; font-family: Arial, sans-serif;">
 </section>
+<section class="tex2jax_ignore mathjax_ignore" id="owning-it-the-power-of-personal-responsibility">
+<h1>Owning It: The Power of Personal Responsibility<a class="headerlink" href="#owning-it-the-power-of-personal-responsibility" title="Link to this heading">#</a></h1>
+<p>The alarm blared at 11:30 AM, jolting Lazlo Python from his sleep. Papers scattered across his messy bed, he stared in horror at his laptop’s notifications. The assignment was due hours ago.</p>
+<p>“The professor is totally unfair!” Lazlo complained later, dramatically waving his arms. “How was I supposed to know the deadline was so strict?”</p>
+<p>Pyter Python, overhearing this, frowned slightly. He’d completed the assignment three days early.</p>
+<p>The next week brought the chemistry lab. While Pyter methodically prepared—checking safety goggles, lab coat, and pre-lab questions—Lazlo spent the evening gaming, dismissing lab notifications with a flick of his tail. The following day, Lazlo arrived in flip-flops with no safety equipment, only to be turned away at the door while Pyter and classmates conducted the experiment.</p>
+<p>“This is ridiculous,” Lazlo muttered, slouched against the wall. “They should have extras for us.”</p>
+<p>Group project week proved even more challenging. At their planning meeting, Pyter presented a color-coded timeline while Lazlo arrived empty-handed. When presentation day came and his section was due, Lazlo fumbled.</p>
+<p>“Can’t someone else cover this part?” he whispered desperately.</p>
+<p>After class, Pyter pulled him aside. “When you don’t complete your part, it affects all of us. We were counting on you.”</p>
+<p>Something in Lazlo’s expression changed—his first glimpse of how his actions impacted others.</p>
+<p>The turning point came during lab calculations when Pyter discovered an error in his work. Instead of hiding it, he immediately raised his hand, explaining the mistake to everyone. The professor used it as a teaching moment, and Lazlo watched, surprised by how respect—not ridicule—followed Pyter’s honesty.</p>
+<p>Gradually, Lazlo began changing. His alarm now set earlier, his backpack organized, he started arriving prepared. When he confidently delivered his section of their final presentation, his teammates looked impressed.</p>
+<p>“We can always count on you now!” they said afterward, inviting him for coffee.</p>
+<p>Lazlo stood taller, a new confidence in his posture as he and Pyter shared a fist-bump.</p>
+<p>“Taking responsibility isn’t just about avoiding trouble,” Lazlo realized. “It’s about earning respect—and feeling proud of yourself.”</p>
+</div></section>
 
     <script type="text/x-thebe-config">
     {
@@ -6662,6 +6686,7 @@ function try_show() {
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#solving-linear-algebraic-equations">Solving linear algebraic equations</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#coding-questions">Coding Questions</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#owning-it-the-power-of-personal-responsibility">Owning It: The Power of Personal Responsibility</a></li>
 </ul>
 
   </nav></div>
