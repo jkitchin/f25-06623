@@ -273,6 +273,7 @@
 
 
 
+
 <li class="toctree-l1"><a class="reference internal" href="../20-autograd-applications/20-jax-applications.html">Applications of automatic differentiation</a></li>
 
 
@@ -545,6 +546,7 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#pyters-derivative-memory-palace">Pyter’s Derivative Memory Palace</a></li>
 </ul>
 
             </nav>
@@ -557,9 +559,11 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="introduction-to-automatic-differentiation-with-jax">
+  <p><a class="reference internal" href="../toc.html"><span class="std std-doc">TOC</span></a></p>
+<section class="tex2jax_ignore mathjax_ignore" id="introduction-to-automatic-differentiation-with-jax">
 <h1>Introduction to automatic differentiation with jax<a class="headerlink" href="#introduction-to-automatic-differentiation-with-jax" title="Link to this heading">#</a></h1>
-<p><img alt="img" src="https://imgs.xkcd.com/comics/newton_and_leibniz.png" /></p>
+<a class="reference internal image-reference" href="../../_images/pp-jax.png"><img alt="../../_images/pp-jax.png" src="../../_images/pp-jax.png" style="width: 330px;" />
+</a>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="derivatives-in-scientific-programming">
 <h1>Derivatives in scientific programming<a class="headerlink" href="#derivatives-in-scientific-programming" title="Link to this heading">#</a></h1>
@@ -801,7 +805,7 @@ there are big changes.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(array([0.63444997, 0.71120143]), array(-6.73531261))
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(array([0.62706386, 0.71711278]), array(-19.40714688))
 </pre></div>
 </div>
 </div>
@@ -814,7 +818,7 @@ there are big changes.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/b6023ac2bfcc546f24f2818efb62bd5c59433ab13846bce1bcda343bb13475a9.png" src="../../_images/b6023ac2bfcc546f24f2818efb62bd5c59433ab13846bce1bcda343bb13475a9.png" />
+<img alt="../../_images/d9b931b0d00c2f5ded4ef57b273bd6dbe333ea2c68e5ebe0834efc602ed4331d.png" src="../../_images/d9b931b0d00c2f5ded4ef57b273bd6dbe333ea2c68e5ebe0834efc602ed4331d.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -829,7 +833,7 @@ there are big changes.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/d59ba30c6456c78a513f940876c5ca8fcf58a3dd38187a4d775857e227dbec83.png" src="../../_images/d59ba30c6456c78a513f940876c5ca8fcf58a3dd38187a4d775857e227dbec83.png" />
+<img alt="../../_images/ed86e23ae1b6172909bdba0158bd81e508a93feb2f27bfde76b8229b12ed1636.png" src="../../_images/ed86e23ae1b6172909bdba0158bd81e508a93feb2f27bfde76b8229b12ed1636.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -839,7 +843,7 @@ there are big changes.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/dd73ff45ae39f479d86b45f642b536c0ea3f1d2772bd429844575543fc0d1e71.png" src="../../_images/dd73ff45ae39f479d86b45f642b536c0ea3f1d2772bd429844575543fc0d1e71.png" />
+<img alt="../../_images/bb0a5ac3048e8a3d2def3d5e2418df95013fb789cc16147d3a36341c77afea3e.png" src="../../_images/bb0a5ac3048e8a3d2def3d5e2418df95013fb789cc16147d3a36341c77afea3e.png" />
 </div>
 </div>
 </section>
@@ -1254,8 +1258,8 @@ example:</p>
 <p><span class="math notranslate nohighlight">\(f_1(x, y) = x^2 y\)</span></p>
 <p><span class="math notranslate nohighlight">\(f_2(x, y) = 5 x + \sin(y)\)</span></p>
 <p>The Jacobian of this system is:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-5e1c0ccc-2567-4a75-8164-97615664ce0f">
-<span class="eqno">(4)<a class="headerlink" href="#equation-5e1c0ccc-2567-4a75-8164-97615664ce0f" title="Permalink to this equation">#</a></span>\[\begin{equation} \left[\begin{array}{cc} 2 x y &amp; x^2 \\ 5 &amp; \cos y \\
+<div class="amsmath math notranslate nohighlight" id="equation-803aa3ef-e7ef-4afa-8245-2fac5fd105c8">
+<span class="eqno">(4)<a class="headerlink" href="#equation-803aa3ef-e7ef-4afa-8245-2fac5fd105c8" title="Permalink to this equation">#</a></span>\[\begin{equation} \left[\begin{array}{cc} 2 x y &amp; x^2 \\ 5 &amp; \cos y \\
 \end{array}\right] \end{equation}\]</div>
 <p>There are two Jacobian functions, <code class="docutils literal notranslate"><span class="pre">jacfwd</span></code> and <code class="docutils literal notranslate"><span class="pre">jacref</span></code>. In theory they do the same thing, but one of them will usually be faster for some systems. <code class="docutils literal notranslate"><span class="pre">jacfwd</span></code> uses a forward pass through the code to compute the Jacobian, while <code class="docutils literal notranslate"><span class="pre">jacrev</span></code> uses a reverse pass. The <a class="reference external" href="https://jax.readthedocs.io/en/latest/notebooks/autodiff_cookbook.html#jacobians-and-hessians-using-jacfwd-and-jacrev">documentation</a> recommends using jacfwd for “tall” Jacobians and jacref for “wide” jacobians. For square jacobians, it does not matter. It is fine to be practical, and try both to see if one is faster than other.</p>
 <div class="cell docutils container">
@@ -1597,8 +1601,8 @@ regression and conclude with an introduction to machine learning.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><div id="UjyvgUeuqgfw" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: left"><style>
-#UjyvgUeuqgfw {
+<div class="output text_html"><div id="YDEHhYaNkZec" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: left"><style>
+#YDEHhYaNkZec {
    --jq-multiple-choice-bg: #6f78ffff;
    --jq-mc-button-bg: #fafafa;
    --jq-mc-button-border: #e0e0e0e0;
@@ -1815,7 +1819,7 @@ regression and conclude with an introduction to machine learning.</p>
         background-color: var(--jq-correct-color);
     }
 }
-</style></div><script type="application/javascript">var questionsUjyvgUeuqgfw=[
+</style></div><script type="application/javascript">var questionsYDEHhYaNkZec=[
   {
     "question": "Derivatives have useful applications in determining",
     "type": "multiple_choice",
@@ -3120,8 +3124,8 @@ function make_string(qa, outerqDiv, qDiv, aDiv, id) {
  * Ensures show_questions is called after the container div is in the DOM.
  */
 function try_show() {
-  if (document.getElementById("UjyvgUeuqgfw")) {
-    show_questions(questionsUjyvgUeuqgfw, UjyvgUeuqgfw);
+  if (document.getElementById("YDEHhYaNkZec")) {
+    show_questions(questionsYDEHhYaNkZec, YDEHhYaNkZec);
   } else {
     setTimeout(try_show, 200);
   }
@@ -3133,7 +3137,24 @@ function try_show() {
 }
 </script></div>
 </div>
+<div style="background-color:#e6f4ff; border-radius:15px; padding:20px; font-family:Georgia, serif; line-height:1.6;">
 </section>
+<section class="tex2jax_ignore mathjax_ignore" id="pyters-derivative-memory-palace">
+<h1>Pyter’s Derivative Memory Palace<a class="headerlink" href="#pyters-derivative-memory-palace" title="Link to this heading">#</a></h1>
+<p>Pyter Python slithered into his study room, notebook open and glasses shining. “Derivatives,” he muttered, “there are so many ways to find them! I need to keep them straight.”</p>
+<p>First, he worked out “dy/dx” by hand, using the chain rule where needed.  “Ah yes—<em>analytical differentiation</em>. The classic! Perfect when I have a clean, simple formula.  It gives exact answers, as long as I’m careful with the algebra.”</p>
+<p>Then he sketched a row of <strong>dots on a curve</strong>.  “That’s <em>numerical differentiation</em>,” he said.  “When all I’ve got are data points, I can approximate the slope. But I must remember—numerical methods can be noisy and less accurate, especially near the edges.”</p>
+<p>Next, Pyter scribbled curly symbols: ∂, ∇, and matrices. “<em>Symbolic differentiation</em>!” he exclaimed. “Tools like SymPy can do the calculus for me—great when equations are neat. But if I try to hand them a whole program, they’ll choke.”</p>
+<p>Finally, Pyter opened his glowing laptop.  “And here’s my favorite: <em>automatic differentiation</em>. With JAX, I can feed it programs—loops, functions, everything—and it quietly applies the chain rule everywhere. It’s not an approximation, and it works even when equations get too tangled for me to handle by hand.”</p>
+<p>Pyter leaned back, proud. He imagined the four methods as characters in a relay race:</p>
+<ul class="simple">
+<li><p><strong>Analytical</strong>: precise but sometimes slow with pencil and paper.</p></li>
+<li><p><strong>Numerical</strong>: quick, but stumbles on rough terrain.</p></li>
+<li><p><strong>Symbolic</strong>: elegant, yet picky about what it eats.</p></li>
+<li><p><strong>Automatic</strong>: a speedy racer in a sleek car, handling anything coded in Python.</p></li>
+</ul>
+<p>“Now I’ll never forget,” Pyter said with a smile, “which friend to call for derivatives—depending on the challenge ahead.”</p>
+</div></section>
 
     <script type="text/x-thebe-config">
     {
@@ -3215,6 +3236,7 @@ function try_show() {
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#pyters-derivative-memory-palace">Pyter’s Derivative Memory Palace</a></li>
 </ul>
 
   </nav></div>
