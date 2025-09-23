@@ -279,6 +279,7 @@
 
 
 <li class="toctree-l1"><a class="reference internal" href="../21-machine-learning/21-machine-learning-jax.html">Introduction to machine learning</a></li>
+
 <li class="toctree-l1"><a class="reference internal" href="../22-ml-2/22-ml-2-jax.html">Advanced topics in ML</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../23-gp/23-gp.html">Gaussian process regression</a></li>
 
@@ -805,7 +806,7 @@ there are big changes.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(array([0.62706386, 0.71711278]), array(-19.40714688))
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(array([0.64028679, 0.71544431]), array(-91.27548747))
 </pre></div>
 </div>
 </div>
@@ -818,7 +819,7 @@ there are big changes.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/d9b931b0d00c2f5ded4ef57b273bd6dbe333ea2c68e5ebe0834efc602ed4331d.png" src="../../_images/d9b931b0d00c2f5ded4ef57b273bd6dbe333ea2c68e5ebe0834efc602ed4331d.png" />
+<img alt="../../_images/8108e1bb2c216a43229a91cc30c1d7eabe863b1a74bfbf3a9033fc0025272dfe.png" src="../../_images/8108e1bb2c216a43229a91cc30c1d7eabe863b1a74bfbf3a9033fc0025272dfe.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -833,7 +834,7 @@ there are big changes.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/ed86e23ae1b6172909bdba0158bd81e508a93feb2f27bfde76b8229b12ed1636.png" src="../../_images/ed86e23ae1b6172909bdba0158bd81e508a93feb2f27bfde76b8229b12ed1636.png" />
+<img alt="../../_images/b8a0166a17265435fd5f7c6d92849d769bab41e6f0b04d6ae0828080f1ee5eed.png" src="../../_images/b8a0166a17265435fd5f7c6d92849d769bab41e6f0b04d6ae0828080f1ee5eed.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -843,7 +844,7 @@ there are big changes.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/bb0a5ac3048e8a3d2def3d5e2418df95013fb789cc16147d3a36341c77afea3e.png" src="../../_images/bb0a5ac3048e8a3d2def3d5e2418df95013fb789cc16147d3a36341c77afea3e.png" />
+<img alt="../../_images/f3e63b85f2bf325987524649a071bfb88bfa82dd68c7fe2f24b45645f9625c31.png" src="../../_images/f3e63b85f2bf325987524649a071bfb88bfa82dd68c7fe2f24b45645f9625c31.png" />
 </div>
 </div>
 </section>
@@ -1258,8 +1259,8 @@ example:</p>
 <p><span class="math notranslate nohighlight">\(f_1(x, y) = x^2 y\)</span></p>
 <p><span class="math notranslate nohighlight">\(f_2(x, y) = 5 x + \sin(y)\)</span></p>
 <p>The Jacobian of this system is:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-803aa3ef-e7ef-4afa-8245-2fac5fd105c8">
-<span class="eqno">(4)<a class="headerlink" href="#equation-803aa3ef-e7ef-4afa-8245-2fac5fd105c8" title="Permalink to this equation">#</a></span>\[\begin{equation} \left[\begin{array}{cc} 2 x y &amp; x^2 \\ 5 &amp; \cos y \\
+<div class="amsmath math notranslate nohighlight" id="equation-194f5bd1-debf-4530-9bfa-749b8df6eb82">
+<span class="eqno">(4)<a class="headerlink" href="#equation-194f5bd1-debf-4530-9bfa-749b8df6eb82" title="Permalink to this equation">#</a></span>\[\begin{equation} \left[\begin{array}{cc} 2 x y &amp; x^2 \\ 5 &amp; \cos y \\
 \end{array}\right] \end{equation}\]</div>
 <p>There are two Jacobian functions, <code class="docutils literal notranslate"><span class="pre">jacfwd</span></code> and <code class="docutils literal notranslate"><span class="pre">jacref</span></code>. In theory they do the same thing, but one of them will usually be faster for some systems. <code class="docutils literal notranslate"><span class="pre">jacfwd</span></code> uses a forward pass through the code to compute the Jacobian, while <code class="docutils literal notranslate"><span class="pre">jacrev</span></code> uses a reverse pass. The <a class="reference external" href="https://jax.readthedocs.io/en/latest/notebooks/autodiff_cookbook.html#jacobians-and-hessians-using-jacfwd-and-jacrev">documentation</a> recommends using jacfwd for “tall” Jacobians and jacref for “wide” jacobians. For square jacobians, it does not matter. It is fine to be practical, and try both to see if one is faster than other.</p>
 <div class="cell docutils container">
@@ -1601,8 +1602,8 @@ regression and conclude with an introduction to machine learning.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><div id="YDEHhYaNkZec" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: left"><style>
-#YDEHhYaNkZec {
+<div class="output text_html"><div id="cISwruozepsN" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: left"><style>
+#cISwruozepsN {
    --jq-multiple-choice-bg: #6f78ffff;
    --jq-mc-button-bg: #fafafa;
    --jq-mc-button-border: #e0e0e0e0;
@@ -1819,7 +1820,7 @@ regression and conclude with an introduction to machine learning.</p>
         background-color: var(--jq-correct-color);
     }
 }
-</style></div><script type="application/javascript">var questionsYDEHhYaNkZec=[
+</style></div><script type="application/javascript">var questionscISwruozepsN=[
   {
     "question": "Derivatives have useful applications in determining",
     "type": "multiple_choice",
@@ -3124,8 +3125,8 @@ function make_string(qa, outerqDiv, qDiv, aDiv, id) {
  * Ensures show_questions is called after the container div is in the DOM.
  */
 function try_show() {
-  if (document.getElementById("YDEHhYaNkZec")) {
-    show_questions(questionsYDEHhYaNkZec, YDEHhYaNkZec);
+  if (document.getElementById("cISwruozepsN")) {
+    show_questions(questionscISwruozepsN, cISwruozepsN);
   } else {
     setTimeout(try_show, 200);
   }

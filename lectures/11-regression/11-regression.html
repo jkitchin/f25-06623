@@ -279,6 +279,7 @@
 
 
 <li class="toctree-l1"><a class="reference internal" href="../21-machine-learning/21-machine-learning-jax.html">Introduction to machine learning</a></li>
+
 <li class="toctree-l1"><a class="reference internal" href="../22-ml-2/22-ml-2-jax.html">Advanced topics in ML</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../23-gp/23-gp.html">Gaussian process regression</a></li>
 
@@ -1123,7 +1124,7 @@ nlinfit<span class="o">??</span>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/7bd87fed1970ec95a20e1fb24b5ac52286cfd9b580c8887a694edabf7bd9833c.png" src="../../_images/7bd87fed1970ec95a20e1fb24b5ac52286cfd9b580c8887a694edabf7bd9833c.png" />
+<img alt="../../_images/98b5b2cdea926bb8df5fd3fa69037ee1f8bb5f518de368b11e0323dd07977d93.png" src="../../_images/98b5b2cdea926bb8df5fd3fa69037ee1f8bb5f518de368b11e0323dd07977d93.png" />
 </div>
 </div>
 <p>So the idea is we can generate a distribution of the parameters</p>
@@ -1139,10 +1140,10 @@ nlinfit<span class="o">??</span>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(np.float64(1.320470670813057), np.float64(0.009668879996579751))
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(np.float64(1.3205973832516809), np.float64(0.009673341950313573))
 </pre></div>
 </div>
-<img alt="../../_images/c177552a291f9c97afceacadbd8b1827c3199987bf797597d8556366c25f2cd7.png" src="../../_images/c177552a291f9c97afceacadbd8b1827c3199987bf797597d8556366c25f2cd7.png" />
+<img alt="../../_images/7500d09b8c7576f8fddd4ab99df11256c0cf6495e0ef02ad7f941353746a28ae.png" src="../../_images/7500d09b8c7576f8fddd4ab99df11256c0cf6495e0ef02ad7f941353746a28ae.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1167,7 +1168,7 @@ nlinfit<span class="o">??</span>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>At x=5, y=1.320 +- 0.019 at about the 95% confidence level.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>At x=5, y=1.321 +- 0.019 at about the 95% confidence level.
 </pre></div>
 </div>
 </div>
@@ -1218,8 +1219,8 @@ nlpredict<span class="o">?</span>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><div id="sfTMMoKlzknH" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: left"><style>
-#sfTMMoKlzknH {
+<div class="output text_html"><div id="yzpkrZvzQCPz" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: left"><style>
+#yzpkrZvzQCPz {
    --jq-multiple-choice-bg: #6f78ffff;
    --jq-mc-button-bg: #fafafa;
    --jq-mc-button-border: #e0e0e0e0;
@@ -1436,7 +1437,7 @@ nlpredict<span class="o">?</span>
         background-color: var(--jq-correct-color);
     }
 }
-</style></div><script type="application/javascript">var questionssfTMMoKlzknH=[
+</style></div><script type="application/javascript">var questionsyzpkrZvzQCPz=[
   {
     "question": "When using minimize() for regression, which of the following objective functions would cause the model to shift towards the outliers to a greater extent than the rest:<br>a: (y_pred - y)^2<br>b: (y_pred - y)<br>c: |ypred - y|",
     "type": "multiple_choice",
@@ -2741,8 +2742,8 @@ function make_string(qa, outerqDiv, qDiv, aDiv, id) {
  * Ensures show_questions is called after the container div is in the DOM.
  */
 function try_show() {
-  if (document.getElementById("sfTMMoKlzknH")) {
-    show_questions(questionssfTMMoKlzknH, sfTMMoKlzknH);
+  if (document.getElementById("yzpkrZvzQCPz")) {
+    show_questions(questionsyzpkrZvzQCPz, yzpkrZvzQCPz);
   } else {
     setTimeout(try_show, 200);
   }
