@@ -284,6 +284,12 @@
 <li class="toctree-l1"><a class="reference internal" href="../23-gp/23-gp.html">Gaussian process regression</a></li>
 
 </ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Badges</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../badges/differential-equations.html">Requirements to Earn the <em>Differential Equations in Python</em> Badge</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../badges/nonlinear-algebra.html">Nonlinear Algebra Badge</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../badges/optimization.html">Requirements to Earn the “Optimization in Python” Badge</a></li>
+</ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">About the book</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../execution-statistics.html">Build statistics</a></li>
@@ -1124,7 +1130,7 @@ nlinfit<span class="o">??</span>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/24cfb3fff5e5da7f3160e182b8b477691317459b94089d3c7fc394a68ba18fd4.png" src="../../_images/24cfb3fff5e5da7f3160e182b8b477691317459b94089d3c7fc394a68ba18fd4.png" />
+<img alt="../../_images/f23450cfccf2a763166df28c8f651ee24560c1c9c00f391b28c38e45193ebb2a.png" src="../../_images/f23450cfccf2a763166df28c8f651ee24560c1c9c00f391b28c38e45193ebb2a.png" />
 </div>
 </div>
 <p>So the idea is we can generate a distribution of the parameters</p>
@@ -1140,10 +1146,10 @@ nlinfit<span class="o">??</span>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(np.float64(1.3205164898223942), np.float64(0.009667877065813119))
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(np.float64(1.3204586637848075), np.float64(0.0096327376590873))
 </pre></div>
 </div>
-<img alt="../../_images/3d3ccf0ef2d853f6cad31780edeab96d880f0900da9f22ae36c911be9aad78fc.png" src="../../_images/3d3ccf0ef2d853f6cad31780edeab96d880f0900da9f22ae36c911be9aad78fc.png" />
+<img alt="../../_images/01085ef31e9cf784f6cef50b91ce90ee179e08a8e7f3f6c75db02617e2911041.png" src="../../_images/01085ef31e9cf784f6cef50b91ce90ee179e08a8e7f3f6c75db02617e2911041.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1168,7 +1174,7 @@ nlinfit<span class="o">??</span>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>At x=5, y=1.321 +- 0.019 at about the 95% confidence level.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>At x=5, y=1.320 +- 0.019 at about the 95% confidence level.
 </pre></div>
 </div>
 </div>
@@ -1219,8 +1225,8 @@ nlpredict<span class="o">?</span>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><div id="dqHnETbnruST" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: left"><style>
-#dqHnETbnruST {
+<div class="output text_html"><div id="QShkEPSkIesA" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: left"><style>
+#QShkEPSkIesA {
    --jq-multiple-choice-bg: #6f78ffff;
    --jq-mc-button-bg: #fafafa;
    --jq-mc-button-border: #e0e0e0e0;
@@ -1437,7 +1443,7 @@ nlpredict<span class="o">?</span>
         background-color: var(--jq-correct-color);
     }
 }
-</style></div><script type="application/javascript">var questionsdqHnETbnruST=[
+</style></div><script type="application/javascript">var questionsQShkEPSkIesA=[
   {
     "question": "When using minimize() for regression, which of the following objective functions would cause the model to shift towards the outliers to a greater extent than the rest:<br>a: (y_pred - y)^2<br>b: (y_pred - y)<br>c: |ypred - y|",
     "type": "multiple_choice",
@@ -2742,8 +2748,8 @@ function make_string(qa, outerqDiv, qDiv, aDiv, id) {
  * Ensures show_questions is called after the container div is in the DOM.
  */
 function try_show() {
-  if (document.getElementById("dqHnETbnruST")) {
-    show_questions(questionsdqHnETbnruST, dqHnETbnruST);
+  if (document.getElementById("QShkEPSkIesA")) {
+    show_questions(questionsQShkEPSkIesA, QShkEPSkIesA);
   } else {
     setTimeout(try_show, 200);
   }
