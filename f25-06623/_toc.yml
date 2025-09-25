@@ -31,6 +31,9 @@ parts:
     - file: lectures/22-ml-2/22-ml-2-jax.ipynb
     - file: lectures/23-gp/23-gp.ipynb
     - file: lectures/index.ipynb
+- caption: Badges
+  chapters:
+    - glob: badges/*
 - caption: Assignments
   chapters:
     - glob: assignments/*
