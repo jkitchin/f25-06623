@@ -757,19 +757,19 @@ document.write(`
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  message: Optimization terminated successfully.
   success: True
    status: 0
-      fun: 1.4913030384655855e-05
-        x: [-5.647e+01  5.723e-01  2.743e+00  1.656e+01]
-      nit: 30
-      jac: [ 7.646e-06  1.600e-06  2.372e-08 -8.896e-07]
- hess_inv: [[ 3.278e-01 -3.364e+00  8.131e+01 -2.295e+00]
-            [-3.364e+00  5.729e+01 -1.627e+03  4.383e+01]
-            [ 8.131e+01 -1.627e+03  6.670e+04 -2.578e+03]
-            [-2.295e+00  4.383e+01 -2.578e+03  1.465e+02]]
-     nfev: 180
-     njev: 36
+      fun: 1.4912984000626383e-05
+        x: [-5.647e+01  5.723e-01  2.742e+00  1.656e+01]
+      nit: 28
+      jac: [-2.419e-06 -8.417e-07  3.751e-08  8.639e-07]
+ hess_inv: [[ 3.081e-01 -2.983e+00  7.646e+01 -2.454e+00]
+            [-2.983e+00  5.047e+01 -1.534e+03  4.746e+01]
+            [ 7.646e+01 -1.534e+03  6.851e+04 -2.867e+03]
+            [-2.454e+00  4.746e+01 -2.867e+03  1.553e+02]]
+     nfev: 175
+     njev: 35
 </pre></div>
 </div>
-<img alt="../../_images/f72b491ca746a50b16e4cf4bb517de020e24455c4bdb648ac4b0c72819570538.png" src="../../_images/f72b491ca746a50b16e4cf4bb517de020e24455c4bdb648ac4b0c72819570538.png" />
+<img alt="../../_images/f54e4dbbc55c1598afe2ba61be2b60facfa977e80151d9ec2c76921be9ac59d1.png" src="../../_images/f54e4dbbc55c1598afe2ba61be2b60facfa977e80151d9ec2c76921be9ac59d1.png" />
 </div>
 </div>
 <p>That looks pretty good. We should ask ourselves, how do we know we got a minimum? We should see that the objective function is really at a minimum <em>for each of the parameters</em>. Here, we show that it is a minimum for the first parameter.</p>
@@ -801,7 +801,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/4a1b31827efe911d86cbfdd8a0c8f544617f65682e0324afc1ba0c5490a316ed.png" src="../../_images/4a1b31827efe911d86cbfdd8a0c8f544617f65682e0324afc1ba0c5490a316ed.png" />
+<img alt="../../_images/bad5a987d4084cede8da8c72de557c37ed46231496e140b1430d8778b95a9a9d.png" src="../../_images/bad5a987d4084cede8da8c72de557c37ed46231496e140b1430d8778b95a9a9d.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -820,7 +820,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/5e16cd1289076ea530ec298a7bb50721b7a0bdb0dedbf52457040ae0381146f2.png" src="../../_images/5e16cd1289076ea530ec298a7bb50721b7a0bdb0dedbf52457040ae0381146f2.png" />
+<img alt="../../_images/0ee5aab0795519703d797779d686dd9b9191d85b8eb072c66740835775b80eff.png" src="../../_images/0ee5aab0795519703d797779d686dd9b9191d85b8eb072c66740835775b80eff.png" />
 </div>
 </div>
 <p>You can see visually that the error goes up on each side of the parameter estimate.</p>
@@ -861,9 +861,9 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(np.float64(0.020605241402604797),
- np.float64(8.372983326471667e-13),
- np.float64(-0.04268685390401405))
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(np.float64(0.02060957709869471),
+ np.float64(-4.1495524381492945e-13),
+ np.float64(-0.0426805050199939))
 </pre></div>
 </div>
 </div>
@@ -1130,7 +1130,7 @@ nlinfit<span class="o">??</span>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/e90f94269f496b9af039ca4df777e343efec553cdfa8ebb1ee243ca12ea09a3e.png" src="../../_images/e90f94269f496b9af039ca4df777e343efec553cdfa8ebb1ee243ca12ea09a3e.png" />
+<img alt="../../_images/961a748b73872cc34965b557e7ad9ad5d197216c2c7d93f6628292bc27f5125a.png" src="../../_images/961a748b73872cc34965b557e7ad9ad5d197216c2c7d93f6628292bc27f5125a.png" />
 </div>
 </div>
 <p>So the idea is we can generate a distribution of the parameters</p>
@@ -1146,10 +1146,10 @@ nlinfit<span class="o">??</span>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(np.float64(1.3205328315762477), np.float64(0.009631817096003185))
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(np.float64(1.320562952635663), np.float64(0.0096785127776102))
 </pre></div>
 </div>
-<img alt="../../_images/716a7f12d6ad7e10d1eb72f2999100390a659e069df34d49df83c58125716683.png" src="../../_images/716a7f12d6ad7e10d1eb72f2999100390a659e069df34d49df83c58125716683.png" />
+<img alt="../../_images/f488b291c7a99474624912e0ee9c095935a14c6bbdb33bb9ee68e9ff6a5f6905.png" src="../../_images/f488b291c7a99474624912e0ee9c095935a14c6bbdb33bb9ee68e9ff6a5f6905.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1225,8 +1225,8 @@ nlpredict<span class="o">?</span>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><div id="nXFzUfRzBNoM" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: left"><style>
-#nXFzUfRzBNoM {
+<div class="output text_html"><div id="IowaEkoGWSKV" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: left"><style>
+#IowaEkoGWSKV {
    --jq-multiple-choice-bg: #6f78ffff;
    --jq-mc-button-bg: #fafafa;
    --jq-mc-button-border: #e0e0e0e0;
@@ -1443,7 +1443,7 @@ nlpredict<span class="o">?</span>
         background-color: var(--jq-correct-color);
     }
 }
-</style></div><script type="application/javascript">var questionsnXFzUfRzBNoM=[
+</style></div><script type="application/javascript">var questionsIowaEkoGWSKV=[
   {
     "question": "When using minimize() for regression, which of the following objective functions would cause the model to shift towards the outliers to a greater extent than the rest:<br>a: (y_pred - y)^2<br>b: (y_pred - y)<br>c: |ypred - y|",
     "type": "multiple_choice",
@@ -2748,8 +2748,8 @@ function make_string(qa, outerqDiv, qDiv, aDiv, id) {
  * Ensures show_questions is called after the container div is in the DOM.
  */
 function try_show() {
-  if (document.getElementById("nXFzUfRzBNoM")) {
-    show_questions(questionsnXFzUfRzBNoM, nXFzUfRzBNoM);
+  if (document.getElementById("IowaEkoGWSKV")) {
+    show_questions(questionsIowaEkoGWSKV, IowaEkoGWSKV);
   } else {
     setTimeout(try_show, 200);
   }
