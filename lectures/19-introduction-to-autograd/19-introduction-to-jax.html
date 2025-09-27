@@ -812,7 +812,7 @@ there are big changes.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(array([0.63595617, 0.7052268 ]), array(52.21995165))
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(array([0.6330602, 0.7063678]), array(-29.47058093))
 </pre></div>
 </div>
 </div>
@@ -825,7 +825,7 @@ there are big changes.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/7c758971ded3f3421fd76b32593485d17b74387f73f8ff91374571ef72f75275.png" src="../../_images/7c758971ded3f3421fd76b32593485d17b74387f73f8ff91374571ef72f75275.png" />
+<img alt="../../_images/30cb803f7ce75a1f4d7c8fb5828ed9ea07fa8f8d9a931d61ab2af5cd97e63928.png" src="../../_images/30cb803f7ce75a1f4d7c8fb5828ed9ea07fa8f8d9a931d61ab2af5cd97e63928.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -840,7 +840,7 @@ there are big changes.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/4a004af483ccdbdb3f5aafd91cd52dfb24c3d3e385dedf79ddfb77b6863354c3.png" src="../../_images/4a004af483ccdbdb3f5aafd91cd52dfb24c3d3e385dedf79ddfb77b6863354c3.png" />
+<img alt="../../_images/80c6b0bdc410522278d3b1d55d6ed4d6b6400cda20a0fd31785ceb71fd7e06bb.png" src="../../_images/80c6b0bdc410522278d3b1d55d6ed4d6b6400cda20a0fd31785ceb71fd7e06bb.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -850,7 +850,7 @@ there are big changes.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/03a3129f9e994a0d4b09e54cf3436380a50d87906219923cc866359dafd1d0ad.png" src="../../_images/03a3129f9e994a0d4b09e54cf3436380a50d87906219923cc866359dafd1d0ad.png" />
+<img alt="../../_images/14cbe5233e1688f05c1df0918a1685c6f62f44a889323d9866357979cf812c94.png" src="../../_images/14cbe5233e1688f05c1df0918a1685c6f62f44a889323d9866357979cf812c94.png" />
 </div>
 </div>
 </section>
@@ -1265,8 +1265,8 @@ example:</p>
 <p><span class="math notranslate nohighlight">\(f_1(x, y) = x^2 y\)</span></p>
 <p><span class="math notranslate nohighlight">\(f_2(x, y) = 5 x + \sin(y)\)</span></p>
 <p>The Jacobian of this system is:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-254ee919-7725-4463-8697-365e63106a96">
-<span class="eqno">(4)<a class="headerlink" href="#equation-254ee919-7725-4463-8697-365e63106a96" title="Permalink to this equation">#</a></span>\[\begin{equation} \left[\begin{array}{cc} 2 x y &amp; x^2 \\ 5 &amp; \cos y \\
+<div class="amsmath math notranslate nohighlight" id="equation-aa43d78f-e5b6-4891-8d47-3a133a941670">
+<span class="eqno">(4)<a class="headerlink" href="#equation-aa43d78f-e5b6-4891-8d47-3a133a941670" title="Permalink to this equation">#</a></span>\[\begin{equation} \left[\begin{array}{cc} 2 x y &amp; x^2 \\ 5 &amp; \cos y \\
 \end{array}\right] \end{equation}\]</div>
 <p>There are two Jacobian functions, <code class="docutils literal notranslate"><span class="pre">jacfwd</span></code> and <code class="docutils literal notranslate"><span class="pre">jacref</span></code>. In theory they do the same thing, but one of them will usually be faster for some systems. <code class="docutils literal notranslate"><span class="pre">jacfwd</span></code> uses a forward pass through the code to compute the Jacobian, while <code class="docutils literal notranslate"><span class="pre">jacrev</span></code> uses a reverse pass. The <a class="reference external" href="https://jax.readthedocs.io/en/latest/notebooks/autodiff_cookbook.html#jacobians-and-hessians-using-jacfwd-and-jacrev">documentation</a> recommends using jacfwd for “tall” Jacobians and jacref for “wide” jacobians. For square jacobians, it does not matter. It is fine to be practical, and try both to see if one is faster than other.</p>
 <div class="cell docutils container">
@@ -1608,8 +1608,8 @@ regression and conclude with an introduction to machine learning.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><div id="DWslPOZUtlFa" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: left"><style>
-#DWslPOZUtlFa {
+<div class="output text_html"><div id="YrRUTJiPGPvr" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: left"><style>
+#YrRUTJiPGPvr {
    --jq-multiple-choice-bg: #6f78ffff;
    --jq-mc-button-bg: #fafafa;
    --jq-mc-button-border: #e0e0e0e0;
@@ -1826,7 +1826,7 @@ regression and conclude with an introduction to machine learning.</p>
         background-color: var(--jq-correct-color);
     }
 }
-</style></div><script type="application/javascript">var questionsDWslPOZUtlFa=[
+</style></div><script type="application/javascript">var questionsYrRUTJiPGPvr=[
   {
     "question": "Derivatives have useful applications in determining",
     "type": "multiple_choice",
@@ -3131,8 +3131,8 @@ function make_string(qa, outerqDiv, qDiv, aDiv, id) {
  * Ensures show_questions is called after the container div is in the DOM.
  */
 function try_show() {
-  if (document.getElementById("DWslPOZUtlFa")) {
-    show_questions(questionsDWslPOZUtlFa, DWslPOZUtlFa);
+  if (document.getElementById("YrRUTJiPGPvr")) {
+    show_questions(questionsYrRUTJiPGPvr, YrRUTJiPGPvr);
   } else {
     setTimeout(try_show, 200);
   }
