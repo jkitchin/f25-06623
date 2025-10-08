@@ -42,6 +42,9 @@ repository:
 html:
   use_issues_button: true
   use_repository_button: true
+  extra_footer: |
+    <elevenlabs-convai agent-id="JmTnPgVh43r894X1Qplb"></elevenlabs-convai>
+    <script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
 
 parse:
   myst_enable_extensions:
