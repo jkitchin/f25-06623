@@ -579,8 +579,8 @@ document.write(`
 <p><span class="math notranslate nohighlight">\(y''(x) \approx \frac{y_{i-1} - 2 y_i + y_{i+1}}{h^2} \)</span></p>
 <p><span class="math notranslate nohighlight">\(y'(x) \approx \frac{y_{i+1} - y_{i-1}}{2 h} \)</span></p>
 <p>We define a function <span class="math notranslate nohighlight">\(y''(x) = F(x, y, y')\)</span>. At each node in our discretized region, we will have an equation that looks like <span class="math notranslate nohighlight">\(y''(x) - F(x, y, y') = 0\)</span>, which will be nonlinear in the unknown solution <span class="math notranslate nohighlight">\(y\)</span>. The set of equations to solve is:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-bc683fc0-e9fc-4193-a310-c8c4c8301fca">
-<span class="eqno">(2)<a class="headerlink" href="#equation-bc683fc0-e9fc-4193-a310-c8c4c8301fca" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
+<div class="amsmath math notranslate nohighlight" id="equation-0d4d6ae7-6c80-40ad-8811-0c528e853d1b">
+<span class="eqno">(2)<a class="headerlink" href="#equation-0d4d6ae7-6c80-40ad-8811-0c528e853d1b" title="Permalink to this equation">#</a></span>\[\begin{eqnarray}
 y_0 - \alpha &amp;=&amp; 0 \
 \frac{y_{i-1} - 2 y_i + y_{i+1}}{h^2} + (3 y_i) \left(\frac{y_{i+1} - y_{i-1}}{2 h}\right) &amp;=&amp; 0 \
 y_L - \beta &amp;=&amp;0
@@ -680,7 +680,7 @@ y_L - \beta &amp;=&amp;0
        0.55555556, 0.66666667, 0.77777778, 0.88888889, 1.        ])
 </pre></div>
 </div>
-<img alt="../../_images/a235ac1f671b49653faaf76d2b5f5526a7cac48ec619ed9b56ffb1f23b8d3d0c.png" src="../../_images/a235ac1f671b49653faaf76d2b5f5526a7cac48ec619ed9b56ffb1f23b8d3d0c.png" />
+<img alt="../../_images/c33e0d3babd0d91252679e70d146ba3060e78cb02944c8f3f65c71877e4f7bb8.png" src="../../_images/c33e0d3babd0d91252679e70d146ba3060e78cb02944c8f3f65c71877e4f7bb8.png" />
 </div>
 </div>
 <p>We should check our residuals function. We mostly want to see that it runs, and produces the right shaped output.</p>
@@ -737,7 +737,7 @@ y_L - \beta &amp;=&amp;0
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/865686a4b85172d5389eea99760d91f44a44aaf15ccf307891bcfc1418af790e.png" src="../../_images/865686a4b85172d5389eea99760d91f44a44aaf15ccf307891bcfc1418af790e.png" />
+<img alt="../../_images/dc44f32962f9fcf82a76222eb219eee1e2c1153a7a001d8ce0b169a570b46b18.png" src="../../_images/dc44f32962f9fcf82a76222eb219eee1e2c1153a7a001d8ce0b169a570b46b18.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -795,7 +795,7 @@ y_L - \beta &amp;=&amp;0
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/fcfd3dc16a4c8386645cf635f728157cce37453b998e97ff603a3c6408dcff29.png" src="../../_images/fcfd3dc16a4c8386645cf635f728157cce37453b998e97ff603a3c6408dcff29.png" />
+<img alt="../../_images/1aae586d2a12b736b6f4a9cf7322ad9c8598e365e19da669e57afe9f44466196.png" src="../../_images/1aae586d2a12b736b6f4a9cf7322ad9c8598e365e19da669e57afe9f44466196.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -936,7 +936,7 @@ solve_bvp<span class="o">?</span>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/d43e128ed5b66cb92d22724dbb088b48513ff738e470bade33aff8845417ec0e.png" src="../../_images/d43e128ed5b66cb92d22724dbb088b48513ff738e470bade33aff8845417ec0e.png" />
+<img alt="../../_images/568f110cfa8b822d3bee429d953dd65d19a28d365cca27f50bd596496a8e393a.png" src="../../_images/568f110cfa8b822d3bee429d953dd65d19a28d365cca27f50bd596496a8e393a.png" />
 </div>
 </div>
 <p>We also need a guess for U2, and in this case we know that <span class="math notranslate nohighlight">\(u2 = u1'\)</span>, so we just use that.</p>
@@ -975,7 +975,7 @@ solve_bvp<span class="o">?</span>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/ce0cdded67c4cb4b7c4c76d3d809b1c1bdd8c8de692a6af8c01df824ff8fbfd1.png" src="../../_images/ce0cdded67c4cb4b7c4c76d3d809b1c1bdd8c8de692a6af8c01df824ff8fbfd1.png" />
+<img alt="../../_images/6b7f5203149d86b13650704f605fec03399ce05d544484345620009eb6594c16.png" src="../../_images/6b7f5203149d86b13650704f605fec03399ce05d544484345620009eb6594c16.png" />
 </div>
 </div>
 <p>Now, we are ready to solve the BVP. Let’s check that all the functions work correctly, e.g. they don’t result in errors and return the right things.</p>
@@ -1039,7 +1039,7 @@ solve_bvp<span class="o">?</span>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The algorithm converged to the desired accuracy.
 </pre></div>
 </div>
-<img alt="../../_images/3606749fc801d27d1af362f9acb7349c39bb6da2be199816760b0576e320f8b3.png" src="../../_images/3606749fc801d27d1af362f9acb7349c39bb6da2be199816760b0576e320f8b3.png" />
+<img alt="../../_images/d85565028dc077679e5d6bd6b1179749a129da44766042395ff394319065f4b1.png" src="../../_images/d85565028dc077679e5d6bd6b1179749a129da44766042395ff394319065f4b1.png" />
 </div>
 </div>
 </section>
@@ -1057,7 +1057,7 @@ solve_bvp<span class="o">?</span>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/c3760ebb6cb179153b0932ccac33a7af54cf6dc86aba3f50bdb6d0e81b789879.png" src="../../_images/c3760ebb6cb179153b0932ccac33a7af54cf6dc86aba3f50bdb6d0e81b789879.png" />
+<img alt="../../_images/eb1c67a0bcfe444d38633c5f187d158afd54487e011c2cbd0dd6cd3a6f5dfc36.png" src="../../_images/eb1c67a0bcfe444d38633c5f187d158afd54487e011c2cbd0dd6cd3a6f5dfc36.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1078,7 +1078,7 @@ solve_bvp<span class="o">?</span>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The algorithm converged to the desired accuracy.
 </pre></div>
 </div>
-<img alt="../../_images/f43b09d31650bbf5cd13649ef24498753d8c7c257c8756bc01a4758f40c15aa5.png" src="../../_images/f43b09d31650bbf5cd13649ef24498753d8c7c257c8756bc01a4758f40c15aa5.png" />
+<img alt="../../_images/5730e5cade7be17ce825ab0c5e0f1b15b0401c919207fc4ffb68989a02339145.png" src="../../_images/5730e5cade7be17ce825ab0c5e0f1b15b0401c919207fc4ffb68989a02339145.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1103,7 +1103,7 @@ solve_bvp<span class="o">?</span>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/eb1e117f926e743670175d627e783cb93dda39d5da349d113a2095af0a7e52f0.png" src="../../_images/eb1e117f926e743670175d627e783cb93dda39d5da349d113a2095af0a7e52f0.png" />
+<img alt="../../_images/4b4349185cd3c484a3c9cc41a6a0fafd10df037221e253c1ae7f145c4eeb83b6.png" src="../../_images/4b4349185cd3c484a3c9cc41a6a0fafd10df037221e253c1ae7f145c4eeb83b6.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1124,7 +1124,7 @@ solve_bvp<span class="o">?</span>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The algorithm converged to the desired accuracy.
 </pre></div>
 </div>
-<img alt="../../_images/d2ed8a0152560e0678db5be6764ab7cc1d335cd047f921ef3137039e2ac96e09.png" src="../../_images/d2ed8a0152560e0678db5be6764ab7cc1d335cd047f921ef3137039e2ac96e09.png" />
+<img alt="../../_images/ecedbe4c5132b9d06999fa6fe06660c1c2a06ea20ef5c548e95f8f4c178a0b74.png" src="../../_images/ecedbe4c5132b9d06999fa6fe06660c1c2a06ea20ef5c548e95f8f4c178a0b74.png" />
 </div>
 </div>
 <p><strong>exercise</strong> Try using different guesses, e.g. lines, or triangle shapes, etc. What else looks like this shape? Half a cycle of a sin wave? A semi-circle?</p>
@@ -1177,7 +1177,7 @@ solve_bvp<span class="o">?</span>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/5a598230bd95e98fed1ecaddfbcc4d28c752348779d0b0ffe72916c66d372e01.png" src="../../_images/5a598230bd95e98fed1ecaddfbcc4d28c752348779d0b0ffe72916c66d372e01.png" />
+<img alt="../../_images/d05177d1394249d5e53816a66836e571ab9297f59e6fa508e954189c9aaea563.png" src="../../_images/d05177d1394249d5e53816a66836e571ab9297f59e6fa508e954189c9aaea563.png" />
 </div>
 </div>
 <p>Now we solve the system.</p>
@@ -1206,7 +1206,7 @@ solve_bvp<span class="o">?</span>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/07a4002f27c872d0f2baea881c0d3bc0c2f99f3a885f3156bfb6901b0f118fb8.png" src="../../_images/07a4002f27c872d0f2baea881c0d3bc0c2f99f3a885f3156bfb6901b0f118fb8.png" />
+<img alt="../../_images/3726ccc2e094cab00e60387cb875008c780b99e73086216f07860577215c1aeb.png" src="../../_images/3726ccc2e094cab00e60387cb875008c780b99e73086216f07860577215c1aeb.png" />
 </div>
 </div>
 <p>You can see the solution looks nothing like our initial guess. In this case, a high thiele modulus means most of the reaction happens near the catalyst surface, and the interior of the slab has hardly any reactant in it. This solution is consistent with that.</p>
@@ -1321,8 +1321,8 @@ solve_bvp<span class="o">?</span>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><div id="aBLnDhnRXJZb" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: left"><style>
-#aBLnDhnRXJZb {
+<div class="output text_html"><div id="OsPthVYDuIKP" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: left"><style>
+#OsPthVYDuIKP {
    --jq-multiple-choice-bg: #6f78ffff;
    --jq-mc-button-bg: #fafafa;
    --jq-mc-button-border: #e0e0e0e0;
@@ -1539,7 +1539,7 @@ solve_bvp<span class="o">?</span>
         background-color: var(--jq-correct-color);
     }
 }
-</style></div><script type="application/javascript">var questionsaBLnDhnRXJZb=[
+</style></div><script type="application/javascript">var questionsOsPthVYDuIKP=[
   {
     "question": "Using finite difference method, find the values of y', <br>if y = [3.,  5.,  7.,  9., 11., 13.]<br>h = 0.2, and the end points are at 1, 15.",
     "type": "multiple_choice",
@@ -2844,8 +2844,8 @@ function make_string(qa, outerqDiv, qDiv, aDiv, id) {
  * Ensures show_questions is called after the container div is in the DOM.
  */
 function try_show() {
-  if (document.getElementById("aBLnDhnRXJZb")) {
-    show_questions(questionsaBLnDhnRXJZb, aBLnDhnRXJZb);
+  if (document.getElementById("OsPthVYDuIKP")) {
+    show_questions(questionsOsPthVYDuIKP, OsPthVYDuIKP);
   } else {
     setTimeout(try_show, 200);
   }
