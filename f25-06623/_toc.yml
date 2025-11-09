@@ -30,7 +30,6 @@ parts:
     - file: lectures/21-machine-learning/21-machine-learning-jax.ipynb
     - file: lectures/22-ml-2/22-ml-2-jax.ipynb
     - file: lectures/23-gp/23-gp.ipynb
-    - file: lectures/index.ipynb
 - caption: Badges
   chapters:
     - glob: badges/*.ipynb
