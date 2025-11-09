@@ -33,10 +33,10 @@ parts:
     - file: lectures/index.ipynb
 - caption: Badges
   chapters:
-    - glob: badges/*
+    - glob: badges/*/*.ipynb
 - caption: Assignments
   chapters:
-    - glob: assignments/*
+    - glob: assignments/*/*.ipynb
 - caption: About the book
   chapters:
     - file: execution-statistics.md    
