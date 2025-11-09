@@ -1,0 +1,3306 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Introduction to automatic differentiation with jax &#8212; f25-06623</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'lectures/19-introduction-to-autograd/19-introduction-to-jax';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Applications of automatic differentiation" href="../20-autograd-applications/20-jax-applications.html" />
+    <link rel="prev" title="Linear regression" href="../18-linear-regression/18-linear-regression.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../syllabus.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/06623-roadmap.png" class="logo__image only-light" alt="f25-06623 - Home"/>
+    <script>document.write(`<img src="../../_static/06623-roadmap.png" class="logo__image only-dark" alt="f25-06623 - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../syllabus.html">
+                    Syllabus for  06-623 Mathematical Modeling of Chemical Engineering Processes
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lectures</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../toc.html">06-623 Mathematical modeling of chemical engineering processes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../00-intro/00-intro.html">Introduction to 06-623 and Jupyter Lab</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../01-jupyter/01-jupyter.html">Jupyter Lab</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../02-integration-1/02-integration-1.html">Integration in Python</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../03-fode-1/03-fode-1.html">Solutions to first-order differential equations by integration</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../04-fode-2/04-fode-2.html">Families of solutions to FODEs</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../05-nth-odes/05-nth-odes.html">Higher order differential equations</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../06-genAI/06-genai.html">Generative AI aka LLMs in scientific programming</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../07-nla-1/07-nla-1.html">Introduction to nonlinear algebra</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../08-nla-2/08-nla-2.html">Advanced topics in nonlinear algebra</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../09-bvp/09-bvp.html">Boundary Value Problems in differential equations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10-min-max/10-min-max.html">Introduction to optimization</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../11-regression/11-regression.html">Introduction to nonlinear regression</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../12-nonlinear-regression/12-nonlinear-regression-2.html">Uncertainty estimates from curvefit and scipy.optimize.minimize</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../13-constrained-optimization/13-constrained-optimization.html">Constrained minimization</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../15-intro-linear-algebra/15-intro-linear-algebra.html">Introduction to Linear algebra</a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../16-linear-algebra/16-linear-algebra.html">Linear algebraic equations</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../17-linear-algebra-2/17-linear-algebra-2.html">Advanced topics in linear algebra</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../18-linear-regression/18-linear-regression.html">Linear regression</a></li>
+
+
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Introduction to automatic differentiation with jax</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../20-autograd-applications/20-jax-applications.html">Applications of automatic differentiation</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../21-machine-learning/21-machine-learning-jax.html">Introduction to machine learning</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../22-ml-2/22-ml-2-jax.html">Advanced topics in ML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../23-gp/23-gp.html">Gaussian process regression</a></li>
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">About the book</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../execution-statistics.html">Build statistics</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://jh-01.cheme.cmu.edu/hub/user-redirect/git-pull?repo=https%3A//github.com/jkitchin/f25-06623&urlpath=lab/tree/f25-06623/f25-06623/lectures/19-introduction-to-autograd/19-introduction-to-jax.ipynb&branch=main" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on JupyterHub"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="JupyterHub logo" src="../../_static/images/logo_jupyterhub.svg">
+  </span>
+<span class="btn__text-container">JupyterHub</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/jkitchin/f25-06623/blob/main/f25-06623/lectures/19-introduction-to-autograd/19-introduction-to-jax.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/jkitchin/f25-06623" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/jkitchin/f25-06623/issues/new?title=Issue%20on%20page%20%2Flectures/19-introduction-to-autograd/19-introduction-to-jax.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/lectures/19-introduction-to-autograd/19-introduction-to-jax.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Introduction to automatic differentiation with jax</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Introduction to automatic differentiation with jax</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#derivatives-in-scientific-programming">Derivatives in scientific programming</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#numpy-gradient">numpy.gradient</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#numdifftools-derivative">numdifftools.Derivative</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#limitations-of-numeric-derivatives">Limitations of numeric derivatives</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#symbolic-differentiation">Symbolic differentiation</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#automatic-differentiation">Automatic differentiation</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#derivatives-of-scalar-functions">Derivatives of scalar functions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#derivatives-of-multivalue-functions-jacobian">Derivatives of multivalue functions - Jacobian</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hessians">Hessians</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#applications-to-optimization">Applications to optimization</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#pyters-derivative-memory-palace">Pyter’s Derivative Memory Palace</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <p><a class="reference internal" href="../toc.html"><span class="std std-doc">TOC</span></a></p>
+<section class="tex2jax_ignore mathjax_ignore" id="introduction-to-automatic-differentiation-with-jax">
+<h1>Introduction to automatic differentiation with jax<a class="headerlink" href="#introduction-to-automatic-differentiation-with-jax" title="Link to this heading">#</a></h1>
+<a class="reference internal image-reference" href="../../_images/pp-jax.png"><img alt="../../_images/pp-jax.png" src="../../_images/pp-jax.png" style="width: 330px;" />
+</a>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="derivatives-in-scientific-programming">
+<h1>Derivatives in scientific programming<a class="headerlink" href="#derivatives-in-scientific-programming" title="Link to this heading">#</a></h1>
+<p>Derivatives play an important role in modeling engineering processes.
+They serve mathematical roles in optimization where we need them to find
+stationary points (i.e. where the first derivatives are zero), and to
+determine if these points are minima, maxima or saddle points.</p>
+<p>Derivatives also play a central role in uncertainty propagation and
+sensitivity analysis. These analyses require derivatives of equations
+with respect to parameters.</p>
+<p>Derivatives also serve in physical roles. When we write mass/energy
+balances we are defining how those variables change in time, which is a
+derivative. If you recall Fick’s law, we way that the flux of a material
+is proportional to the <em>gradient</em> in concentration, which is a
+derivative. In thermodynamics, we relate many properties to derivatives
+of some thermodynamic variable. For example, the heat capacity is
+defined by a partial derivative of the enthalpy:
+<span class="math notranslate nohighlight">\(\left(\frac{\partial H}{\partial T}\right)_P = C_p\)</span>. There are many
+more examples where derivatives are important.</p>
+<p>We usually think about deriving derivatives using calculus. That
+requires, however, that you have an analytical equation, that you know
+how to derive the derivative, and finally that you correctly evaluate
+the result. When you have an analytical equation, that approach is
+probably the best one when done correctly.</p>
+<p>In many cases, however, we may not have an equation, or the equation
+could change regularly or be tedious to derive the derivative. As we
+increasingly express equations in the form of a program, it is
+increasingly inconvenient and difficult to work through the program to
+derive derivatives. In these cases, we need a computational approach to
+getting derivatives.</p>
+<p>We have primarily considered two approaches to <em>estimating</em> or
+<em>approximating</em> derivatives so far:</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">numpy.gradient</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">numdifftools.Derivative</span></code></p></li>
+</ol>
+<p>Both of these approaches have limitations we review below.</p>
+<section id="numpy-gradient">
+<h2>numpy.gradient<a class="headerlink" href="#numpy-gradient" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">numpy.gradient</span></code> uses
+<a class="reference external" href="https://en.wikipedia.org/wiki/Numerical_differentiation">finite
+difference</a> formulas to estimate the derivatives <em>from data</em>. This data
+may be obtained from experiments, or by numeric integration of an ODE,
+or from the solution to a BVP. In these cases we do not have analytical
+formulas to get derivatives from, and we have to resort to numerical
+methods.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="o">?</span>np.gradient
+</pre></div>
+</div>
+</div>
+</div>
+<p>The accuracy of these derivatives depends on the spacing between the
+data points. We have seen the derivatives at the edges of the data are
+less accurate because a first-order equation is used by default.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="mf">0.5</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">x</span><span class="o">**-</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">edge_order</span><span class="o">=</span><span class="mi">2</span><span class="p">),</span> <span class="s2">&quot;r.&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s2">&quot;analytical&quot;</span><span class="p">,</span> <span class="s2">&quot;numeric&quot;</span><span class="p">]);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/c2b825af5294e7a7790f8daa5c5a75dce9f704f4858b18db1508f19adef15481.png" src="../../_images/c2b825af5294e7a7790f8daa5c5a75dce9f704f4858b18db1508f19adef15481.png" />
+</div>
+</div>
+<p>You may recall we can fit a polynomial to this data, and then easily get
+the derivative of the polynomial. By increasing the polynomial order we
+can improve the derivative estimates to a point. If you start
+overfitting, you will introduce wiggles into the data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="mi">9</span><span class="p">)</span>
+<span class="n">dp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyder</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">x</span><span class="o">**-</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">polyval</span><span class="p">(</span><span class="n">dp</span><span class="p">,</span> <span class="n">x</span><span class="p">),</span> <span class="s2">&quot;r.&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s2">&quot;analytical&quot;</span><span class="p">,</span> <span class="s2">&quot;numeric&quot;</span><span class="p">]);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/a67cb45e701f072da34164587ddc463af9590fed9d53f4d32e54ed963fd1aff6.png" src="../../_images/a67cb45e701f072da34164587ddc463af9590fed9d53f4d32e54ed963fd1aff6.png" />
+</div>
+</div>
+<p>Let’s briefly review some linear algebra and the connection with
+derivatives.</p>
+<p>A central difference formula is:</p>
+<p><span class="math notranslate nohighlight">\(y'(x_i) \approx \frac{y_{i+1} - y_{i-1}}{2h}\)</span></p>
+<p>We cannot evaluate this for <span class="math notranslate nohighlight">\(y_0\)</span> or <span class="math notranslate nohighlight">\(y_{-1}\)</span>. We need a simpler formula for
+that:</p>
+<p>We use a forward formula at the beginning:
+<span class="math notranslate nohighlight">\(y'(x_0) \approx \frac{y_1 - y_0}{h}\)</span></p>
+<p>and a backward formula at the end:
+<span class="math notranslate nohighlight">\(y'(x_{-1}) \approx \frac{y_{-1} - y_{-2}}{h}\)</span></p>
+<p>We can express these formulas in matrix algebra form:</p>
+<p><span class="math notranslate nohighlight">\(\mathbf{y'} = \mathbf{D} \mathbf{y}\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">retstep</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="mf">0.5</span>
+
+<span class="n">D</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)))</span>
+<span class="n">D</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">h</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># diagonal above main</span>
+<span class="n">D</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">h</span><span class="p">),</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>  <span class="c1">#  diagonal below the main</span>
+<span class="n">D</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span> <span class="o">/</span> <span class="n">h</span><span class="o">**</span><span class="mi">2</span>  <span class="c1"># forward formula for the first row</span>
+<span class="n">D</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">:]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="n">h</span><span class="o">**</span><span class="mi">2</span>  <span class="c1"># backward formula for the last row</span>
+<span class="n">D</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.1
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 100., -200.,  200.,    0.,    0.,    0.,    0.,    0.,    0.,
+           0.],
+       [  -5.,    0.,    5.,    0.,    0.,    0.,    0.,    0.,    0.,
+           0.],
+       [   0.,   -5.,    0.,    5.,    0.,    0.,    0.,    0.,    0.,
+           0.],
+       [   0.,    0.,   -5.,    0.,    5.,    0.,    0.,    0.,    0.,
+           0.],
+       [   0.,    0.,    0.,   -5.,    0.,    5.,    0.,    0.,    0.,
+           0.],
+       [   0.,    0.,    0.,    0.,   -5.,    0.,    5.,    0.,    0.,
+           0.],
+       [   0.,    0.,    0.,    0.,    0.,   -5.,    0.,    5.,    0.,
+           0.],
+       [   0.,    0.,    0.,    0.,    0.,    0.,   -5.,    0.,    5.,
+           0.],
+       [   0.,    0.,    0.,    0.,    0.,    0.,    0.,   -5.,    0.,
+           5.],
+       [   0.,    0.,    0.,    0.,    0.,    0.,    0.,  100., -200.,
+         100.]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dydx</span> <span class="o">=</span> <span class="n">D</span> <span class="o">@</span> <span class="n">y</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">dydx</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">edge_order</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>False
+</pre></div>
+</div>
+</div>
+</div>
+<p>There are more accurate formulas to use for these that use more data
+points, but in these cases it is better to use <code class="docutils literal notranslate"><span class="pre">np.gradient</span></code> because it
+already handles these.</p>
+</section>
+<section id="numdifftools-derivative">
+<h2>numdifftools.Derivative<a class="headerlink" href="#numdifftools-derivative" title="Link to this heading">#</a></h2>
+<p>When we have equations in the form of <em>functions</em> rather than data, we
+can leverage <code class="docutils literal notranslate"><span class="pre">scipy.misc.derivative</span></code>. This function also works by using
+finite differences, and so it would suffer from the same limitations on
+accuracy as we saw above with data. Nevertheless, if you don’t have a
+better approach, it might still be useful.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">numdifftools</span><span class="w"> </span><span class="kn">import</span> <span class="n">Derivative</span>
+
+<span class="o">?</span>Derivative
+</pre></div>
+</div>
+</div>
+</div>
+<p>The most crucial step is choosing an appropriate value for dx. Note that
+<code class="docutils literal notranslate"><span class="pre">derivative</span></code> does not return a function; we have to <em>wrap</em> it in a
+function definition to use it like a function.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span><span class="o">**</span><span class="mf">0.5</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">dfdx</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dx</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">Derivative</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="n">dx</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">x</span><span class="o">**-</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">dfdx</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="s2">&quot;r.&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s2">&quot;analytical&quot;</span><span class="p">,</span> <span class="s2">&quot;numeric&quot;</span><span class="p">]);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/67f3f64d5b6dd17b553fc6ebb57328fb38a038b5a220a801931fbc65f9a3d4cc.png" src="../../_images/67f3f64d5b6dd17b553fc6ebb57328fb38a038b5a220a801931fbc65f9a3d4cc.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Derivative</span><span class="p">(</span><span class="n">f</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>  <span class="c1"># this is vectorized, so the helper function is not critical here</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([1.58113883, 1.11803399, 0.91287093, 0.79056942, 0.70710678,
+       0.64549722, 0.5976143 , 0.55901699, 0.52704628, 0.5       ])
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can combine the ideas for data and functions with
+<code class="docutils literal notranslate"><span class="pre">scipy.interpolate.interp1d</span></code>. This is similar in spirit to using
+polyfit, but the polynomials are locally fit rather than globally fit
+through all the data points. As with polyfit, this can result in
+spurious wiggles being introduced, especially near data points where
+there are big changes.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy.interpolate</span><span class="w"> </span><span class="kn">import</span> <span class="n">interp1d</span>
+
+<span class="o">?</span>interp1d
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">retstep</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="mf">0.5</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.005</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+<span class="n">af</span> <span class="o">=</span> <span class="n">interp1d</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;cubic&quot;</span><span class="p">,</span> <span class="n">bounds_error</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">fill_value</span><span class="o">=</span><span class="s2">&quot;extrapolate&quot;</span><span class="p">)</span>
+<span class="n">af</span><span class="p">([</span><span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">]),</span> <span class="n">af</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(array([0.63419876, 0.71511544]), array(89.92641567))
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xfit</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s2">&quot;bo&quot;</span><span class="p">,</span> <span class="n">xfit</span><span class="p">,</span> <span class="n">af</span><span class="p">(</span><span class="n">xfit</span><span class="p">));</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/e451b21093685200f2760dd43ccac5d1f123ca3a19b5161e1c2086ac2b3b3b2d.png" src="../../_images/e451b21093685200f2760dd43ccac5d1f123ca3a19b5161e1c2086ac2b3b3b2d.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">dfadx</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dx</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">Derivative</span><span class="p">(</span><span class="n">af</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="n">dx</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">x</span><span class="o">**-</span><span class="mf">0.5</span><span class="p">,</span> <span class="s2">&quot;bo&quot;</span><span class="p">,</span> <span class="n">xfit</span><span class="p">,</span> <span class="n">dfadx</span><span class="p">(</span><span class="n">xfit</span><span class="p">,</span> <span class="n">dx</span><span class="o">=</span><span class="mf">0.05</span><span class="p">),</span> <span class="s2">&quot;r.&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s2">&quot;analytical&quot;</span><span class="p">,</span> <span class="s2">&quot;numeric&quot;</span><span class="p">]);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/2c5cded6d037de0260c5dd54d9000d299f61098259e9da133e2cdeaa8d01a9e3.png" src="../../_images/2c5cded6d037de0260c5dd54d9000d299f61098259e9da133e2cdeaa8d01a9e3.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">x</span><span class="o">**-</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">),</span> <span class="s2">&quot;r.&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/77016262d8e5aecef9bb6706d432a4de28b61026453b968b03fd02c4ee17fadf.png" src="../../_images/77016262d8e5aecef9bb6706d432a4de28b61026453b968b03fd02c4ee17fadf.png" />
+</div>
+</div>
+</section>
+<section id="limitations-of-numeric-derivatives">
+<h2>Limitations of numeric derivatives<a class="headerlink" href="#limitations-of-numeric-derivatives" title="Link to this heading">#</a></h2>
+<p>There are several limitations of numeric derivatives. The biggest one is
+that they are all <em>approximations</em> to the real derivative, and their
+accuracy depends on how small the spacing between the data points is. If
+the spacing is too small, however, these methods can suffer from
+numerical instabilities. These issues are exacerbated with higher order
+derivatives; derivatives tend to magnify errors in data.</p>
+<p>Fitting models to the data leads to analytical models that can be
+analytically differentiated. Here you have to be aware of the properties
+of the model, and its derivatives.</p>
+<p>The methods above apply to scalar functions of a single variable. It is
+not convenient to use them for multivariable functions.</p>
+<p>Numdifftools (<a class="reference external" href="https://numdifftools.readthedocs.io/en/latest/">https://numdifftools.readthedocs.io/en/latest/</a>) is a
+more advanced library for numerical differentiation that can do
+multivariable functions, but it too can have numerical instabilities and
+needs to be checked for convergence.</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="symbolic-differentiation">
+<h1>Symbolic differentiation<a class="headerlink" href="#symbolic-differentiation" title="Link to this heading">#</a></h1>
+<p><a class="reference external" href="https://docs.sympy.org/latest/tutorial/calculus.html">https://docs.sympy.org/latest/tutorial/calculus.html</a></p>
+<p>Computer algebra systems have increasingly been able to compute symbolic
+derivatives of expressions.
+<a class="reference external" href="https://docs.sympy.org/latest/index.html">sympy</a> can do some
+<a class="reference external" href="https://docs.sympy.org/latest/tutorial/calculus.html">calculus</a>,
+including taking derivatives symbolically.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sympy</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>  <span class="c1"># the import * is considered lazy/sloppy, </span>
+<span class="c1"># and it can cause issues if you import functions that are already defined</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">))</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">X</span><span class="o">**-</span><span class="mf">0.5</span><span class="p">,</span> <span class="s2">&quot;r-&quot;</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">X</span><span class="p">],</span> <span class="s2">&quot;b.&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s2">&quot;analytical&quot;</span><span class="p">,</span> <span class="s2">&quot;symbolic&quot;</span><span class="p">]);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.5/x**0.5
+0.707106781186548
+</pre></div>
+</div>
+<img alt="../../_images/62c6964eba8d2f46a8da9354b573fe7fbb1ebe6c988f078fd8361998e360ed6a.png" src="../../_images/62c6964eba8d2f46a8da9354b573fe7fbb1ebe6c988f078fd8361998e360ed6a.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">sympy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sym</span>  <span class="c1"># This is a more responsible way to keep functions in namespaces</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">))</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">X</span><span class="o">**-</span><span class="mf">0.5</span><span class="p">,</span> <span class="s2">&quot;r-&quot;</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">X</span><span class="p">],</span> <span class="s2">&quot;b.&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s2">&quot;analytical&quot;</span><span class="p">,</span> <span class="s2">&quot;symbolic&quot;</span><span class="p">]);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.5/x**0.5
+0.707106781186548
+</pre></div>
+</div>
+<img alt="../../_images/62c6964eba8d2f46a8da9354b573fe7fbb1ebe6c988f078fd8361998e360ed6a.png" src="../../_images/62c6964eba8d2f46a8da9354b573fe7fbb1ebe6c988f078fd8361998e360ed6a.png" />
+</div>
+</div>
+<p>For some applications, this is very useful. Symbolic derivatives do not
+work on programs though, and in some cases there are not simple
+derivatives to find.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="automatic-differentiation">
+<h1>Automatic differentiation<a class="headerlink" href="#automatic-differentiation" title="Link to this heading">#</a></h1>
+<p>The third kind of computational derivatives we need to know about is
+called <a class="reference external" href="https://en.wikipedia.org/wiki/Automatic_differentiation">automatic differentiation</a> (AD). It is completely different from both finite
+differences and symbolic differentiation. In AD, we use the chain rule
+to take derivatives of computer programs.</p>
+<p>AD solves many of the problems described above:</p>
+<ol class="arabic simple">
+<li><p>It is not an approximation like the finite difference approach.</p></li>
+<li><p>It works on programs, unlike symbolic differentiation</p></li>
+</ol>
+<p>However, these features come at some cost; we have to use an AD library
+and learn how to write code with it. Most importantly, AD is usually an
+add-on feature and its implementation introduces some constraints on
+what can be programmed.</p>
+<p>There are several AD frameworks available in Python that have been
+developed for machine learning applications. The main ones in use today
+are:</p>
+<ol class="arabic simple">
+<li><p>autograd - <a class="github reference external" href="https://github.com/HIPS/autograd">HIPS/autograd</a> (old, but good)</p></li>
+<li><p>JAX - <a class="github reference external" href="https://github.com/google/jax">google/jax</a> (better version of autograd)</p></li>
+<li><p>Tensorflow - <a class="reference external" href="https://www.tensorflow.org/">https://www.tensorflow.org/</a></p></li>
+<li><p>pytorch - <a class="reference external" href="https://pytorch.org/">https://pytorch.org/</a></p></li>
+</ol>
+<p>We will focus on jax for the rest of the semester.</p>
+<p>jax works by modifying <code class="docutils literal notranslate"><span class="pre">numpy</span></code> so that derivatives can be
+automatically computed.</p>
+<p><strong>The most important step</strong> in using jax is to import the jax
+version of numpy. Not doing this will lead to errors eventually. We also configure jax to use 64-bit floats (32-bit is the default, and that is not usually sufficient for pycse calculations.)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">jax</span><span class="w"> </span><span class="kn">import</span> <span class="n">config</span>
+
+<span class="n">config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="s2">&quot;jax_enable_x64&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">jax.numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="derivatives-of-scalar-functions">
+<h2>Derivatives of scalar functions<a class="headerlink" href="#derivatives-of-scalar-functions" title="Link to this heading">#</a></h2>
+<p>jax provides functions for getting the derivatives of different kinds of functions. We first consider scalar functions, i.e. functions that return one number that is continuous (e.g. it is a float). The function can have many arguments, but it can only return one number. Note you have to be careful here, some functions return a single number with single arguments, but return an array of numbers if you use arrays as arguments.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">jax</span><span class="w"> </span><span class="kn">import</span> <span class="n">grad</span>
+
+<span class="o">?</span>grad
+</pre></div>
+</div>
+</div>
+</div>
+<p>You use grad when your function outputs a single number, and you want a
+single derivative of that function with respect to an argument. For
+example, it could be an objective function.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span>
+
+
+<span class="n">dfdx</span> <span class="o">=</span> <span class="n">grad</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>  <span class="c1"># the output is callable like a function</span>
+
+<span class="n">dfdx</span><span class="p">(</span><span class="mf">10.0</span><span class="p">)</span>  <span class="c1"># the analytical derivative is 2x</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Array(20., dtype=float64, weak_type=True)
+</pre></div>
+</div>
+</div>
+</div>
+<p>There are a few points to note in the output. First you get the WARNING, which is annoying, but something to ignore. You only see it the first time you run the code, if you run it again you won’t see it.</p>
+<p>Second, the output shows we do not get a “number” that is returned, but a <code class="docutils literal notranslate"><span class="pre">DeviceArray</span></code> object. If you print the object, you will see something that looks like a number.</p>
+<p>Note: Using integers as the input will give an error. Why? Integers are <em>not
+differentiable</em>.</p>
+<div class="cell tag_raises-exception docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dfdx</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">19</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">dfdx</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+
+    <span class="p">[</span><span class="o">...</span> <span class="n">skipping</span> <span class="n">hidden</span> <span class="mi">4</span> <span class="n">frame</span><span class="p">]</span>
+
+<span class="nn">File /opt/hostedtoolcache/Python/3.12.12/x64/lib/python3.12/site-packages/jax/_src/api.py:539,</span> in <span class="ni">_check_input_dtype_revderiv</span><span class="nt">(name, holomorphic, allow_int, x)</span>
+<span class="g g-Whitespace">    </span><span class="mi">535</span> <span class="k">if</span> <span class="p">(</span><span class="n">dtypes</span><span class="o">.</span><span class="n">issubdtype</span><span class="p">(</span><span class="n">aval</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="n">dtypes</span><span class="o">.</span><span class="n">extended</span><span class="p">)</span> <span class="ow">or</span>
+<span class="g g-Whitespace">    </span><span class="mi">536</span>     <span class="n">dtypes</span><span class="o">.</span><span class="n">issubdtype</span><span class="p">(</span><span class="n">aval</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">integer</span><span class="p">)</span> <span class="ow">or</span>
+<span class="g g-Whitespace">    </span><span class="mi">537</span>     <span class="n">dtypes</span><span class="o">.</span><span class="n">issubdtype</span><span class="p">(</span><span class="n">aval</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">bool_</span><span class="p">)):</span>
+<span class="g g-Whitespace">    </span><span class="mi">538</span>   <span class="k">if</span> <span class="ow">not</span> <span class="n">allow_int</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">539</span>     <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> requires real- or complex-valued inputs (input dtype &quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">540</span>                     <span class="sa">f</span><span class="s2">&quot;that is a sub-dtype of np.inexact), but got </span><span class="si">{</span><span class="n">aval</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">. &quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">541</span>                     <span class="s2">&quot;If you want to use Boolean- or integer-valued inputs, use vjp &quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">542</span>                     <span class="s2">&quot;or set allow_int to True.&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">543</span> <span class="k">elif</span> <span class="ow">not</span> <span class="n">dtypes</span><span class="o">.</span><span class="n">issubdtype</span><span class="p">(</span><span class="n">aval</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inexact</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">544</span>   <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> requires numerical-valued inputs (input dtype that is a &quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">545</span>                   <span class="sa">f</span><span class="s2">&quot;sub-dtype of np.bool_ or np.number), but got </span><span class="si">{</span><span class="n">aval</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+
+<span class="ne">TypeError</span>: grad requires real- or complex-valued inputs (input dtype that is a sub-dtype of np.inexact), but got int64. If you want to use Boolean- or integer-valued inputs, use vjp or set allow_int to True.
+</pre></div>
+</div>
+</div>
+</div>
+<p>We have to be careful about what kind of argument we use. You should not
+use lists when you mean arrays. jax can only work on arrays defined
+in the jax.numpy library.</p>
+<p>With jax you should be explicit on types, and not rely on automatic casting.</p>
+<div class="cell tag_raises-exception docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dfdx</span><span class="p">([</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">])</span>  <span class="c1"># This is an error because lists do not support the operations required to evaluate the derivative.</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">20</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">dfdx</span><span class="p">([</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">])</span>  <span class="c1"># This is an error because lists do not support the operations required to evaluate the derivative.</span>
+
+    <span class="p">[</span><span class="o">...</span> <span class="n">skipping</span> <span class="n">hidden</span> <span class="mi">12</span> <span class="n">frame</span><span class="p">]</span>
+
+<span class="nn">Cell In[18], line 2,</span> in <span class="ni">f</span><span class="nt">(x)</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="k">def</span><span class="w"> </span><span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<span class="ne">----&gt; </span><span class="mi">2</span>     <span class="k">return</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span>
+
+<span class="ne">TypeError</span>: unsupported operand type(s) for ** or pow(): &#39;list&#39; and &#39;int&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here is another error, because when you pass an array, the function no longer has a scalar output.</p>
+<div class="cell tag_raises-exception docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dfdx</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">21</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">dfdx</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">]))</span>
+
+    <span class="p">[</span><span class="o">...</span> <span class="n">skipping</span> <span class="n">hidden</span> <span class="mi">4</span> <span class="n">frame</span><span class="p">]</span>
+
+<span class="nn">File /opt/hostedtoolcache/Python/3.12.12/x64/lib/python3.12/site-packages/jax/_src/api.py:523,</span> in <span class="ni">_check_scalar</span><span class="nt">(x)</span>
+<span class="g g-Whitespace">    </span><span class="mi">521</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">aval</span><span class="p">,</span> <span class="n">ShapedArray</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">522</span>   <span class="k">if</span> <span class="n">aval</span><span class="o">.</span><span class="n">shape</span> <span class="o">!=</span> <span class="p">():</span>
+<span class="ne">--&gt; </span><span class="mi">523</span>     <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="n">msg</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;had shape: </span><span class="si">{</span><span class="n">aval</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">))</span>
+<span class="g g-Whitespace">    </span><span class="mi">524</span> <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">525</span>   <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="n">msg</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;had abstract value </span><span class="si">{</span><span class="n">aval</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">))</span>
+
+<span class="ne">TypeError</span>: Gradient only defined for scalar-output functions. Output had shape: (2,).
+</pre></div>
+</div>
+</div>
+</div>
+<p>The problem is with an array input, <code class="docutils literal notranslate"><span class="pre">f</span></code> is not a scalar function; it
+outputs an array.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Array([2.25, 4.  ], dtype=float64)
+</pre></div>
+</div>
+</div>
+</div>
+<p>To address this, we can use <code class="docutils literal notranslate"><span class="pre">vmap</span></code>, which means pretend each element is passed one at a time, and then provide the gradient for that value. <code class="docutils literal notranslate"><span class="pre">vmap</span></code> means vector map, which is a programming jargon for mapping something on every element.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">jax</span><span class="w"> </span><span class="kn">import</span> <span class="n">vmap</span>
+
+<span class="o">?</span>vmap
+</pre></div>
+</div>
+</div>
+</div>
+<p>You use vmap when you might use an array as input, and you
+get an array of values out, but you want the derivative of each element
+in the output with respect to the corresponding element in the input.
+This is still a <em>scalar</em> function in the sense that each element in the
+input produces one element in the output.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">eg</span> <span class="o">=</span> <span class="n">vmap</span><span class="p">(</span><span class="n">dfdx</span><span class="p">)</span>
+<span class="n">eg</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Array([ 3.,  4., -4., 10.], dtype=float64)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">dfdx</span><span class="p">(</span><span class="n">_x</span><span class="p">)</span> <span class="k">for</span> <span class="n">_x</span> <span class="ow">in</span> <span class="p">[</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">]]</span>  <span class="c1"># equivalent to vmap, but probably slower</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Array(3., dtype=float64, weak_type=True),
+ Array(4., dtype=float64, weak_type=True),
+ Array(-4., dtype=float64, weak_type=True),
+ Array(10., dtype=float64, weak_type=True)]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here is an example usage similar to the examples we have used so far.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span><span class="o">**</span><span class="mf">0.5</span>
+
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">vmap</span><span class="p">(</span><span class="n">grad</span><span class="p">(</span><span class="n">f</span><span class="p">))</span>  <span class="c1"># This returns a callable function</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">x</span><span class="o">**-</span><span class="mf">0.5</span><span class="p">,</span> <span class="s2">&quot;r-&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">df</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="s2">&quot;b.&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s2">&quot;analytical&quot;</span><span class="p">,</span> <span class="s2">&quot;autograd&quot;</span><span class="p">])</span>
+<span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">x</span><span class="o">**-</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">df</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Array(True, dtype=bool)
+</pre></div>
+</div>
+<img alt="../../_images/36781c67ff9dafaa16135f765619c4991d47c14bc3a83423fbe13e5b3391fd93.png" src="../../_images/36781c67ff9dafaa16135f765619c4991d47c14bc3a83423fbe13e5b3391fd93.png" />
+</div>
+</div>
+<p>AD is not magical, if a derivative is not defined, AD will not compute it. Here the derivative at x=0 is infinity, which is what jax reports.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Array([inf], dtype=float64)
+</pre></div>
+</div>
+</div>
+</div>
+<p>The AD derivatives are identical within tolerance to the analytical
+formula because autograd simply applies the chain rule to the program to
+evaluate the derivatives.</p>
+<p><strong>Limitation</strong> Derivatives with integers is not well-defined since
+integers are not continuous.</p>
+<p>It might not seem like a big deal that this works. The significance
+really shows when you have more complex programs. This Rube-Goldberg
+program is equivalent to the previous program. You could work out the
+derivative by the chain rule your self, but autograd has no problem
+doing this through all the operations and loops!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">x</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">a</span><span class="o">**</span><span class="mi">2</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">b</span> <span class="o">/</span> <span class="mf">4.0</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">c</span><span class="o">**</span><span class="mf">0.5</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="n">d</span> <span class="o">*</span> <span class="mi">2</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="n">d</span> <span class="o">/</span> <span class="mi">2</span>
+
+    <span class="n">e</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">e</span>
+
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">vmap</span><span class="p">(</span><span class="n">grad</span><span class="p">(</span><span class="n">f</span><span class="p">))</span>  <span class="c1"># This returns a callable function</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">x</span><span class="o">**-</span><span class="mf">0.5</span><span class="p">,</span> <span class="s2">&quot;r-&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">df</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="s2">&quot;b.&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s2">&quot;analytical&quot;</span><span class="p">,</span> <span class="s2">&quot;autograd&quot;</span><span class="p">])</span>
+<span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">x</span><span class="o">**-</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">df</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Array(True, dtype=bool)
+</pre></div>
+</div>
+<img alt="../../_images/36781c67ff9dafaa16135f765619c4991d47c14bc3a83423fbe13e5b3391fd93.png" src="../../_images/36781c67ff9dafaa16135f765619c4991d47c14bc3a83423fbe13e5b3391fd93.png" />
+</div>
+</div>
+<p>Of course, autograd cannot make derivatives where they are not defined.
+The derivative of the square root function is not defined at <span class="math notranslate nohighlight">\(x=0\)</span>, and
+we get warnings and a <code class="docutils literal notranslate"><span class="pre">nan</span></code> result if we try to evaluate it there.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Array([nan], dtype=float64)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="derivatives-of-multivalue-functions-jacobian">
+<h2>Derivatives of multivalue functions - Jacobian<a class="headerlink" href="#derivatives-of-multivalue-functions-jacobian" title="Link to this heading">#</a></h2>
+<p>Autograd really starts to shine when we have vector functions. If we
+have a function that takes an input with <span class="math notranslate nohighlight">\(n\)</span> and produces <span class="math notranslate nohighlight">\(m\)</span> outputs,
+then we frequently need to compute the derivatives of the output with
+respect to the inputs. These are defined by:</p>
+<p><span class="math notranslate nohighlight">\(\mathbf{J}_{ij} = \frac{\partial f_i}{\partial x_j}\)</span></p>
+<p>jax provides functions for computing the Jacobian for this. Let’s consider an
+example:</p>
+<p><span class="math notranslate nohighlight">\(f_1(x, y) = x^2 y\)</span></p>
+<p><span class="math notranslate nohighlight">\(f_2(x, y) = 5 x + \sin(y)\)</span></p>
+<p>The Jacobian of this system is:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-c9852ee4-1efd-4703-80fe-5a7e0a84bbaa">
+<span class="eqno">(4)<a class="headerlink" href="#equation-c9852ee4-1efd-4703-80fe-5a7e0a84bbaa" title="Permalink to this equation">#</a></span>\[\begin{equation} \left[\begin{array}{cc} 2 x y &amp; x^2 \\ 5 &amp; \cos y \\
+\end{array}\right] \end{equation}\]</div>
+<p>There are two Jacobian functions, <code class="docutils literal notranslate"><span class="pre">jacfwd</span></code> and <code class="docutils literal notranslate"><span class="pre">jacref</span></code>. In theory they do the same thing, but one of them will usually be faster for some systems. <code class="docutils literal notranslate"><span class="pre">jacfwd</span></code> uses a forward pass through the code to compute the Jacobian, while <code class="docutils literal notranslate"><span class="pre">jacrev</span></code> uses a reverse pass. The <a class="reference external" href="https://jax.readthedocs.io/en/latest/notebooks/autodiff_cookbook.html#jacobians-and-hessians-using-jacfwd-and-jacrev">documentation</a> recommends using jacfwd for “tall” Jacobians and jacref for “wide” jacobians. For square jacobians, it does not matter. It is fine to be practical, and try both to see if one is faster than other.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">jax</span><span class="w"> </span><span class="kn">import</span> <span class="n">jacfwd</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">f</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
+    <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">X</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">y</span><span class="p">,</span> <span class="mi">5</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">y</span><span class="p">)])</span>  <span class="c1"># f1  # f2</span>
+
+
+<span class="n">Jf</span> <span class="o">=</span> <span class="n">jacfwd</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+
+<span class="c1"># now show the equivalence</span>
+<span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Jf: &quot;</span><span class="p">,</span> <span class="n">Jf</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">])))</span>  <span class="c1"># use array for the input</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;An: &quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">2</span> <span class="o">*</span> <span class="n">x</span> <span class="o">*</span> <span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">y</span><span class="p">)]]))</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">Jf</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">])),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">2</span> <span class="o">*</span> <span class="n">x</span> <span class="o">*</span> <span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">y</span><span class="p">)]]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Jf:  [[0.5        0.25      ]
+ [5.         0.87758256]]
+An:  [[0.5        0.25      ]
+ [5.         0.87758256]]
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Array(True, dtype=bool)
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Limitation</strong> Note the explicit use of arrays in the above code. jax
+requires you to use arrays explicitly most of the time, and you can get
+errors if you are lazy and use lists/tuples.</p>
+<p>We use Jacobians in a variety of applications, but one important one is
+for changing variables in integrations, presumably because this results
+in a simpler integral.</p>
+<p><span class="math notranslate nohighlight">\(\int \int_R f(x, y) dx dy = \int \int_{R'} f(x(u, v), y(u, v)) \left|\frac{\partial(x, y)}{\partial(u, v)}\right| du dv\)</span></p>
+<p>Where <span class="math notranslate nohighlight">\(\left|\frac{\partial(x, y)}{\partial(u, v)}\right|\)</span> is defined as
+the determinant of the Jacobian:</p>
+<p><span class="math notranslate nohighlight">\(\left|\begin{array}{cc} \frac{\partial x}{\partial u} &amp; \frac{\partial x}{\partial v} \\ \frac{\partial y}{\partial u} &amp; \frac{\partial y}{\partial v} \end{array}\right|\)</span></p>
+<p>Here is an example we work out that is adapted from:
+<a class="reference external" href="http://www.stat.rice.edu/~dobelman/notes_papers/math/Jacobian.pdf">http://www.stat.rice.edu/~dobelman/notes_papers/math/Jacobian.pdf</a></p>
+<a class="reference internal image-reference" href="../../_images/change-of-variables.png"><img alt="../../_images/change-of-variables.png" src="../../_images/change-of-variables.png" style="width: 300px;" />
+</a>
+<p>Executing that double integral in cartesian coordinates is not
+convenient because the integral limits would be a function for <span class="math notranslate nohighlight">\(y\)</span>. If
+we instead switch to polar coordinates, then we have the simpler limits
+of <span class="math notranslate nohighlight">\(\rho\)</span> from 0 to <span class="math notranslate nohighlight">\(r\)</span>, and <span class="math notranslate nohighlight">\(\theta\)</span> from 0 to <span class="math notranslate nohighlight">\(2\pi\)</span>. There is no
+<span class="math notranslate nohighlight">\(f(x, y)\)</span> here, the integrand is just 1.</p>
+<p>This is a double integral, and we use <code class="docutils literal notranslate"><span class="pre">scipy.integrate.dblquad</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy.integrate</span><span class="w"> </span><span class="kn">import</span> <span class="n">dblquad</span>
+
+<span class="o">?</span>dblquad
+</pre></div>
+</div>
+</div>
+</div>
+<p>Return the double (definite) integral of ``func(y, x)`` from ``x =
+a..b`` and ``y = gfun(x)..hfun(x)``.</p>
+<p>We want:</p>
+<p><span class="math notranslate nohighlight">\(\int_{\rho=0}^{\rho=1} \int_{\theta=0}^{\theta=2\pi} det(J) d\rho d\theta = \pi\)</span></p>
+<p>That leads to this implementation:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">f</span><span class="p">(</span><span class="n">P</span><span class="p">):</span>
+    <span class="n">rho</span><span class="p">,</span> <span class="n">theta</span> <span class="o">=</span> <span class="n">P</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">rho</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">),</span> <span class="n">rho</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">)])</span>  <span class="c1"># x  # y</span>
+
+
+<span class="n">jf</span> <span class="o">=</span> <span class="n">jacfwd</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">integrand</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="n">theta</span><span class="p">):</span>
+    <span class="n">J</span> <span class="o">=</span> <span class="n">jf</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">rho</span><span class="p">,</span> <span class="n">theta</span><span class="p">]))</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">det</span><span class="p">(</span><span class="n">J</span><span class="p">)</span>
+
+
+<span class="c1"># integrand(y, x)</span>
+<span class="n">xa</span><span class="p">,</span> <span class="n">xb</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span>  <span class="c1"># theta</span>
+<span class="n">ya</span><span class="p">,</span> <span class="n">yb</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span>  <span class="c1"># rho</span>
+
+<span class="n">dblquad</span><span class="p">(</span><span class="n">integrand</span><span class="p">,</span> <span class="n">xa</span><span class="p">,</span> <span class="n">xb</span><span class="p">,</span> <span class="n">ya</span><span class="p">,</span> <span class="n">yb</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(3.141592653589793, 3.487868498008632e-14)
+</pre></div>
+</div>
+</div>
+</div>
+<p>And the expected answer. Compare that to the cartesian coordinate
+system:</p>
+<p><span class="math notranslate nohighlight">\(\int_{-1}^1 \int_{-\sqrt{1 - x^2}}^{\sqrt{1 - x^2}} dx dy\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">integrand</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mi">1</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">yl</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">yu</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+
+<span class="n">dblquad</span><span class="p">(</span><span class="n">integrand</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">yl</span><span class="p">,</span> <span class="n">yu</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(3.1415926535897967, 2.000470900043183e-09)
+</pre></div>
+</div>
+</div>
+</div>
+<p>The answer is the same, but the integral limits are more complex. Of
+course, one can invoke Kitchin’s conservation of complexity law here; we
+can give up the complexity of the limits if we take on the complexity of
+autograd.</p>
+</section>
+<section id="hessians">
+<h2>Hessians<a class="headerlink" href="#hessians" title="Link to this heading">#</a></h2>
+<p>The <a class="reference external" href="https://en.wikipedia.org/wiki/Hessian_matrix">Hessian matrix</a> is
+a square matrix of second-order partial derivatives of a scalar-valued
+function.</p>
+<p><span class="math notranslate nohighlight">\(\mathbf{H}_{ij} = \frac{\partial^2 f}{\partial x_i x_j}\)</span></p>
+<p><code class="docutils literal notranslate"><span class="pre">jax.hessian</span></code> also returns a callable function.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">jax</span><span class="w"> </span><span class="kn">import</span> <span class="n">hessian</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">f</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
+    <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">X</span>
+    <span class="k">return</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">y</span><span class="o">**</span><span class="mi">2</span>
+
+
+<span class="n">H</span> <span class="o">=</span> <span class="n">hessian</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+
+<span class="n">H</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Array([[2., 0.],
+       [0., 2.]], dtype=float64)
+</pre></div>
+</div>
+</div>
+</div>
+<p>The Hessian is used to classify what kind of stationary points have been
+found. It is also used in some optimization algorithms.</p>
+</section>
+<section id="applications-to-optimization">
+<h2>Applications to optimization<a class="headerlink" href="#applications-to-optimization" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy.optimize</span><span class="w"> </span><span class="kn">import</span> <span class="n">minimize</span>
+
+<span class="o">?</span>minimize
+</pre></div>
+</div>
+</div>
+</div>
+<p>We will consider the
+<a class="reference external" href="https://en.wikipedia.org/wiki/Rosenbrock_function">Rosenbrock function</a>, which has a minimum at (1, 1) with a value of 0. The
+standard optimization approach is shown here for comparison.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy.optimize</span><span class="w"> </span><span class="kn">import</span> <span class="n">minimize</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">rosenbrock</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
+    <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">X</span>
+    <span class="k">return</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">x</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">100</span> <span class="o">*</span> <span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
+
+
+<span class="n">sol</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span><span class="n">rosenbrock</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sol</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  message: Optimization terminated successfully.
+  success: True
+   status: 0
+      fun: 2.111180088069277e-11
+        x: [ 1.000e+00  1.000e+00]
+      nit: 32
+      jac: [-2.897e-07  2.844e-08]
+ hess_inv: [[ 4.939e-01  9.877e-01]
+            [ 9.877e-01  1.980e+00]]
+     nfev: 111
+     njev: 37
+</pre></div>
+</div>
+</div>
+</div>
+<p>Next, we look at how to imporve the performance by providing the Jacobian and Hessian via AD functions.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">?</span>minimize
+</pre></div>
+</div>
+</div>
+</div>
+<p>The solution is pretty good, but we can get a better answer if we
+provide the Jacobian. Usually you are expected to derive and implement
+this. We do it in one like with jax. Since we have a scalar function, the Jacobian and grad are equivalent.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">grad</span><span class="p">(</span><span class="n">rosenbrock</span><span class="p">)</span>
+<span class="n">df</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Array([ 400., -200.], dtype=float64)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">grad</span><span class="p">(</span><span class="n">rosenbrock</span><span class="p">)</span>
+
+<span class="n">sol_j</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span><span class="n">rosenbrock</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">jac</span><span class="o">=</span><span class="n">df</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sol_j</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  message: Optimization terminated successfully.
+  success: True
+   status: 0
+      fun: 1.929228318427838e-14
+        x: [ 1.000e+00  1.000e+00]
+      nit: 32
+      jac: [-2.941e-07  8.157e-09]
+ hess_inv: [[ 4.929e-01  9.858e-01]
+            [ 9.858e-01  1.977e+00]]
+     nfev: 37
+     njev: 37
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note that the function is closer to zero (although it was small to start
+with) and it took many fewer steps to get there.</p>
+<p>Finally, we get an even better answer if we also provide the Hessian,
+and use an algorithm that uses the Hessian (most of them do not).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">?</span>minimize
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hf</span> <span class="o">=</span> <span class="n">hessian</span><span class="p">(</span><span class="n">rosenbrock</span><span class="p">)</span>
+<span class="n">minimize</span><span class="p">(</span><span class="n">rosenbrock</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">jac</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">hess</span><span class="o">=</span><span class="n">hf</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;dogleg&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> message: Optimization terminated successfully.
+ success: True
+  status: 0
+     fun: 4.930380657631324e-30
+       x: [ 1.000e+00  1.000e+00]
+     nit: 1
+     jac: [-8.882e-14  4.441e-14]
+    nfev: 2
+    njev: 2
+    nhev: 1
+    hess: [[ 8.020e+02 -4.000e+02]
+           [-4.000e+02  2.000e+02]]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note we get an almost exact answer, with only two function evaluations!</p>
+<p>You can see that the Hessian returned by this solver is identical to the
+Hessian we would compute.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hf</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Array([[ 802., -400.],
+       [-400.,  200.]], dtype=float64)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note that in the example where we just provided the Jacobian that the
+Hessian is approximated. You can see that here. It is pretty close, but
+not exact.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">sol_j</span><span class="o">.</span><span class="n">hess_inv</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[ 802.02588665 -399.99966532]
+ [-399.99966532  200.00039681]]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="summary">
+<h1>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h1>
+<p>Today we reviewed computational approaches to taking derivatives. The
+star of this lecture is automatic differentiation.</p>
+<p><code class="docutils literal notranslate"><span class="pre">jax</span></code> is very good, but it is worth spending some time reading <a class="reference external" href="https://jax.readthedocs.io/en/latest/notebooks/Common_Gotchas_in_JAX.html">https://jax.readthedocs.io/en/latest/notebooks/Common_Gotchas_in_JAX.html</a>. It is not magic, and sometimes there are surprises that require innovative solutions.</p>
+<p>Next time we will look at several applications of AD in calculus,
+science and engineering. After that, we will return to nonlinear
+regression and conclude with an introduction to machine learning.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">jupyterquiz</span><span class="w"> </span><span class="kn">import</span> <span class="n">display_quiz</span>
+<span class="n">display_quiz</span><span class="p">(</span><span class="s1">&#39;.quiz.json&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div id="wgeIbAzVdaVX" data-shufflequestions="False" data-shuffleanswers="True" data-preserveresponses="false" data-numquestions="1000000" data-maxwidth="600" style="border-radius: 10px; text-align: left"><style>
+#wgeIbAzVdaVX {
+   --jq-multiple-choice-bg: #6f78ffff;
+   --jq-mc-button-bg: #fafafa;
+   --jq-mc-button-border: #e0e0e0e0;
+   --jq-mc-button-inset-shadow: #555555;
+   --jq-many-choice-bg: #f75c03ff;
+   --jq-numeric-bg: #392061ff;
+   --jq-numeric-input-bg: #c0c0c0;
+   --jq-numeric-input-label: #101010;
+   --jq-numeric-input-shadow: #999999;
+   --jq-string-bg: #4c1a57;
+   --jq-incorrect-color: #c80202;
+   --jq-correct-color: #009113;
+   --jq-text-color: #fafafa;
+}
+
+.Quiz {
+    max-width: 600px;
+    margin-top: 15px;
+    margin-left: auto;
+    margin-right: auto;
+/*    margin-bottom: 15px;*/
+/*    padding-bottom: 4px;*/
+    padding-top: 4px;
+    line-height: 1.1;
+    font-size: 16pt;
+    border-radius: inherit;
+}
+
+.QuizCode {
+    font-size: 14pt;
+    margin-top: 10px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.QuizCode>pre {
+    padding: 4px;
+}
+
+.Quiz code {
+    background-color: lightgray;
+    color: black;
+}
+
+.Quiz .QuizCode code {
+    background-color: inherit;
+    color: inherit;
+}
+
+
+.Quiz .MCButton code {
+    background-color: inherit;
+    color: inherit;
+}
+
+.MCButton .QuizCode {
+    text-align: left;
+}
+
+
+
+
+.Answer {
+    border-radius: inherit;
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: 1fr 1fr;
+    margin: 10px 0;
+}
+
+@media only screen and (max-width:480px) {
+    .Answer {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+.Feedback {
+    font-size: 16pt;
+    text-align: center;
+/*    min-height: 2em;*/
+}
+
+.Input {
+    align: left;
+    font-size: 20pt;
+}
+
+.Input-text {
+    display: block;
+    margin: 10px;
+    color: inherit;
+    width: unset;
+    min-width: 140px;
+    max-width: 93%;
+    field-sizing: content;
+    background-color: var(--jq-numeric-input-bg);
+    color: var(--jq-text-color);
+    padding: 5px;
+    padding-left: 10px;
+    font-family: inherit;
+    font-size: 20px;
+    font-weight: inherit;
+    line-height: 20pt;
+    border: none;
+    border-radius: 0.2rem;
+    transition: box-shadow 0.1s);
+}
+
+.Input-text:focus {
+    /*outline: none;*/
+    background-color: var(--jq-numeric-input-bg);
+    box-shadow: 0.6rem 0.8rem 1.4rem -0.5rem var(--jq-numeric-input-shadow);
+}
+
+.MCButton {
+    background: var(--jq-mc-button-bg);
+    border: 1px solid var(--jq-mc-button-border);
+    border-radius: inherit;
+    color: #333333;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.MCButton p {
+    color: inherit;
+}
+
+.MultipleChoiceQn {
+    padding: 10px;
+    background: var(--jq-multiple-choice-bg);
+    color: var(--jq-text-color);
+    border-radius: inherit;
+}
+
+.ManyChoiceQn {
+    padding: 10px;
+    background: var(--jq-many-choice-bg);
+    color: var(--jq-text-color);
+    border-radius: inherit;
+}
+
+.NumericQn {
+    background: var(--jq-numeric-bg);
+    border-radius: inherit;
+    color: var(--jq-text-color);
+    padding: 10px;
+}
+
+.NumericQn p {
+    color: inherit;
+}
+
+.StringQn {
+    background: var(--jq-string-bg);
+    border-radius: inherit;
+    color: var(--jq-text-color);
+    padding: 10px;
+}
+
+.StringQn p {
+    color: inherit;
+}
+
+
+.InpLabel {
+    color: var(--jq-numeric-input-label);
+    float: left;
+    font-size: 15pt;
+    line-height: 34px;
+    margin-right: 10px;
+}
+
+.incorrect {
+    color: var(--jq-incorrect-color);
+}
+
+.correct {
+    color: var(--jq-correct-color);
+}
+
+.correctButton {
+    /*
+    background: var(--jq-correct-color);
+   */
+    animation: correct-anim 0.6s ease;
+    animation-fill-mode: forwards;
+    box-shadow: inset 0 0 5px var(--jq-mc-button-inset-shadow);
+    color: var(--jq-text-color);
+    /*outline: none;*/
+}
+
+.incorrectButton {
+    animation: incorrect-anim 0.8s ease;
+    animation-fill-mode: forwards;
+    box-shadow: inset 0 0 5px var(--jq-mc-button-inset-shadow);
+    color: var(--jq-text-color);
+    /*outline: none;*/
+}
+
+@keyframes incorrect-anim {
+    100% {
+        background-color: var(--jq-incorrect-color);
+    }
+}
+
+@keyframes correct-anim {
+    100% {
+        background-color: var(--jq-correct-color);
+    }
+}
+</style></div><script type="application/javascript">var questionswgeIbAzVdaVX=[
+  {
+    "question": "Derivatives have useful applications in determining",
+    "type": "multiple_choice",
+    "answers": [
+      {
+        "answer": "rate of change of physical quantities",
+        "correct": false
+      },
+      {
+        "answer": "uncertainty propagation",
+        "correct": false
+      },
+      {
+        "answer": "extreme values of a function",
+        "correct": false
+      },
+      {
+        "answer": "All of the above",
+        "correct": true
+      }
+    ],
+    "tag": "derivative",
+    "lecture_file": "19_introduction_to_autograd"
+  },
+  {
+    "question": "np.gradient and numdifftools.Derivative approximates the derivatives based on",
+    "type": "multiple_choice",
+    "answers": [
+      {
+        "answer": "chain rule",
+        "correct": false
+      },
+      {
+        "answer": "Finite element analysis",
+        "correct": false
+      },
+      {
+        "answer": "Finite differences",
+        "correct": true
+      },
+      {
+        "answer": "None of the above",
+        "correct": false
+      }
+    ],
+    "tag": "derivative numpy scipy",
+    "lecture_file": "19_introduction_to_autograd"
+  },
+  {
+    "question": "A requirement of using np.gradient to calculate the derivative is",
+    "type": "multiple_choice",
+    "answers": [
+      {
+        "answer": "equation of the function to be differentiated",
+        "correct": false
+      },
+      {
+        "answer": "data points",
+        "correct": true
+      },
+      {
+        "answer": "defining a function in python",
+        "correct": false
+      },
+      {
+        "answer": "None of the above",
+        "correct": false
+      }
+    ],
+    "tag": "numpy derivative",
+    "lecture_file": "19_introduction_to_autograd"
+  },
+  {
+    "question": "A requirement of using numdifftools.Derivative to calculate the derivative is",
+    "type": "multiple_choice",
+    "answers": [
+      {
+        "answer": "equation of the function to be differentiated",
+        "correct": false
+      },
+      {
+        "answer": "defining a function in python",
+        "correct": false
+      },
+      {
+        "answer": "All of the above",
+        "correct": true
+      },
+      {
+        "answer": "None of the above",
+        "correct": false
+      }
+    ],
+    "tag": "scipy derivative",
+    "lecture_file": "19_introduction_to_autograd"
+  },
+  {
+    "question": "Automatic differentiation is better than classical methods such as symbolic and numerical differentiation as",
+    "type": "multiple_choice",
+    "answers": [
+      {
+        "answer": "It does not approximate",
+        "correct": false
+      },
+      {
+        "answer": "It can solve higher order derivatives",
+        "correct": false
+      },
+      {
+        "answer": "It can work on a program",
+        "correct": false
+      },
+      {
+        "answer": "All of the above",
+        "correct": true
+      }
+    ],
+    "tag": "derivative automatic_differentiation",
+    "lecture_file": "19_introduction_to_autograd"
+  },
+  {
+    "question": "If f(x) is a scalar function, and E = elementwise_grad(f), then E(np.array([a, b, c]), will output",
+    "type": "multiple_choice",
+    "answers": [
+      {
+        "answer": "A single element as f(x) is a scalar function",
+        "correct": false
+      },
+      {
+        "answer": "An array of length 3",
+        "correct": true
+      },
+      {
+        "answer": "An error",
+        "correct": false
+      },
+      {
+        "answer": "An array of length 9",
+        "correct": false
+      }
+    ],
+    "tag": "autograd",
+    "lecture_file": "19_introduction_to_autograd"
+  },
+  {
+    "question": "When using jax, which of the following codes will work without raising an error",
+    "type": "multiple_choice",
+    "answers": [
+      {
+        "answer": "def z(x):<br>    c = 1/x - 1<br>    return c<br>dz = grad(z)<br>dz(-2.0)",
+        "correct": true
+      },
+      {
+        "answer": "def z(x):<br>    c = 1/x - 1<br>    return c<br>dz = grad(z)<br>dz(2)",
+        "correct": false
+      },
+      {
+        "answer": "def z(x):<br>    c = 1/x - 1<br>    return c<br>dz = grad(z)<br>dz(0.0)",
+        "correct": false
+      },
+      {
+        "answer": "def z(x):<br>    c = 1/x - 1<br>    return c<br>dz = grad(z)<br>dz(np.array([-2.0, -1.0]))",
+        "correct": false
+      }
+    ],
+    "tag": "autograd",
+    "lecture_file": "19_introduction_to_autograd"
+  },
+  {
+    "question": "When using jax.jacobian() to evaluate the derivative for multiple input arrays, we need to",
+    "type": "multiple_choice",
+    "answers": [
+      {
+        "answer": "Use a list of arrays as input",
+        "correct": false
+      },
+      {
+        "answer": "Cannot be done directly; Need to use a single input array at a time",
+        "correct": false
+      },
+      {
+        "answer": "Use a nested array as the input",
+        "correct": true
+      },
+      {
+        "answer": "Can be used if we vectorize the function with '@np.vectorize' decorator",
+        "correct": false
+      }
+    ],
+    "tag": "autograd",
+    "lecture_file": "19_introduction_to_autograd"
+  },
+  {
+    "question": "Hessian and Jacobian are useful to find the partial derivatives of",
+    "type": "multiple_choice",
+    "answers": [
+      {
+        "answer": "Vector-valued functions",
+        "correct": false
+      },
+      {
+        "answer": "Scalar-valued functions",
+        "correct": false
+      },
+      {
+        "answer": "Hessian is used on scalar-valued functions and Jacobian on vector-valued functions",
+        "correct": true
+      },
+      {
+        "answer": "Hessian is used on vector-valued functions and Jacobian on scalar-valued functions",
+        "correct": false
+      }
+    ],
+    "tag": "hessian jacobian",
+    "lecture_file": "19_introduction_to_autograd"
+  },
+  {
+    "question": "When the input dimensions and output dimensions of a vector valued function are equal to 1, then",
+    "type": "multiple_choice",
+    "answers": [
+      {
+        "answer": "The function can be interpreted as scalar-valued",
+        "correct": false
+      },
+      {
+        "answer": "The jacobian matrix has a single value which is the derivative of the function at the input value",
+        "correct": false
+      },
+      {
+        "answer": "The function is no longer multivariate",
+        "correct": false
+      },
+      {
+        "answer": "All of the above",
+        "correct": true
+      }
+    ],
+    "tag": "autograd functions",
+    "lecture_file": "19_introduction_to_autograd"
+  }
+]
+;
+
+if (typeof Question === 'undefined') {
+// Make a random ID
+function makeid(length) {
+    var result = [];
+    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+    var charactersLength = characters.length;
+    for (var i = 0; i < length; i++) {
+        result.push(characters.charAt(Math.floor(Math.random() * charactersLength)));
+    }
+    return result.join('');
+}
+// Convert LaTeX delimiters and markdown links to HTML
+function jaxify(string) {
+    let mystring = string;
+    let count = 0, count2 = 0;
+    let loc = mystring.search(/([^\\]|^)(\$)/);
+    let loc2 = mystring.search(/([^\\]|^)(\$\$)/);
+    while (loc >= 0 || loc2 >= 0) {
+        if (loc2 >= 0) {
+            mystring = mystring.replace(/([^\\]|^)(\$\$)/, count2 % 2 ? '$1\\]' : '$1\\[');
+            count2++;
+        } else {
+            mystring = mystring.replace(/([^\\]|^)(\$)/, count % 2 ? '$1\\)' : '$1\\(');
+            count++;
+        }
+        loc = mystring.search(/([^\\]|^)(\$)/);
+        loc2 = mystring.search(/([^\\]|^)(\$\$)/);
+    }
+    // Replace markdown links
+    mystring = mystring.replace(/<http(.*?)>/g, '<a href="http$1" target="_blank" class="Link">http$1</a>');
+    mystring = mystring.replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank" class="Link">$1</a>');
+    return mystring;
+}
+
+// Base class for question types
+class Question {
+    static registry = {};
+    static register(type, cls) {
+        Question.registry[type] = cls;
+    }
+    static create(qa, id, index, options, rootDiv) {
+        const Cls = Question.registry[qa.type];
+        if (!Cls) {
+            console.error(`No question class registered for type "${qa.type}"`);
+            return;
+        }
+        const q = new Cls(qa, id, index, options, rootDiv);
+        q.render();
+    }
+
+    constructor(qa, id, index, options, rootDiv) {
+        this.qa = qa;
+        this.id = id;
+        this.index = index;
+        this.options = options;
+        this.rootDiv = rootDiv;
+        // wrapper
+        this.wrapper = document.createElement('div');
+        this.wrapper.id = `quizWrap${id}`;
+        this.wrapper.className = 'Quiz';
+        this.wrapper.dataset.qnum = index;
+        this.wrapper.style.maxWidth = `${options.maxWidth}px`;
+        rootDiv.appendChild(this.wrapper);
+        // question container
+        this.outerqDiv = document.createElement('div');
+        this.outerqDiv.id = `OuterquizQn${id}${index}`;
+        this.wrapper.appendChild(this.outerqDiv);
+        // question text
+        this.qDiv = document.createElement('div');
+        this.qDiv.id = `quizQn${id}${index}`;
+        if (qa.question) {
+            this.qDiv.innerHTML = jaxify(qa.question);
+            this.outerqDiv.appendChild(this.qDiv);
+        }
+        // code block
+        if (qa.code) {
+            const codeDiv = document.createElement('div');
+            codeDiv.id = `code${id}${index}`;
+            codeDiv.className = 'QuizCode';
+            const pre = document.createElement('pre');
+            const codeEl = document.createElement('code');
+            codeEl.innerHTML = qa.code;
+            pre.appendChild(codeEl);
+            codeDiv.appendChild(pre);
+            this.outerqDiv.appendChild(codeDiv);
+        }
+        // answer container
+        this.aDiv = document.createElement('div');
+        this.aDiv.id = `quizAns${id}${index}`;
+        this.aDiv.className = 'Answer';
+        this.wrapper.appendChild(this.aDiv);
+        // feedback container (append after answers)
+        this.fbDiv = document.createElement('div');
+        this.fbDiv.id = `fb${id}`;
+        this.fbDiv.className = 'Feedback';
+        this.fbDiv.dataset.answeredcorrect = 0;
+    }
+
+    render() {
+        throw new Error('render() not implemented');
+    }
+
+    preserveResponse(val) {
+        if (!this.options.preserveResponses) return;
+        const resp = document.getElementById(`responses${this.rootDiv.id}`);
+        if (!resp) return;
+        const arr = JSON.parse(resp.dataset.responses);
+        arr[this.index] = val;
+        resp.dataset.responses = JSON.stringify(arr);
+        printResponses(resp);
+    }
+
+    typeset(container) {
+        if (typeof MathJax !== 'undefined') {
+            const v = MathJax.version;
+            if (v[0] === '2') {
+                MathJax.Hub.Queue(['Typeset', MathJax.Hub]);
+            } else {
+                MathJax.typeset([container]);
+            }
+        }
+    }
+}
+
+// Choose a random subset of an array. Can also be used to shuffle the array
+function getRandomSubarray(arr, size) {
+    var shuffled = arr.slice(0), i = arr.length, temp, index;
+    while (i--) {
+        index = Math.floor((i + 1) * Math.random());
+        temp = shuffled[index];
+        shuffled[index] = shuffled[i];
+        shuffled[i] = temp;
+    }
+    return shuffled.slice(0, size);
+}
+
+function printResponses(responsesContainer) {
+    var responses=JSON.parse(responsesContainer.dataset.responses);
+    var stringResponses='<B>IMPORTANT!</B>To preserve this answer sequence for submission, when you have finalized your answers: <ol> <li> Copy the text in this cell below "Answer String"</li> <li> Double click on the cell directly below the Answer String, labeled "Replace Me"</li> <li> Select the whole "Replace Me" text</li> <li> Paste in your answer string and press shift-Enter.</li><li>Save the notebook using the save icon or File->Save Notebook menu item</li></ul><br><br><br><b>Answer String:</b><br> ';
+    console.log(responses);
+    responses.forEach((response, index) => {
+        if (response) {
+            console.log(index + ': ' + response);
+            stringResponses+= index + ': ' + response +"<BR>";
+        }
+    });
+    responsesContainer.innerHTML=stringResponses;
+}
+/* Callback function to determine whether a selected multiple-choice
+   button corresponded to a correct answer and to provide feedback
+   based on the answer */
+function check_mc() {
+    var id = this.id.split('-')[0];
+    //var response = this.id.split('-')[1];
+    //console.log(response);
+    //console.log("In check_mc(), id="+id);
+    //console.log(event.srcElement.id)           
+    //console.log(event.srcElement.dataset.correct)   
+    //console.log(event.srcElement.dataset.feedback)
+
+    var label = event.srcElement;
+    //console.log(label, label.nodeName);
+    var depth = 0;
+    while ((label.nodeName != "LABEL") && (depth < 20)) {
+        label = label.parentElement;
+        console.log(depth, label);
+        depth++;
+    }
+
+
+
+    var answers = label.parentElement.children;
+    //console.log(answers);
+
+    // Split behavior based on multiple choice vs many choice:
+    var fb = document.getElementById("fb" + id);
+
+
+
+    /* Multiple choice (1 answer). Allow for 0 correct
+       answers as an edge case */
+    if (fb.dataset.numcorrect <= 1) {
+        // What follows is for the saved responses stuff
+        var outerContainer = fb.parentElement.parentElement;
+        var responsesContainer = document.getElementById("responses" + outerContainer.id);
+        if (responsesContainer) {
+            //console.log(responsesContainer);
+            var response = label.firstChild.innerText;
+            if (label.querySelector(".QuizCode")){
+                response+= label.querySelector(".QuizCode").firstChild.innerText;
+            }
+            console.log(response);
+            //console.log(document.getElementById("quizWrap"+id));
+            var qnum = document.getElementById("quizWrap"+id).dataset.qnum;
+            console.log("Question " + qnum);
+            //console.log(id, ", got numcorrect=",fb.dataset.numcorrect);
+            var responses=JSON.parse(responsesContainer.dataset.responses);
+            console.log(responses);
+            responses[qnum]= response;
+            responsesContainer.setAttribute('data-responses', JSON.stringify(responses));
+            printResponses(responsesContainer);
+        }
+        // End code to preserve responses
+
+        for (var i = 0; i < answers.length; i++) {
+            var child = answers[i];
+            //console.log(child);
+            child.className = "MCButton";
+        }
+
+
+
+        if (label.dataset.correct == "true") {
+            // console.log("Correct action");
+            if ("feedback" in label.dataset) {
+                fb.innerHTML = jaxify(label.dataset.feedback);
+            } else {
+                fb.innerHTML = "Correct!";
+            }
+            label.classList.add("correctButton");
+
+            fb.className = "Feedback";
+            fb.classList.add("correct");
+
+        } else {
+            if ("feedback" in label.dataset) {
+                fb.innerHTML = jaxify(label.dataset.feedback);
+            } else {
+                fb.innerHTML = "Incorrect -- try again.";
+            }
+            //console.log("Error action");
+            label.classList.add("incorrectButton");
+            fb.className = "Feedback";
+            fb.classList.add("incorrect");
+        }
+    }
+    else { /* Many choice (more than 1 correct answer) */
+        var reset = false;
+        var feedback;
+         if (label.dataset.correct == "true") {
+            if ("feedback" in label.dataset) {
+                feedback = jaxify(label.dataset.feedback);
+            } else {
+                feedback = "Correct!";
+            }
+            if (label.dataset.answered <= 0) {
+                if (fb.dataset.answeredcorrect < 0) {
+                    fb.dataset.answeredcorrect = 1;
+                    reset = true;
+                } else {
+                    fb.dataset.answeredcorrect++;
+                }
+                if (reset) {
+                    for (var i = 0; i < answers.length; i++) {
+                        var child = answers[i];
+                        child.className = "MCButton";
+                        child.dataset.answered = 0;
+                    }
+                }
+                label.classList.add("correctButton");
+                label.dataset.answered = 1;
+                fb.className = "Feedback";
+                fb.classList.add("correct");
+
+            }
+        } else {
+            if ("feedback" in label.dataset) {
+                feedback = jaxify(label.dataset.feedback);
+            } else {
+                feedback = "Incorrect -- try again.";
+            }
+            if (fb.dataset.answeredcorrect > 0) {
+                fb.dataset.answeredcorrect = -1;
+                reset = true;
+            } else {
+                fb.dataset.answeredcorrect--;
+            }
+
+            if (reset) {
+                for (var i = 0; i < answers.length; i++) {
+                    var child = answers[i];
+                    child.className = "MCButton";
+                    child.dataset.answered = 0;
+                }
+            }
+            label.classList.add("incorrectButton");
+            fb.className = "Feedback";
+            fb.classList.add("incorrect");
+        }
+        // What follows is for the saved responses stuff
+        var outerContainer = fb.parentElement.parentElement;
+        var responsesContainer = document.getElementById("responses" + outerContainer.id);
+        if (responsesContainer) {
+            //console.log(responsesContainer);
+            var response = label.firstChild.innerText;
+            if (label.querySelector(".QuizCode")){
+                response+= label.querySelector(".QuizCode").firstChild.innerText;
+            }
+            console.log(response);
+            //console.log(document.getElementById("quizWrap"+id));
+            var qnum = document.getElementById("quizWrap"+id).dataset.qnum;
+            console.log("Question " + qnum);
+            //console.log(id, ", got numcorrect=",fb.dataset.numcorrect);
+            var responses=JSON.parse(responsesContainer.dataset.responses);
+            if (label.dataset.correct == "true") {
+                if (typeof(responses[qnum]) == "object"){
+                    if (!responses[qnum].includes(response))
+                        responses[qnum].push(response);
+                } else{
+                    responses[qnum]= [ response ];
+                }
+            } else {
+                responses[qnum]= response;
+            }
+            console.log(responses);
+            responsesContainer.setAttribute('data-responses', JSON.stringify(responses));
+            printResponses(responsesContainer);
+        }
+        // End save responses stuff
+
+
+
+        var numcorrect = fb.dataset.numcorrect;
+        var answeredcorrect = fb.dataset.answeredcorrect;
+        if (answeredcorrect >= 0) {
+            fb.innerHTML = feedback + " [" + answeredcorrect + "/" + numcorrect + "]";
+        } else {
+            fb.innerHTML = feedback + " [" + 0 + "/" + numcorrect + "]";
+        }
+
+
+    }
+
+    if (typeof MathJax != 'undefined') {
+        var version = MathJax.version;
+        console.log('MathJax version', version);
+        if (version[0] == "2") {
+            MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+        } else if (version[0] == "3") {
+            MathJax.typeset([fb]);
+        }
+    } else {
+        console.log('MathJax not detected');
+    }
+
+}
+
+
+/* Function to produce the HTML buttons for a multiple choice/
+   many choice question  and to update the CSS tags based on
+   the question type */
+function make_mc(qa, shuffle_answers, outerqDiv, qDiv, aDiv, id) {
+
+    var shuffled;
+    if (shuffle_answers == true) {
+        //console.log(shuffle_answers+" read as true");
+        shuffled = getRandomSubarray(qa.answers, qa.answers.length);
+    } else {
+        //console.log(shuffle_answers+" read as false");
+        shuffled = qa.answers;
+    }
+
+
+    var num_correct = 0;
+
+    shuffled.forEach((item, index, ans_array) => {
+        //console.log(answer);
+
+        // Make input element
+        var inp = document.createElement("input");
+        inp.type = "radio";
+        inp.id = "quizo" + id + index;
+        inp.style = "display:none;";
+        aDiv.append(inp);
+
+        //Make label for input element
+        var lab = document.createElement("label");
+        lab.className = "MCButton";
+        lab.id = id + '-' + index;
+        lab.onclick = check_mc;
+        var aSpan = document.createElement('span');
+        aSpan.classsName = "";
+        //qDiv.id="quizQn"+id+index;
+        if ("answer" in item) {
+            aSpan.innerHTML = jaxify(item.answer);
+            //aSpan.innerHTML=item.answer;
+        }
+        lab.append(aSpan);
+
+        // Create div for code inside question
+        var codeSpan;
+        if ("code" in item) {
+            codeSpan = document.createElement('span');
+            codeSpan.id = "code" + id + index;
+            codeSpan.className = "QuizCode";
+            var codePre = document.createElement('pre');
+            codeSpan.append(codePre);
+            var codeCode = document.createElement('code');
+            codePre.append(codeCode);
+            codeCode.innerHTML = item.code;
+            lab.append(codeSpan);
+            //console.log(codeSpan);
+        }
+
+        //lab.textContent=item.answer;
+
+        // Set the data attributes for the answer
+        lab.setAttribute('data-correct', item.correct);
+        if (item.correct) {
+            num_correct++;
+        }
+        if ("feedback" in item) {
+            lab.setAttribute('data-feedback', item.feedback);
+        }
+        lab.setAttribute('data-answered', 0);
+
+        aDiv.append(lab);
+
+    });
+
+    if (num_correct > 1) {
+        outerqDiv.className = "ManyChoiceQn";
+    } else {
+        outerqDiv.className = "MultipleChoiceQn";
+    }
+
+    return num_correct;
+
+}
+// Object-oriented wrapper for MC/MANY choice
+class MCQuestion extends Question {
+    constructor(qa, id, idx, opts, rootDiv) { super(qa, id, idx, opts, rootDiv); }
+    render() {
+        //console.log("options.shuffleAnswers " + this.options.shuffleAnswers);
+        const numCorrect = make_mc(
+            this.qa,
+            this.options.shuffleAnswers,
+            this.outerqDiv,
+            this.qDiv,
+            this.aDiv,
+            this.id
+        );
+        if ('answer_cols' in this.qa) {
+            this.aDiv.style.gridTemplateColumns =
+                'repeat(' + this.qa.answer_cols + ', 1fr)';
+        }
+        this.fbDiv.dataset.numcorrect = numCorrect;
+        this.wrapper.appendChild(this.fbDiv);
+    }
+}
+Question.register('multiple_choice', MCQuestion);
+Question.register('many_choice', MCQuestion);
+function check_numeric(ths, event) {
+
+    if (event.keyCode === 13) {
+        ths.blur();
+
+        var id = ths.id.split('-')[0];
+
+        var submission = ths.value;
+        if (submission.indexOf('/') != -1) {
+            var sub_parts = submission.split('/');
+            //console.log(sub_parts);
+            submission = sub_parts[0] / sub_parts[1];
+        }
+        //console.log("Reader entered", submission);
+
+        if ("precision" in ths.dataset) {
+            var precision = ths.dataset.precision;
+            submission = Number(Number(submission).toPrecision(precision));
+        }
+
+
+        //console.log("In check_numeric(), id="+id);
+        //console.log(event.srcElement.id)           
+        //console.log(event.srcElement.dataset.feedback)
+
+        var fb = document.getElementById("fb" + id);
+        fb.style.display = "none";
+        fb.innerHTML = "Incorrect -- try again.";
+
+        var answers = JSON.parse(ths.dataset.answers);
+        //console.log(answers);
+
+        var defaultFB = "Incorrect. Try again.";
+        var correct;
+        var done = false;
+        answers.every(answer => {
+            //console.log(answer.type);
+
+            correct = false;
+            // if (answer.type=="value"){
+            if ('value' in answer) {
+                var value;
+                if ("precision" in ths.dataset) {
+                    value = answer.value.toPrecision(ths.dataset.precision);
+                } else {
+                    value = answer.value;
+                }
+                if (submission == value) {
+                    if ("feedback" in answer) {
+                        fb.innerHTML = jaxify(answer.feedback);
+                    } else {
+                        fb.innerHTML = jaxify("Correct");
+                    }
+                    correct = answer.correct;
+                    //console.log(answer.correct);
+                    done = true;
+                }
+
+                // } else if (answer.type=="range") {
+            } else if ('range' in answer) {
+                console.log(answer.range);
+                console.log(submission, submission >=answer.range[0], submission < answer.range[1])
+                if ((submission >= answer.range[0]) && (submission < answer.range[1])) {
+                    fb.innerHTML = jaxify(answer.feedback);
+                    correct = answer.correct;
+                    console.log(answer.correct);
+                    done = true;
+                }
+            } else if (answer.type == "default") {
+                if ("feedback" in answer) {
+                    defaultFB = answer.feedback;
+                } 
+            }
+            if (done) {
+                return false; // Break out of loop if this has been marked correct
+            } else {
+                return true; // Keep looking for case that includes this as a correct answer
+            }
+        });
+        console.log("done:", done);
+
+        if ((!done) && (defaultFB != "")) {
+            fb.innerHTML = jaxify(defaultFB);
+            //console.log("Default feedback", defaultFB);
+        }
+
+        fb.style.display = "block";
+        if (correct) {
+            ths.className = "Input-text";
+            ths.classList.add("correctButton");
+            fb.className = "Feedback";
+            fb.classList.add("correct");
+        } else {
+            ths.className = "Input-text";
+            ths.classList.add("incorrectButton");
+            fb.className = "Feedback";
+            fb.classList.add("incorrect");
+        }
+
+        // What follows is for the saved responses stuff
+        var outerContainer = fb.parentElement.parentElement;
+        var responsesContainer = document.getElementById("responses" + outerContainer.id);
+        if (responsesContainer) {
+            console.log(submission);
+            var qnum = document.getElementById("quizWrap"+id).dataset.qnum;
+            //console.log("Question " + qnum);
+            //console.log(id, ", got numcorrect=",fb.dataset.numcorrect);
+            var responses=JSON.parse(responsesContainer.dataset.responses);
+            console.log(responses);
+            if (submission == ths.value){
+                responses[qnum]= submission;
+            } else {
+                responses[qnum]= ths.value + "(" + submission +")";
+            }
+            responsesContainer.setAttribute('data-responses', JSON.stringify(responses));
+            printResponses(responsesContainer);
+        }
+        // End code to preserve responses
+
+        if (typeof MathJax != 'undefined') {
+            var version = MathJax.version;
+            console.log('MathJax version', version);
+            if (version[0] == "2") {
+                MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+            } else if (version[0] == "3") {
+                MathJax.typeset([fb]);
+            }
+        } else {
+            console.log('MathJax not detected');
+        }
+        // After correct answer, if next JupyterQuiz question exists and has a text input, scroll by current question height
+        if (correct) {
+            // find the current question wrapper
+            var wrapper = ths.closest('.Quiz');
+            if (wrapper) {
+                var nextWrapper = wrapper.nextElementSibling;
+                if (nextWrapper && nextWrapper.classList.contains('Quiz')) {
+                    var nextInput = nextWrapper.querySelector('input.Input-text');
+                    if (nextInput) {
+                        var height = wrapper.getBoundingClientRect().height;
+                        console.log(height);
+                        nextInput.focus();
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+}
+// Object-oriented wrapper for numeric questions
+class NumericQuestion extends Question {
+    constructor(qa, id, idx, opts, rootDiv) {
+        super(qa, id, idx, opts, rootDiv);
+    }
+    render() {
+        make_numeric(this.qa, this.outerqDiv, this.qDiv, this.aDiv, this.id);
+        this.wrapper.appendChild(this.fbDiv);
+    }
+}
+Question.register('numeric', NumericQuestion);
+
+function isValid(el, charC) {
+    //console.log("Input char: ", charC);
+    if (charC == 46) {
+        if (el.value.indexOf('.') === -1) {
+            return true;
+        } else if (el.value.indexOf('/') != -1) {
+            var parts = el.value.split('/');
+            if (parts[1].indexOf('.') === -1) {
+                return true;
+            }
+        }
+        else {
+            return false;
+        }
+    } else if (charC == 47) {
+        if (el.value.indexOf('/') === -1) {
+            if ((el.value != "") && (el.value != ".")) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    } else if (charC == 45) {
+        var edex = el.value.indexOf('e');
+        if (edex == -1) {
+            edex = el.value.indexOf('E');
+        }
+
+        if (el.value == "") {
+            return true;
+        } else if (edex == (el.value.length - 1)) { // If just after e or E
+            return true;
+        } else {
+            return false;
+        }
+    } else if (charC == 101) { // "e"
+        if ((el.value.indexOf('e') === -1) && (el.value.indexOf('E') === -1) && (el.value.indexOf('/') == -1)) {
+            // Prev symbol must be digit or decimal point:
+            if (el.value.slice(-1).search(/\d/) >= 0) {
+                return true;
+            } else if (el.value.slice(-1).search(/\./) >= 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    } else {
+        if (charC > 31 && (charC < 48 || charC > 57))
+            return false;
+    }
+    return true;
+}
+
+function numeric_keypress(evnt) {
+    var charC = (evnt.which) ? evnt.which : evnt.keyCode;
+
+    if (charC == 13) {
+        check_numeric(this, evnt);
+    } else {
+        return isValid(this, charC);
+    }
+}
+
+
+
+
+
+function make_numeric(qa, outerqDiv, qDiv, aDiv, id) {
+
+
+
+    //console.log(answer);
+
+
+    outerqDiv.className = "NumericQn";
+    aDiv.style.display = 'block';
+
+    var lab = document.createElement("label");
+    lab.className = "InpLabel";
+    lab.innerHTML = "Type numeric answer here:";
+    aDiv.append(lab);
+
+    var inp = document.createElement("input");
+    inp.type = "text";
+    //inp.id="input-"+id;
+    inp.id = id + "-0";
+    inp.className = "Input-text";
+    inp.setAttribute('data-answers', JSON.stringify(qa.answers));
+    if ("precision" in qa) {
+        inp.setAttribute('data-precision', qa.precision);
+    }
+    aDiv.append(inp);
+    //console.log(inp);
+
+    //inp.addEventListener("keypress", check_numeric);
+    //inp.addEventListener("keypress", numeric_keypress);
+    /*
+    inp.addEventListener("keypress", function(event) {
+        return numeric_keypress(this, event);
+    }
+                        );
+                        */
+    //inp.onkeypress="return numeric_keypress(this, event)";
+    inp.onkeypress = numeric_keypress;
+    inp.onpaste = event => false;
+
+    inp.addEventListener("focus", function (event) {
+        this.value = "";
+        return false;
+    }
+    );
+
+
+}
+// Override show_questions to use object-oriented Question API
+function show_questions(json, container) {
+    // Accept container element or element ID
+    if (typeof container === 'string') {
+        container = document.getElementById(container);
+    }
+    if (!container) {
+        console.error('show_questions: invalid container', container);
+        return;
+    }
+
+    const shuffleQuestions = container.dataset.shufflequestions === 'True';
+    const shuffleAnswers = container.dataset.shuffleanswers === 'True';
+    const preserveResponses = container.dataset.preserveresponses === 'true';
+    const maxWidth = parseInt(container.dataset.maxwidth, 10) || 0;
+    let numQuestions = parseInt(container.dataset.numquestions, 10) || json.length;
+    if (numQuestions > json.length) numQuestions = json.length;
+
+    let questions = json;
+    if (shuffleQuestions || numQuestions < json.length) {
+        questions = getRandomSubarray(json, numQuestions);
+    }
+
+    questions.forEach((qa, index) => {
+        const id = makeid(8);
+        const options = {
+            shuffleAnswers: shuffleAnswers,
+            preserveResponses: preserveResponses,
+            maxWidth: maxWidth
+        };
+        Question.create(qa, id, index, options, container);
+    });
+
+    if (preserveResponses) {
+        const respDiv = document.createElement('div');
+        respDiv.id = 'responses' + container.id;
+        respDiv.className = 'JCResponses';
+        respDiv.dataset.responses = JSON.stringify([]);
+        respDiv.innerHTML = '<b>Select your answers and then follow the directions that will appear here.</b>';
+        container.appendChild(respDiv);
+    }
+
+    // Trigger MathJax typesetting if available
+    if (typeof MathJax != 'undefined') {
+        console.log("MathJax version", MathJax.version);
+        var version = MathJax.version;
+        setTimeout(function(){
+            var version = MathJax.version;
+            console.log('After sleep, MathJax version', version);
+            if (version[0] == "2") {
+                MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+            } else if (version[0] == "3") {
+                if (MathJax.hasOwnProperty('typeset') ) {
+                    MathJax.typeset([container]);
+                } else {
+                    console.log('WARNING: Trying to force load MathJax 3');
+                    window.MathJax = {
+                        tex: {
+                            inlineMath: [['$', '$'], ['\\(', '\\)']]
+                        },
+                        svg: {
+                            fontCache: 'global'
+                        }
+                    };
+
+                    (function () {
+                        var script = document.createElement('script');
+                        script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js';
+                        script.async = true;
+                        document.head.appendChild(script);
+                    })();
+                }
+            }
+        }, 500);
+if (typeof version == 'undefined') {
+        } else
+        {
+            if (version[0] == "2") {
+                MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+            } else if (version[0] == "3") {
+                if (MathJax.hasOwnProperty('typeset') ) {
+                    MathJax.typeset([container]);
+                } else {
+                    console.log('WARNING: Trying to force load MathJax 3');
+                    window.MathJax = {
+                        tex: {
+                            inlineMath: [['$', '$'], ['\\(', '\\)']]
+                        },
+                        svg: {
+                            fontCache: 'global'
+                        }
+                    };
+
+                    (function () {
+                        var script = document.createElement('script');
+                        script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js';
+                        script.async = true;
+                        document.head.appendChild(script);
+                    })();
+                }
+            } else {
+                console.log("MathJax not found");
+            }
+        }
+    }
+    // if (typeof MathJax !== 'undefined') {
+    //     const v = MathJax.version;
+    //     if (v[0] === '2') {
+    //         MathJax.Hub.Queue(['Typeset', MathJax.Hub]);
+    //     } else if (v[0] === '3') {
+    //         MathJax.typeset([container]);
+    //     }
+    // }
+
+    // Prevent link clicks from bubbling up
+    Array.from(container.getElementsByClassName('Link')).forEach(link => {
+        link.addEventListener('click', e => e.stopPropagation());
+    });
+}
+function levenshteinDistance(a, b) {
+    if (a.length === 0) return b.length;
+    if (b.length === 0) return a.length;
+
+    const matrix = Array(b.length + 1).fill(null).map(() => Array(a.length + 1).fill(null));
+
+    for (let i = 0; i <= a.length; i++) {
+        matrix[0][i] = i;
+    }
+
+    for (let j = 0; j <= b.length; j++) {
+        matrix[j][0] = j;
+    }
+
+    for (let j = 1; j <= b.length; j++) {
+        for (let i = 1; i <= a.length; i++) {
+            const cost = a[i - 1] === b[j - 1] ? 0 : 1;
+            matrix[j][i] = Math.min(
+                matrix[j - 1][i] + 1, // Deletion
+                matrix[j][i - 1] + 1, // Insertion
+                matrix[j - 1][i - 1] + cost // Substitution
+            );
+        }
+    }
+    return matrix[b.length][a.length];
+}
+// Object-oriented wrapper for string input questions
+class StringQuestion extends Question {
+    constructor(qa, id, idx, opts, rootDiv) {
+        super(qa, id, idx, opts, rootDiv);
+    }
+    render() {
+        make_string(this.qa, this.outerqDiv, this.qDiv, this.aDiv, this.id);
+        this.wrapper.appendChild(this.fbDiv);
+    }
+}
+Question.register('string', StringQuestion);
+
+function check_string(ths, event) {
+    if (event.keyCode === 13) {
+        ths.blur();
+
+        var id = ths.id.split('-')[0];
+        var submission = ths.value.trim();
+        var fb = document.getElementById("fb" + id);
+        fb.style.display = "none";
+        fb.innerHTML = "Incorrect -- try again.";
+
+        var answers = JSON.parse(ths.dataset.answers);
+        var defaultFB = "Incorrect. Try again.";
+        var correct;
+        var done = false;
+
+        // Handle default answer pattern: filter out and capture default feedback
+        var filteredAnswers = [];
+        answers.forEach(answer => {
+            if (answer.type === "default") {
+                defaultFB = answer.feedback;
+            } else {
+                filteredAnswers.push(answer);
+            }
+        });
+        answers = filteredAnswers;
+
+        answers.every(answer => {
+            correct = false;
+
+            let match = false;
+            if (answer.match_case) {
+                match = submission === answer.answer;
+            } else {
+                match = submission.toLowerCase() === answer.answer.toLowerCase();
+            }
+            console.log(submission);
+            console.log(answer.answer);
+            console.log(match);
+
+            if (match) {
+                if ("feedback" in answer) {
+                    fb.innerHTML = jaxify(answer.feedback);
+                } else {
+                    fb.innerHTML = jaxify("Correct");
+                }
+                correct = answer.correct;
+                done = true;
+            } else if (answer.fuzzy_threshold) {
+                var max_length = Math.max(submission.length, answer.answer.length);
+                var ratio;
+                if (answer.match_case) {
+                    ratio = 1- (levenshteinDistance(submission, answer.answer) / max_length);
+                } else {
+                    ratio = 1- (levenshteinDistance(submission.toLowerCase(),
+                                                    answer.answer.toLowerCase()) / max_length);
+                }
+                if (ratio >= answer.fuzzy_threshold) {
+                    if ("feedback" in answer) {
+                        fb.innerHTML = jaxify("(Fuzzy) " + answer.feedback);
+                    } else {
+                        fb.innerHTML = jaxify("Correct");
+                    }
+                    correct = answer.correct;
+                    done = true;
+                }
+
+            }
+
+            if (done) {
+                return false;
+            } else {
+                return true;
+            }
+        });
+
+        if ((!done) && (defaultFB != "")) {
+            fb.innerHTML = jaxify(defaultFB);
+        }
+
+        fb.style.display = "block";
+        if (correct) {
+            ths.className = "Input-text";
+            ths.classList.add("correctButton");
+            fb.className = "Feedback";
+            fb.classList.add("correct");
+        } else {
+            ths.className = "Input-text";
+            ths.classList.add("incorrectButton");
+            fb.className = "Feedback";
+            fb.classList.add("incorrect");
+        }
+
+        var outerContainer = fb.parentElement.parentElement;
+        var responsesContainer = document.getElementById("responses" + outerContainer.id);
+        if (responsesContainer) {
+            var qnum = document.getElementById("quizWrap" + id).dataset.qnum;
+            var responses = JSON.parse(responsesContainer.dataset.responses);
+            responses[qnum] = submission;
+            responsesContainer.setAttribute('data-responses', JSON.stringify(responses));
+            printResponses(responsesContainer);
+        }
+
+        if (typeof MathJax != 'undefined') {
+            var version = MathJax.version;
+            if (version[0] == "2") {
+                MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+            } else if (version[0] == "3") {
+                MathJax.typeset([fb]);
+            }
+        } else {
+            console.log('MathJax not detected');
+        }
+        // After correct answer, if next JupyterQuiz question exists and has a text input, scroll by current question height
+        if (correct) {
+            var wrapper = ths.closest('.Quiz');
+            if (wrapper) {
+                var nextWrapper = wrapper.nextElementSibling;
+                if (nextWrapper && nextWrapper.classList.contains('Quiz')) {
+                    var nextInput = nextWrapper.querySelector('input.Input-text');
+                    if (nextInput) {
+                        var height = wrapper.getBoundingClientRect().height;
+                        nextInput.focus();
+                    }
+                }
+            }
+        }
+        return false;
+    }
+}
+
+function string_keypress(evnt) {
+    var charC = (evnt.which) ? evnt.which : evnt.keyCode;
+
+    if (charC == 13) {
+        check_string(this, evnt);
+    } 
+}
+
+
+function make_string(qa, outerqDiv, qDiv, aDiv, id) {
+    outerqDiv.className = "StringQn";
+    aDiv.style.display = 'block';
+
+    var lab = document.createElement("label");
+    lab.className = "InpLabel";
+    lab.innerHTML = "Type your answer here:";
+    aDiv.append(lab);
+
+    var inp = document.createElement("input");
+    inp.type = "text";
+    inp.id = id + "-0";
+    inp.className = "Input-text";
+    inp.setAttribute('data-answers', JSON.stringify(qa.answers));
+    // Apply optional input width (approx. number of characters, in em units)
+    if (qa.input_width != null) {
+        inp.style['min-width'] = qa.input_width + 'em';
+    }
+    aDiv.append(inp);
+
+    inp.onkeypress = string_keypress;
+    inp.onpaste = event => false;
+
+    inp.addEventListener("focus", function (event) {
+        this.value = "";
+        return false;
+    });
+}
+/*
+ * Handle asynchrony issues when re-running quizzes in Jupyter notebooks.
+ * Ensures show_questions is called after the container div is in the DOM.
+ */
+function try_show() {
+  if (document.getElementById("wgeIbAzVdaVX")) {
+    show_questions(questionswgeIbAzVdaVX, wgeIbAzVdaVX);
+  } else {
+    setTimeout(try_show, 200);
+  }
+};
+// Invoke immediately
+{
+  try_show();
+}
+}
+</script></div>
+</div>
+<div style="background-color:#e6f4ff; border-radius:15px; padding:20px; font-family:Georgia, serif; line-height:1.6;">
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="pyters-derivative-memory-palace">
+<h1>Pyter’s Derivative Memory Palace<a class="headerlink" href="#pyters-derivative-memory-palace" title="Link to this heading">#</a></h1>
+<p>Pyter Python slithered into his study room, notebook open and glasses shining. “Derivatives,” he muttered, “there are so many ways to find them! I need to keep them straight.”</p>
+<p>First, he worked out “dy/dx” by hand, using the chain rule where needed.  “Ah yes—<em>analytical differentiation</em>. The classic! Perfect when I have a clean, simple formula.  It gives exact answers, as long as I’m careful with the algebra.”</p>
+<p>Then he sketched a row of <strong>dots on a curve</strong>.  “That’s <em>numerical differentiation</em>,” he said.  “When all I’ve got are data points, I can approximate the slope. But I must remember—numerical methods can be noisy and less accurate, especially near the edges.”</p>
+<p>Next, Pyter scribbled curly symbols: ∂, ∇, and matrices. “<em>Symbolic differentiation</em>!” he exclaimed. “Tools like SymPy can do the calculus for me—great when equations are neat. But if I try to hand them a whole program, they’ll choke.”</p>
+<p>Finally, Pyter opened his glowing laptop.  “And here’s my favorite: <em>automatic differentiation</em>. With JAX, I can feed it programs—loops, functions, everything—and it quietly applies the chain rule everywhere. It’s not an approximation, and it works even when equations get too tangled for me to handle by hand.”</p>
+<p>Pyter leaned back, proud. He imagined the four methods as characters in a relay race:</p>
+<ul class="simple">
+<li><p><strong>Analytical</strong>: precise but sometimes slow with pencil and paper.</p></li>
+<li><p><strong>Numerical</strong>: quick, but stumbles on rough terrain.</p></li>
+<li><p><strong>Symbolic</strong>: elegant, yet picky about what it eats.</p></li>
+<li><p><strong>Automatic</strong>: a speedy racer in a sleek car, handling anything coded in Python.</p></li>
+</ul>
+<p>“Now I’ll never forget,” Pyter said with a smile, “which friend to call for derivatives—depending on the challenge ahead.”</p>
+</div></section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./lectures/19-introduction-to-autograd"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../18-linear-regression/18-linear-regression.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Linear regression</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../20-autograd-applications/20-jax-applications.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Applications of automatic differentiation</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Introduction to automatic differentiation with jax</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#derivatives-in-scientific-programming">Derivatives in scientific programming</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#numpy-gradient">numpy.gradient</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#numdifftools-derivative">numdifftools.Derivative</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#limitations-of-numeric-derivatives">Limitations of numeric derivatives</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#symbolic-differentiation">Symbolic differentiation</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#automatic-differentiation">Automatic differentiation</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#derivatives-of-scalar-functions">Derivatives of scalar functions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#derivatives-of-multivalue-functions-jacobian">Derivatives of multivalue functions - Jacobian</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hessians">Hessians</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#applications-to-optimization">Applications to optimization</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#pyters-derivative-memory-palace">Pyter’s Derivative Memory Palace</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By John Kitchin
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <script src="https://cdn.jsdelivr.net/npm/@widgetbot/crate@3" async defer>
+new Crate({
+server: '1408876219008553041',
+channel: '1425580151521153064'
+})
+</script>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

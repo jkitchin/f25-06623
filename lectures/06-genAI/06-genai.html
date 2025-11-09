@@ -1,0 +1,1793 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Generative AI aka LLMs in scientific programming &#8212; f25-06623</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'lectures/06-genAI/06-genai';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Introduction to nonlinear algebra" href="../07-nla-1/07-nla-1.html" />
+    <link rel="prev" title="Higher order differential equations" href="../05-nth-odes/05-nth-odes.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../syllabus.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/06623-roadmap.png" class="logo__image only-light" alt="f25-06623 - Home"/>
+    <script>document.write(`<img src="../../_static/06623-roadmap.png" class="logo__image only-dark" alt="f25-06623 - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../syllabus.html">
+                    Syllabus for  06-623 Mathematical Modeling of Chemical Engineering Processes
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lectures</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../toc.html">06-623 Mathematical modeling of chemical engineering processes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../00-intro/00-intro.html">Introduction to 06-623 and Jupyter Lab</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../01-jupyter/01-jupyter.html">Jupyter Lab</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../02-integration-1/02-integration-1.html">Integration in Python</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../03-fode-1/03-fode-1.html">Solutions to first-order differential equations by integration</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../04-fode-2/04-fode-2.html">Families of solutions to FODEs</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../05-nth-odes/05-nth-odes.html">Higher order differential equations</a></li>
+
+
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Generative AI aka LLMs in scientific programming</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../07-nla-1/07-nla-1.html">Introduction to nonlinear algebra</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../08-nla-2/08-nla-2.html">Advanced topics in nonlinear algebra</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../09-bvp/09-bvp.html">Boundary Value Problems in differential equations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10-min-max/10-min-max.html">Introduction to optimization</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../11-regression/11-regression.html">Introduction to nonlinear regression</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../12-nonlinear-regression/12-nonlinear-regression-2.html">Uncertainty estimates from curvefit and scipy.optimize.minimize</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../13-constrained-optimization/13-constrained-optimization.html">Constrained minimization</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../15-intro-linear-algebra/15-intro-linear-algebra.html">Introduction to Linear algebra</a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../16-linear-algebra/16-linear-algebra.html">Linear algebraic equations</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../17-linear-algebra-2/17-linear-algebra-2.html">Advanced topics in linear algebra</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../18-linear-regression/18-linear-regression.html">Linear regression</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../19-introduction-to-autograd/19-introduction-to-jax.html">Introduction to automatic differentiation with jax</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../20-autograd-applications/20-jax-applications.html">Applications of automatic differentiation</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../21-machine-learning/21-machine-learning-jax.html">Introduction to machine learning</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../22-ml-2/22-ml-2-jax.html">Advanced topics in ML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../23-gp/23-gp.html">Gaussian process regression</a></li>
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">About the book</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../execution-statistics.html">Build statistics</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://jh-01.cheme.cmu.edu/hub/user-redirect/git-pull?repo=https%3A//github.com/jkitchin/f25-06623&urlpath=lab/tree/f25-06623/f25-06623/lectures/06-genAI/06-genai.ipynb&branch=main" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on JupyterHub"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="JupyterHub logo" src="../../_static/images/logo_jupyterhub.svg">
+  </span>
+<span class="btn__text-container">JupyterHub</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/jkitchin/f25-06623/blob/main/f25-06623/lectures/06-genAI/06-genai.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/jkitchin/f25-06623" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/jkitchin/f25-06623/issues/new?title=Issue%20on%20page%20%2Flectures/06-genAI/06-genai.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/lectures/06-genAI/06-genai.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Generative AI aka LLMs in scientific programming</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Generative AI aka LLMs in scientific programming</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#llm-powered-tools-you-have-access-to-through-cmu">LLM-powered tools you have access to through CMU</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#pyter-python-and-discord">Pyter Python and Discord</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#github-copilot">GitHUB Copilot</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#jupyter-ai">Jupyter AI</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generate-flash-cards">Generate flash cards</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generate-short-stories-to-help-you-study">Generate short stories to help you study</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#get-answers-in-a-language-you-prefer">Get answers in a language you prefer</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="generative-ai-aka-llms-in-scientific-programming">
+<h1>Generative AI aka LLMs in scientific programming<a class="headerlink" href="#generative-ai-aka-llms-in-scientific-programming" title="Link to this heading">#</a></h1>
+<a class="reference internal image-reference" href="../../_images/pppp.png"><img alt="../../_images/pppp.png" src="../../_images/pppp.png" style="width: 300px;" />
+</a>
+<p>Generative AI, also known as Large Language Models (LLMs), can be used to assist in scientific programming tasks. This notebook explores how to use LLMs to generate code, explain concepts, and provide assistance in Python programming.</p>
+<p>You might know this more commonly as “chatGPT” but it includes a broad range of models and applications, including Google Gemini, OpenAI’s GPT-3.5 and GPT-4, and others. These are all available as web / Desktop apps, and increasingly integrated into IDEs like VSCode, PyCharm, and JupyterLab.</p>
+<p>We explore this notebook how to use the Jupyter AI extensions to interact with LLMs directly from Jupyter notebooks. You will see it can be helpful, and confusing!</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="llm-powered-tools-you-have-access-to-through-cmu">
+<h1>LLM-powered tools you have access to through CMU<a class="headerlink" href="#llm-powered-tools-you-have-access-to-through-cmu" title="Link to this heading">#</a></h1>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="https://copilot.cloud.microsoft/">https://copilot.cloud.microsoft/</a></p></li>
+<li><p><a class="reference external" href="https://gemini.google.com/app">https://gemini.google.com/app</a></p></li>
+<li><p><a class="reference external" href="https://notebooklm.google.com/">https://notebooklm.google.com/</a></p></li>
+</ol>
+<p>There is an option to buy a ChatGPT Edu license (<a class="reference external" href="https://www.cmu.edu/computing/software/titles/chatgpt/index.html">https://www.cmu.edu/computing/software/titles/chatgpt/index.html</a>) and Anthropic offers Claude for students (<a class="reference external" href="https://www.anthropic.com/for/students">https://www.anthropic.com/for/students</a>).</p>
+<p>There is no right answer of which one is better, it depends on how you use them.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="pyter-python-and-discord">
+<h1>Pyter Python and Discord<a class="headerlink" href="#pyter-python-and-discord" title="Link to this heading">#</a></h1>
+<p>The course Discord server (<a class="reference external" href="https://discord.gg/NGeyZSB26X">https://discord.gg/NGeyZSB26X</a>) has a Bot (Pyter Python) that is powered by an LLM (Gemini). When you send a DM to Pyter Python, he searches the course notes for relevant content and uses that information in his response to your message.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="github-copilot">
+<h1>GitHUB Copilot<a class="headerlink" href="#github-copilot" title="Link to this heading">#</a></h1>
+<p>The <a class="reference external" href="https://blog.jupyter.org/introducing-notebook-intelligence-3648c306b91a">notebook intelligence</a> package integrates GitHUB Copilot with Jupyter lab. You need a GitHUB account, and then to log in to it in the side menubar:</p>
+<p><img alt="image.png" src="lectures/06-genAI/attachment:a174ae79-edf5-4142-889f-6028e99ceeff.png" /></p>
+<p>You will have to do this each time you start Jupyter Lab. After that, you will see the GitHUB Copilot icons activated.</p>
+<p>If you click on the icon in a cell, it will ask you for a prompt to generate code. Alternatively if you right click on a cell, you will get a Copilot menu with some options to generate, fix or explain the code in the cell.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># nbi-prompt: Write a function for the right hand side of dy/dx = k1 x</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">right_hand_side</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">k1</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate the right hand side of the differential equation dy/dx = k1 * x.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters:</span>
+<span class="sd">    x (float): The value of x.</span>
+<span class="sd">    k1 (float): The constant k1.</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">    float: The value of k1 * x.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">k1</span> <span class="o">*</span> <span class="n">x</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="jupyter-ai">
+<h1>Jupyter AI<a class="headerlink" href="#jupyter-ai" title="Link to this heading">#</a></h1>
+<p>Here we take a sidebar to explore what we can do with <span class="target" id="index-0"></span>AI in Jupyter.</p>
+<p>We have installed the <a class="reference external" href="https://github.com/jupyterlab/jupyter-ai">Jupyter AI</a> extension in this Jupyter hub. You should check it out to see what is possible.</p>
+<p>First you have to load the AI extension.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> jupyter_ai
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can see what AI models are available here.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">ai</span> list
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<p>| Provider | Environment variable | Set? | Models |
+|———-|———————-|——|——–|
+| <code class="docutils literal notranslate"><span class="pre">ai21</span></code> | <code class="docutils literal notranslate"><span class="pre">AI21_API_KEY</span></code> | <abbr title="You have not set this environment variable, so you cannot use this provider's models.">❌</abbr> | <ul><li><code class="docutils literal notranslate"><span class="pre">ai21:j1-large</span></code></li><li><code class="docutils literal notranslate"><span class="pre">ai21:j1-grande</span></code></li><li><code class="docutils literal notranslate"><span class="pre">ai21:j1-jumbo</span></code></li><li><code class="docutils literal notranslate"><span class="pre">ai21:j1-grande-instruct</span></code></li><li><code class="docutils literal notranslate"><span class="pre">ai21:j2-large</span></code></li><li><code class="docutils literal notranslate"><span class="pre">ai21:j2-grande</span></code></li><li><code class="docutils literal notranslate"><span class="pre">ai21:j2-jumbo</span></code></li><li><code class="docutils literal notranslate"><span class="pre">ai21:j2-grande-instruct</span></code></li><li><code class="docutils literal notranslate"><span class="pre">ai21:j2-jumbo-instruct</span></code></li></ul> |
+| <code class="docutils literal notranslate"><span class="pre">bedrock</span></code> | Not applicable. | <abbr title="Not applicable">N/A</abbr> | <ul><li><code class="docutils literal notranslate"><span class="pre">bedrock:amazon.titan-text-express-v1</span></code></li><li><code class="docutils literal notranslate"><span class="pre">bedrock:amazon.titan-text-lite-v1</span></code></li><li><code class="docutils literal notranslate"><span class="pre">bedrock:amazon.titan-text-premier-v1:0</span></code></li><li><code class="docutils literal notranslate"><span class="pre">bedrock:ai21.j2-ultra-v1</span></code></li><li><code class="docutils literal notranslate"><span class="pre">bedrock:ai21.j2-mid-v1</span></code></li><li><code class="docutils literal notranslate"><span class="pre">bedrock:ai21.jamba-instruct-v1:0</span></code></li><li><code class="docutils literal notranslate"><span class="pre">bedrock:cohere.command-light-text-v14</span></code></li><li><code class="docutils literal notranslate"><span class="pre">bedrock:cohere.command-text-v14</span></code></li><li><code class="docutils literal notranslate"><span class="pre">bedrock:cohere.command-r-v1:0</span></code></li><li><code class="docutils literal notranslate"><span class="pre">bedrock:cohere.command-r-plus-v1:0</span></code></li><li><code class="docutils literal notranslate"><span class="pre">bedrock:meta.llama2-13b-chat-v1</span></code></li><li><code class="docutils literal notranslate"><span class="pre">bedrock:meta.llama2-70b-chat-v1</span></code></li><li><code class="docutils literal notranslate"><span class="pre">bedrock:meta.llama3-8b-instruct-v1:0</span></code></li><li><code class="docutils literal notranslate"><span class="pre">bedrock:meta.llama3-70b-instruct-v1:0</span></code></li><li><code class="docutils literal notranslate"><span class="pre">bedrock:meta.llama3-1-8b-instruct-v1:0</span></code></li><li><code class="docutils literal notranslate"><span class="pre">bedrock:meta.llama3-1-70b-instruct-v1:0</span></code></li><li><code class="docutils literal notranslate"><span class="pre">bedrock:meta.llama3-1-405b-instruct-v1:0</span></code></li><li><code class="docutils literal notranslate"><span class="pre">bedrock:mistral.mistral-7b-instruct-v0:2</span></code></li><li><code class="docutils literal notranslate"><span class="pre">bedrock:mistral.mixtral-8x7b-instruct-v0:1</span></code></li><li><code class="docutils literal notranslate"><span class="pre">bedrock:mistral.mistral-large-2402-v1:0</span></code></li><li><code class="docutils literal notranslate"><span class="pre">bedrock:mistral.mistral-large-2407-v1:0</span></code></li></ul> |
+| <code class="docutils literal notranslate"><span class="pre">bedrock-chat</span></code> | Not applicable. | <abbr title="Not applicable">N/A</abbr> | <ul><li><code class="docutils literal notranslate"><span class="pre">bedrock-chat:amazon.titan-text-express-v1</span></code></li><li><code class="docutils literal notranslate"><span class="pre">bedrock-chat:amazon.titan-text-lite-v1</span></code></li><li><code class="docutils literal notranslate"><span class="pre">bedrock-chat:amazon.titan-text-premier-v1:0</span></code></li><li><code class="docutils literal notranslate"><span class="pre">bedrock-chat:anthropic.claude-v2</span></code></li><li><code class="docutils literal notranslate"><span class="pre">bedrock-chat:anthropic.claude-v2:1</span></code></li><li><code class="docutils literal notranslate"><span class="pre">bedrock-chat:anthropic.claude-instant-v1</span></code></li><li><code class="docutils literal notranslate"><span class="pre">bedrock-chat:anthropic.claude-3-sonnet-20240229-v1:0</span></code></li><li><code class="docutils literal notranslate"><span class="pre">bedrock-chat:anthropic.claude-3-haiku-20240307-v1:0</span></code></li><li><code class="docutils literal notranslate"><span class="pre">bedrock-chat:anthropic.claude-3-opus-20240229-v1:0</span></code></li><li><code class="docutils literal notranslate"><span class="pre">bedrock-chat:anthropic.claude-3-5-haiku-20241022-v1:0</span></code></li><li><code class="docutils literal notranslate"><span class="pre">bedrock-chat:anthropic.claude-3-5-sonnet-20240620-v1:0</span></code></li><li><code class="docutils literal notranslate"><span class="pre">bedrock-chat:anthropic.claude-3-5-sonnet-20241022-v2:0</span></code></li><li><code class="docutils literal notranslate"><span class="pre">bedrock-chat:meta.llama2-13b-chat-v1</span></code></li><li><code class="docutils literal notranslate"><span class="pre">bedrock-chat:meta.llama2-70b-chat-v1</span></code></li><li><code class="docutils literal notranslate"><span class="pre">bedrock-chat:meta.llama3-8b-instruct-v1:0</span></code></li><li><code class="docutils literal notranslate"><span class="pre">bedrock-chat:meta.llama3-70b-instruct-v1:0</span></code></li><li><code class="docutils literal notranslate"><span class="pre">bedrock-chat:meta.llama3-1-8b-instruct-v1:0</span></code></li><li><code class="docutils literal notranslate"><span class="pre">bedrock-chat:meta.llama3-1-70b-instruct-v1:0</span></code></li><li><code class="docutils literal notranslate"><span class="pre">bedrock-chat:meta.llama3-1-405b-instruct-v1:0</span></code></li><li><code class="docutils literal notranslate"><span class="pre">bedrock-chat:mistral.mistral-7b-instruct-v0:2</span></code></li><li><code class="docutils literal notranslate"><span class="pre">bedrock-chat:mistral.mixtral-8x7b-instruct-v0:1</span></code></li><li><code class="docutils literal notranslate"><span class="pre">bedrock-chat:mistral.mistral-large-2402-v1:0</span></code></li><li><code class="docutils literal notranslate"><span class="pre">bedrock-chat:mistral.mistral-large-2407-v1:0</span></code></li></ul> |
+| <code class="docutils literal notranslate"><span class="pre">bedrock-custom</span></code> | Not applicable. | <abbr title="Not applicable">N/A</abbr> | - For Cross-Region Inference use the appropriate <code class="docutils literal notranslate"><span class="pre">Inference</span> <span class="pre">profile</span> <span class="pre">ID</span></code> (Model ID with a region prefix, e.g., <code class="docutils literal notranslate"><span class="pre">us.meta.llama3-2-11b-instruct-v1:0</span></code>). See the <a class="reference external" href="https://docs.aws.amazon.com/bedrock/latest/userguide/inference-profiles-support.html">inference profiles documentation</a>.</p>
+<ul class="simple">
+<li><p>For custom/provisioned models, specify the model ARN (Amazon Resource Name) as the model ID. For more information, see the <a class="reference external" href="https://docs.aws.amazon.com/bedrock/latest/userguide/model-ids.html">Amazon Bedrock model IDs documentation</a>.</p></li>
+</ul>
+<p>The model provider must also be specified below. This is the provider of your foundation model <em>in lowercase</em>, e.g., <code class="docutils literal notranslate"><span class="pre">amazon</span></code>, <code class="docutils literal notranslate"><span class="pre">anthropic</span></code>, <code class="docutils literal notranslate"><span class="pre">cohere</span></code>, <code class="docutils literal notranslate"><span class="pre">meta</span></code>, or <code class="docutils literal notranslate"><span class="pre">mistral</span></code>. |
+| <code class="docutils literal notranslate"><span class="pre">anthropic-chat</span></code> | <code class="docutils literal notranslate"><span class="pre">ANTHROPIC_API_KEY</span></code> | <abbr title="You have not set this environment variable, so you cannot use this provider's models.">❌</abbr> | <ul><li><code class="docutils literal notranslate"><span class="pre">anthropic-chat:claude-2.0</span></code></li><li><code class="docutils literal notranslate"><span class="pre">anthropic-chat:claude-2.1</span></code></li><li><code class="docutils literal notranslate"><span class="pre">anthropic-chat:claude-3-opus-20240229</span></code></li><li><code class="docutils literal notranslate"><span class="pre">anthropic-chat:claude-3-sonnet-20240229</span></code></li><li><code class="docutils literal notranslate"><span class="pre">anthropic-chat:claude-3-haiku-20240307</span></code></li><li><code class="docutils literal notranslate"><span class="pre">anthropic-chat:claude-3-5-haiku-20241022</span></code></li><li><code class="docutils literal notranslate"><span class="pre">anthropic-chat:claude-3-5-sonnet-20240620</span></code></li><li><code class="docutils literal notranslate"><span class="pre">anthropic-chat:claude-3-5-sonnet-20241022</span></code></li></ul> |
+| <code class="docutils literal notranslate"><span class="pre">azure-chat-openai</span></code> | <code class="docutils literal notranslate"><span class="pre">AZURE_OPENAI_API_KEY</span></code> | <abbr title="You have not set this environment variable, so you cannot use this provider's models.">❌</abbr> | This provider does not define a list of models. |
+| <code class="docutils literal notranslate"><span class="pre">cohere</span></code> | <code class="docutils literal notranslate"><span class="pre">COHERE_API_KEY</span></code> | <abbr title="You have not set this environment variable, so you cannot use this provider's models.">❌</abbr> | <ul><li><code class="docutils literal notranslate"><span class="pre">cohere:command</span></code></li><li><code class="docutils literal notranslate"><span class="pre">cohere:command-nightly</span></code></li><li><code class="docutils literal notranslate"><span class="pre">cohere:command-light</span></code></li><li><code class="docutils literal notranslate"><span class="pre">cohere:command-light-nightly</span></code></li><li><code class="docutils literal notranslate"><span class="pre">cohere:command-r-plus</span></code></li><li><code class="docutils literal notranslate"><span class="pre">cohere:command-r</span></code></li></ul> |
+| <code class="docutils literal notranslate"><span class="pre">gemini</span></code> | <code class="docutils literal notranslate"><span class="pre">GOOGLE_API_KEY</span></code> | <abbr title="You have not set this environment variable, so you cannot use this provider's models.">❌</abbr> | <ul><li><code class="docutils literal notranslate"><span class="pre">gemini:gemini-1.5-pro</span></code></li><li><code class="docutils literal notranslate"><span class="pre">gemini:gemini-1.5-flash</span></code></li><li><code class="docutils literal notranslate"><span class="pre">gemini:gemini-1.0-pro</span></code></li><li><code class="docutils literal notranslate"><span class="pre">gemini:gemini-1.0-pro-001</span></code></li><li><code class="docutils literal notranslate"><span class="pre">gemini:gemini-1.0-pro-latest</span></code></li><li><code class="docutils literal notranslate"><span class="pre">gemini:gemini-1.0-pro-vision-latest</span></code></li><li><code class="docutils literal notranslate"><span class="pre">gemini:gemini-pro</span></code></li><li><code class="docutils literal notranslate"><span class="pre">gemini:gemini-pro-vision</span></code></li></ul> |
+| <code class="docutils literal notranslate"><span class="pre">gpt4all</span></code> | Not applicable. | <abbr title="Not applicable">N/A</abbr> | <ul><li><code class="docutils literal notranslate"><span class="pre">gpt4all:ggml-gpt4all-j-v1.2-jazzy</span></code></li><li><code class="docutils literal notranslate"><span class="pre">gpt4all:ggml-gpt4all-j-v1.3-groovy</span></code></li><li><code class="docutils literal notranslate"><span class="pre">gpt4all:ggml-gpt4all-l13b-snoozy</span></code></li><li><code class="docutils literal notranslate"><span class="pre">gpt4all:mistral-7b-openorca.Q4_0</span></code></li><li><code class="docutils literal notranslate"><span class="pre">gpt4all:mistral-7b-instruct-v0.1.Q4_0</span></code></li><li><code class="docutils literal notranslate"><span class="pre">gpt4all:gpt4all-falcon-q4_0</span></code></li><li><code class="docutils literal notranslate"><span class="pre">gpt4all:wizardlm-13b-v1.2.Q4_0</span></code></li><li><code class="docutils literal notranslate"><span class="pre">gpt4all:nous-hermes-llama2-13b.Q4_0</span></code></li><li><code class="docutils literal notranslate"><span class="pre">gpt4all:gpt4all-13b-snoozy-q4_0</span></code></li><li><code class="docutils literal notranslate"><span class="pre">gpt4all:mpt-7b-chat-merges-q4_0</span></code></li><li><code class="docutils literal notranslate"><span class="pre">gpt4all:orca-mini-3b-gguf2-q4_0</span></code></li><li><code class="docutils literal notranslate"><span class="pre">gpt4all:starcoder-q4_0</span></code></li><li><code class="docutils literal notranslate"><span class="pre">gpt4all:rift-coder-v0-7b-q4_0</span></code></li><li><code class="docutils literal notranslate"><span class="pre">gpt4all:em_german_mistral_v01.Q4_0</span></code></li></ul> |
+| <code class="docutils literal notranslate"><span class="pre">huggingface_hub</span></code> | <code class="docutils literal notranslate"><span class="pre">HUGGINGFACEHUB_API_TOKEN</span></code> | <abbr title="You have not set this environment variable, so you cannot use this provider's models.">❌</abbr> | See <a class="reference external" href="https://huggingface.co/models">https://huggingface.co/models</a> for a list of models. Pass a model’s repository ID as the model ID; for example, <code class="docutils literal notranslate"><span class="pre">huggingface_hub:ExampleOwner/example-model</span></code>. |
+| <code class="docutils literal notranslate"><span class="pre">mistralai</span></code> | <code class="docutils literal notranslate"><span class="pre">MISTRAL_API_KEY</span></code> | <abbr title="You have not set this environment variable, so you cannot use this provider's models.">❌</abbr> | <ul><li><code class="docutils literal notranslate"><span class="pre">mistralai:open-mistral-7b</span></code></li><li><code class="docutils literal notranslate"><span class="pre">mistralai:open-mixtral-8x7b</span></code></li><li><code class="docutils literal notranslate"><span class="pre">mistralai:open-mixtral-8x22b</span></code></li><li><code class="docutils literal notranslate"><span class="pre">mistralai:mistral-small-latest</span></code></li><li><code class="docutils literal notranslate"><span class="pre">mistralai:mistral-medium-latest</span></code></li><li><code class="docutils literal notranslate"><span class="pre">mistralai:mistral-large-latest</span></code></li><li><code class="docutils literal notranslate"><span class="pre">mistralai:codestral-latest</span></code></li></ul> |
+| <code class="docutils literal notranslate"><span class="pre">nvidia-chat</span></code> | <code class="docutils literal notranslate"><span class="pre">NVIDIA_API_KEY</span></code> | <abbr title="You have not set this environment variable, so you cannot use this provider's models.">❌</abbr> | <ul><li><code class="docutils literal notranslate"><span class="pre">nvidia-chat:playground_llama2_70b</span></code></li><li><code class="docutils literal notranslate"><span class="pre">nvidia-chat:playground_nemotron_steerlm_8b</span></code></li><li><code class="docutils literal notranslate"><span class="pre">nvidia-chat:playground_mistral_7b</span></code></li><li><code class="docutils literal notranslate"><span class="pre">nvidia-chat:playground_nv_llama2_rlhf_70b</span></code></li><li><code class="docutils literal notranslate"><span class="pre">nvidia-chat:playground_llama2_13b</span></code></li><li><code class="docutils literal notranslate"><span class="pre">nvidia-chat:playground_steerlm_llama_70b</span></code></li><li><code class="docutils literal notranslate"><span class="pre">nvidia-chat:playground_llama2_code_13b</span></code></li><li><code class="docutils literal notranslate"><span class="pre">nvidia-chat:playground_yi_34b</span></code></li><li><code class="docutils literal notranslate"><span class="pre">nvidia-chat:playground_mixtral_8x7b</span></code></li><li><code class="docutils literal notranslate"><span class="pre">nvidia-chat:playground_neva_22b</span></code></li><li><code class="docutils literal notranslate"><span class="pre">nvidia-chat:playground_llama2_code_34b</span></code></li></ul> |
+| <code class="docutils literal notranslate"><span class="pre">ollama</span></code> | Not applicable. | <abbr title="Not applicable">N/A</abbr> | See <a class="reference external" href="https://www.ollama.com/library">https://www.ollama.com/library</a> for a list of models. Pass a model’s name; for example, <code class="docutils literal notranslate"><span class="pre">deepseek-coder-v2</span></code>. |
+| <code class="docutils literal notranslate"><span class="pre">openai</span></code> | <code class="docutils literal notranslate"><span class="pre">OPENAI_API_KEY</span></code> | <abbr title="You have not set this environment variable, so you cannot use this provider's models.">❌</abbr> | <ul><li><code class="docutils literal notranslate"><span class="pre">openai:babbage-002</span></code></li><li><code class="docutils literal notranslate"><span class="pre">openai:davinci-002</span></code></li><li><code class="docutils literal notranslate"><span class="pre">openai:gpt-3.5-turbo-instruct</span></code></li></ul> |
+| <code class="docutils literal notranslate"><span class="pre">openai-chat</span></code> | <code class="docutils literal notranslate"><span class="pre">OPENAI_API_KEY</span></code> | <abbr title="You have not set this environment variable, so you cannot use this provider's models.">❌</abbr> | <ul><li><code class="docutils literal notranslate"><span class="pre">openai-chat:gpt-3.5-turbo</span></code></li><li><code class="docutils literal notranslate"><span class="pre">openai-chat:gpt-3.5-turbo-1106</span></code></li><li><code class="docutils literal notranslate"><span class="pre">openai-chat:gpt-4</span></code></li><li><code class="docutils literal notranslate"><span class="pre">openai-chat:gpt-4-turbo</span></code></li><li><code class="docutils literal notranslate"><span class="pre">openai-chat:gpt-4-turbo-preview</span></code></li><li><code class="docutils literal notranslate"><span class="pre">openai-chat:gpt-4-0613</span></code></li><li><code class="docutils literal notranslate"><span class="pre">openai-chat:gpt-4-0125-preview</span></code></li><li><code class="docutils literal notranslate"><span class="pre">openai-chat:gpt-4-1106-preview</span></code></li><li><code class="docutils literal notranslate"><span class="pre">openai-chat:gpt-4o</span></code></li><li><code class="docutils literal notranslate"><span class="pre">openai-chat:gpt-4o-2024-11-20</span></code></li><li><code class="docutils literal notranslate"><span class="pre">openai-chat:gpt-4o-mini</span></code></li><li><code class="docutils literal notranslate"><span class="pre">openai-chat:chatgpt-4o-latest</span></code></li></ul> |
+| <code class="docutils literal notranslate"><span class="pre">openrouter</span></code> | <code class="docutils literal notranslate"><span class="pre">OPENROUTER_API_KEY</span></code> | <abbr title="You have not set this environment variable, so you cannot use this provider's models.">❌</abbr> | This provider does not define a list of models. |
+| <code class="docutils literal notranslate"><span class="pre">qianfan</span></code> | <code class="docutils literal notranslate"><span class="pre">QIANFAN_AK</span></code>, <code class="docutils literal notranslate"><span class="pre">QIANFAN_SK</span></code> | <abbr title="You have not set all of these environment variables, so you cannot use this provider's models.">❌</abbr> | <ul><li><code class="docutils literal notranslate"><span class="pre">qianfan:ERNIE-Bot</span></code></li><li><code class="docutils literal notranslate"><span class="pre">qianfan:ERNIE-Bot-4</span></code></li></ul> |
+| <code class="docutils literal notranslate"><span class="pre">sagemaker-endpoint</span></code> | Not applicable. | <abbr title="Not applicable">N/A</abbr> | Specify an endpoint name as the model ID. In addition, you must specify a region name, request schema, and response path. For more information, see the documentation about <a class="reference external" href="https://docs.aws.amazon.com/sagemaker/latest/dg/realtime-endpoints-deploy-models.html">SageMaker endpoints deployment</a> and about <a class="reference external" href="https://jupyter-ai.readthedocs.io/en/latest/users/index.html#using-magic-commands-with-sagemaker-endpoints">using magic commands with SageMaker endpoints</a>. |
+| <code class="docutils literal notranslate"><span class="pre">togetherai</span></code> | <code class="docutils literal notranslate"><span class="pre">TOGETHER_API_KEY</span></code> | <abbr title="You have not set this environment variable, so you cannot use this provider's models.">❌</abbr> | <ul><li><code class="docutils literal notranslate"><span class="pre">togetherai:Austism/chronos-hermes-13b</span></code></li><li><code class="docutils literal notranslate"><span class="pre">togetherai:DiscoResearch/DiscoLM-mixtral-8x7b-v2</span></code></li><li><code class="docutils literal notranslate"><span class="pre">togetherai:EleutherAI/llemma_7b</span></code></li><li><code class="docutils literal notranslate"><span class="pre">togetherai:Gryphe/MythoMax-L2-13b</span></code></li><li><code class="docutils literal notranslate"><span class="pre">togetherai:Meta-Llama/Llama-Guard-7b</span></code></li><li><code class="docutils literal notranslate"><span class="pre">togetherai:Nexusflow/NexusRaven-V2-13B</span></code></li><li><code class="docutils literal notranslate"><span class="pre">togetherai:NousResearch/Nous-Capybara-7B-V1p9</span></code></li><li><code class="docutils literal notranslate"><span class="pre">togetherai:NousResearch/Nous-Hermes-2-Yi-34B</span></code></li><li><code class="docutils literal notranslate"><span class="pre">togetherai:NousResearch/Nous-Hermes-Llama2-13b</span></code></li><li><code class="docutils literal notranslate"><span class="pre">togetherai:NousResearch/Nous-Hermes-Llama2-70b</span></code></li></ul> |</p>
+<p>Aliases and custom commands:</p>
+<p>| Name | Target |
+|——|——–|
+| <code class="docutils literal notranslate"><span class="pre">gpt2</span></code> | <code class="docutils literal notranslate"><span class="pre">huggingface_hub:gpt2</span></code> |
+| <code class="docutils literal notranslate"><span class="pre">gpt3</span></code> | <code class="docutils literal notranslate"><span class="pre">openai:davinci-002</span></code> |
+| <code class="docutils literal notranslate"><span class="pre">chatgpt</span></code> | <code class="docutils literal notranslate"><span class="pre">openai-chat:gpt-3.5-turbo</span></code> |
+| <code class="docutils literal notranslate"><span class="pre">gpt4</span></code> | <code class="docutils literal notranslate"><span class="pre">openai-chat:gpt-4</span></code> |
+| <code class="docutils literal notranslate"><span class="pre">ernie-bot</span></code> | <code class="docutils literal notranslate"><span class="pre">qianfan:ERNIE-Bot</span></code> |
+| <code class="docutils literal notranslate"><span class="pre">ernie-bot-4</span></code> | <code class="docutils literal notranslate"><span class="pre">qianfan:ERNIE-Bot-4</span></code> |
+| <code class="docutils literal notranslate"><span class="pre">titan</span></code> | <code class="docutils literal notranslate"><span class="pre">bedrock:amazon.titan-tg1-large</span></code> |
+| <code class="docutils literal notranslate"><span class="pre">openrouter-claude</span></code> | <code class="docutils literal notranslate"><span class="pre">openrouter:anthropic/claude-3.5-sonnet:beta</span></code> |</p>
+</div>
+</div>
+<p>You need to get an API Key. You should be able to get a free key for Gemini.</p>
+<p>Go to <a class="reference external" href="https://aistudio.google.com/apikey">https://aistudio.google.com/apikey</a></p>
+<p>This key is secret. You should not share it with other people. We need to enter this key so that it gets loaded in your environment.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you have an api key for Anthropic or OpenAI, you can use that too, just change the model in the cell magic below.</p>
+</div>
+<p>You need to make a cell like this, but with your own key:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>%%writefile ~/.env
+GOOGLE_API_KEY=AI...
+</pre></div>
+</div>
+<p>Then, we load that secret key like this.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">dotenv</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_dotenv</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+
+<span class="n">load_dotenv</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we test it just to see if it works. You should get some output about the model.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">ai</span> gemini:gemini-1.5-flash 
+Tell me about yourself
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<p>I am a large language model, trained by Google.  I am a conversational AI, able to communicate and generate human-like text in response to a wide range of prompts and questions.  My knowledge cutoff is 2021, meaning I don’t have information on events after that year.  I am constantly learning and improving, but my abilities are limited by my training data. I strive to be helpful and informative, but I am not capable of independent thought or sentience.</p>
+</div>
+</div>
+<section id="generate-flash-cards">
+<h2>Generate flash cards<a class="headerlink" href="#generate-flash-cards" title="Link to this heading">#</a></h2>
+<p>We can use jupyter_flashcards to make interactive cards to help us review information.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span> <span class="p">{</span>
+        <span class="s2">&quot;front&quot;</span><span class="p">:</span> <span class="s2">&quot;scipy&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;back&quot;</span><span class="p">:</span> <span class="s2">&quot;Scientific python. ODEs, optimization, root finding, etc. &quot;</span>
+    <span class="p">}</span>
+</pre></div>
+</div>
+<p>Below we use the ai cell magic to create some flashcards for us.</p>
+<p>This is a prompt that will generate json for us. You should take these with a grain of salt; it is possible that the ai could hallucinate the names of functions, and their definitions. Note the weird use of {{{{, and }}}} in the prompt. The magic allows you to use format strings in the prompt that get expanded. The use of multiple curly brackets here escapes that framework and allows us to represent a single {} in the prompt.</p>
+<p>It is a little annoying that the Gemini model does not return clean json, it returns the json in a “fence”:</p>
+<div class="highlight-markdown notranslate"><div class="highlight"><pre><span></span><span class="sb">```json</span>
+<span class="err">...</span>
+<span class="sb">```</span>
+</pre></div>
+</div>
+<p>Although it appears that it returns just what you want. This does not always happen with other models, and it is a current “feature” of genAI.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">ai</span> gemini:gemini-1.5-flash 
+
+Generate a list of flash cards to help me learn some Python library functions from numpy.
+
+Each flash card is structured in json as 
+
+   {{{{&quot;front&quot;: &quot;front content&quot;,
+    &quot;back&quot;: &quot;back content&quot;}}}}
+
+I want the front content to be a function from numpy, and the 
+back content to be the docstring for that function. Return just a list of 
+those elements. 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
+<span class="w">  </span><span class="p">{</span><span class="nt">&quot;front&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;numpy.array()&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;back&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;numpy.array(object, dtype=None, *, copy=True, order=&#39;K&#39;, subok=False, ndmin=0, like=None)&quot;</span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span><span class="nt">&quot;front&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;numpy.arange()&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;back&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;numpy.arange([start,] stop[, step,], dtype=None, *, like=None)&quot;</span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span><span class="nt">&quot;front&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;numpy.linspace()&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;back&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;numpy.linspace(start, stop, num=50, endpoint=True, retstep=False, dtype=None, axis=0)&quot;</span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span><span class="nt">&quot;front&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;numpy.zeros()&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;back&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;numpy.zeros(shape, dtype=float, order=&#39;C&#39;, *, like=None)&quot;</span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span><span class="nt">&quot;front&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;numpy.ones()&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;back&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;numpy.ones(shape, dtype=None, order=&#39;C&#39;, *, like=None)&quot;</span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span><span class="nt">&quot;front&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;numpy.eye()&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;back&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;numpy.eye(N, M=None, k=0, dtype=&lt;class &#39;float&#39;&gt;, order=&#39;C&#39;, *, like=None)&quot;</span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span><span class="nt">&quot;front&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;numpy.reshape()&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;back&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;numpy.reshape(a, newshape, order=&#39;C&#39;)&quot;</span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span><span class="nt">&quot;front&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;numpy.transpose()&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;back&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;numpy.transpose(a, axes=None)&quot;</span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span><span class="nt">&quot;front&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;numpy.dot()&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;back&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;numpy.dot(a, b, *, out=None)&quot;</span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span><span class="nt">&quot;front&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;numpy.sum()&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;back&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;numpy.sum(a, axis=None, dtype=None, out=None, keepdims=False, initial=0, where=True)&quot;</span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span><span class="nt">&quot;front&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;numpy.mean()&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;back&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;numpy.mean(a, axis=None, dtype=None, out=None, keepdims=False, *, where=True)&quot;</span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span><span class="nt">&quot;front&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;numpy.std()&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;back&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;numpy.std(a, axis=None, dtype=None, out=None, ddof=0, keepdims=False, *, where=True)&quot;</span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span><span class="nt">&quot;front&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;numpy.max()&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;back&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;numpy.max(a, axis=None, out=None, keepdims=False, initial=None, where=True)&quot;</span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span><span class="nt">&quot;front&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;numpy.min()&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;back&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;numpy.min(a, axis=None, out=None, keepdims=False, initial=None, where=True)&quot;</span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span><span class="nt">&quot;front&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;numpy.sort()&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;back&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;numpy.sort(a, axis=-1, kind=None, order=None)&quot;</span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span><span class="nt">&quot;front&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;numpy.concatenate()&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;back&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;numpy.concatenate((a1, a2, ...), axis=0, out=None, dtype=None, casting=&#39;same_kind&#39;)&quot;</span><span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>You have to run this cell next, in order because we use <code class="docutils literal notranslate"><span class="pre">_</span></code> as an alias for the last result from the previous cell.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">jupytercards</span><span class="w"> </span><span class="kn">import</span> <span class="n">display_flashcards</span>
+<span class="n">flash_cards</span> <span class="o">=</span> <span class="n">_</span>  <span class="c1"># _ is an alias for the result from the last cell</span>
+<span class="n">flash_cards</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
+<span class="w">  </span><span class="p">{</span><span class="nt">&quot;front&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;numpy.array()&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;back&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;numpy.array(object, dtype=None, *, copy=True, order=&#39;K&#39;, subok=False, ndmin=0, like=None)&quot;</span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span><span class="nt">&quot;front&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;numpy.arange()&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;back&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;numpy.arange([start,] stop[, step,], dtype=None, *, like=None)&quot;</span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span><span class="nt">&quot;front&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;numpy.linspace()&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;back&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;numpy.linspace(start, stop, num=50, endpoint=True, retstep=False, dtype=None, axis=0)&quot;</span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span><span class="nt">&quot;front&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;numpy.zeros()&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;back&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;numpy.zeros(shape, dtype=float, order=&#39;C&#39;, *, like=None)&quot;</span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span><span class="nt">&quot;front&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;numpy.ones()&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;back&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;numpy.ones(shape, dtype=None, order=&#39;C&#39;, *, like=None)&quot;</span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span><span class="nt">&quot;front&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;numpy.eye()&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;back&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;numpy.eye(N, M=None, k=0, dtype=&lt;class &#39;float&#39;&gt;, order=&#39;C&#39;, *, like=None)&quot;</span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span><span class="nt">&quot;front&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;numpy.reshape()&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;back&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;numpy.reshape(a, newshape, order=&#39;C&#39;)&quot;</span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span><span class="nt">&quot;front&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;numpy.transpose()&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;back&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;numpy.transpose(a, axes=None)&quot;</span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span><span class="nt">&quot;front&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;numpy.dot()&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;back&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;numpy.dot(a, b, *, out=None)&quot;</span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span><span class="nt">&quot;front&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;numpy.sum()&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;back&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;numpy.sum(a, axis=None, dtype=None, out=None, keepdims=False, initial=0, where=True)&quot;</span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span><span class="nt">&quot;front&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;numpy.mean()&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;back&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;numpy.mean(a, axis=None, dtype=None, out=None, keepdims=False, *, where=True)&quot;</span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span><span class="nt">&quot;front&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;numpy.std()&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;back&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;numpy.std(a, axis=None, dtype=None, out=None, ddof=0, keepdims=False, *, where=True)&quot;</span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span><span class="nt">&quot;front&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;numpy.max()&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;back&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;numpy.max(a, axis=None, out=None, keepdims=False, initial=None, where=True)&quot;</span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span><span class="nt">&quot;front&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;numpy.min()&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;back&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;numpy.min(a, axis=None, out=None, keepdims=False, initial=None, where=True)&quot;</span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span><span class="nt">&quot;front&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;numpy.sort()&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;back&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;numpy.sort(a, axis=-1, kind=None, order=None)&quot;</span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span><span class="nt">&quot;front&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;numpy.concatenate()&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;back&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;numpy.concatenate((a1, a2, ...), axis=0, out=None, dtype=None, casting=&#39;same_kind&#39;)&quot;</span><span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>It would appear that we have what we want, but <em>appear</em> is the critical word. The variable <code class="docutils literal notranslate"><span class="pre">flash_cards</span></code> is not in the form we need yet. We need it in json form, but it is not there yet, it just looks that way. We need the string form, and you can see in two cells that the string has some extra stuff in it, notably the substrings</p>
+<div class="highlight-markdown notranslate"><div class="highlight"><pre><span></span><span class="sb">```json</span>
+<span class="err">...</span>
+<span class="sb">```</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">flash_cards</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>IPython.core.display.Markdown
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">j</span> <span class="o">=</span> <span class="n">flash_cards</span><span class="o">.</span><span class="n">data</span>
+<span class="n">j</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;```json\n[\n  {&quot;front&quot;: &quot;numpy.array()&quot;, &quot;back&quot;: &quot;numpy.array(object, dtype=None, *, copy=True, order=\&#39;K\&#39;, subok=False, ndmin=0, like=None)&quot;},\n  {&quot;front&quot;: &quot;numpy.arange()&quot;, &quot;back&quot;: &quot;numpy.arange([start,] stop[, step,], dtype=None, *, like=None)&quot;},\n  {&quot;front&quot;: &quot;numpy.linspace()&quot;, &quot;back&quot;: &quot;numpy.linspace(start, stop, num=50, endpoint=True, retstep=False, dtype=None, axis=0)&quot;},\n  {&quot;front&quot;: &quot;numpy.zeros()&quot;, &quot;back&quot;: &quot;numpy.zeros(shape, dtype=float, order=\&#39;C\&#39;, *, like=None)&quot;},\n  {&quot;front&quot;: &quot;numpy.ones()&quot;, &quot;back&quot;: &quot;numpy.ones(shape, dtype=None, order=\&#39;C\&#39;, *, like=None)&quot;},\n  {&quot;front&quot;: &quot;numpy.eye()&quot;, &quot;back&quot;: &quot;numpy.eye(N, M=None, k=0, dtype=&lt;class \&#39;float\&#39;&gt;, order=\&#39;C\&#39;, *, like=None)&quot;},\n  {&quot;front&quot;: &quot;numpy.reshape()&quot;, &quot;back&quot;: &quot;numpy.reshape(a, newshape, order=\&#39;C\&#39;)&quot;},\n  {&quot;front&quot;: &quot;numpy.transpose()&quot;, &quot;back&quot;: &quot;numpy.transpose(a, axes=None)&quot;},\n  {&quot;front&quot;: &quot;numpy.dot()&quot;, &quot;back&quot;: &quot;numpy.dot(a, b, *, out=None)&quot;},\n  {&quot;front&quot;: &quot;numpy.sum()&quot;, &quot;back&quot;: &quot;numpy.sum(a, axis=None, dtype=None, out=None, keepdims=False, initial=0, where=True)&quot;},\n  {&quot;front&quot;: &quot;numpy.mean()&quot;, &quot;back&quot;: &quot;numpy.mean(a, axis=None, dtype=None, out=None, keepdims=False, *, where=True)&quot;},\n  {&quot;front&quot;: &quot;numpy.std()&quot;, &quot;back&quot;: &quot;numpy.std(a, axis=None, dtype=None, out=None, ddof=0, keepdims=False, *, where=True)&quot;},\n  {&quot;front&quot;: &quot;numpy.max()&quot;, &quot;back&quot;: &quot;numpy.max(a, axis=None, out=None, keepdims=False, initial=None, where=True)&quot;},\n  {&quot;front&quot;: &quot;numpy.min()&quot;, &quot;back&quot;: &quot;numpy.min(a, axis=None, out=None, keepdims=False, initial=None, where=True)&quot;},\n  {&quot;front&quot;: &quot;numpy.sort()&quot;, &quot;back&quot;: &quot;numpy.sort(a, axis=-1, kind=None, order=None)&quot;},\n  {&quot;front&quot;: &quot;numpy.concatenate()&quot;, &quot;back&quot;: &quot;numpy.concatenate((a1, a2, ...), axis=0, out=None, dtype=None, casting=\&#39;same_kind\&#39;)&quot;}\n]\n```\n&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="n">fcs</span> <span class="o">=</span> <span class="n">flash_cards</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;```json&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;```&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+<span class="n">display_flashcards</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">fcs</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<div class="output text_html"><style>
+:root{
+  --asparagus: #87a878ff;
+  --terra-cotta: #e26d5aff;
+  --cyan-process: #5bc0ebff;
+  --dark-blue-gray: #666a86ff;
+  --snow: #fffafbff;
+  --rich-black-fogra-39: #090c08ff;
+}
+
+
+/* entire container, keeps perspective */
+.flip-container {
+	perspective: 1000px;
+  touch-action: pinch-zoom pan-y;
+}
+
+
+.flip-container.flip .flipper {
+    box-sizing: content-box;
+	  transform: rotateY(180deg);
+	/* transform: rotateY(180deg)  translateX(-6%);  */
+}
+
+
+.flip-container.slide .flipper.frontcard {
+    filter: brightness(90%);
+    position:absolute;
+    z-index: -20;
+    /* left: 20px; */
+}
+
+.flip-container.prepare .flipper.backcard {
+    opacity:1;
+    transition: display 0s;
+    transform:  translateX(20px); 
+}
+
+
+.flip-container.slide .flipper.backcard {
+    filter: brightness(115%);
+    /* height: 360px; */
+    opacity:1;
+	  transform:  rotateY(3deg)  translateX(700px) translateZ(20px) scale(1, 1.05) rotate(3deg);
+    z-index: 20;
+    /* left: -20px; */
+}
+
+
+
+
+.flip-container.slideback .flipper.backcard {
+    filter: brightness(100%);
+    opacity: 1;
+	  transform: translateX(0px) translateZ(20px) rotateY(0deg);
+    z-index: 10;
+}
+
+.flip-container.slideback .flipper.frontcard {
+    filter: brightness(90%);
+    transform: translateX(0px) translateZ(-20px);
+    z-index: -10;
+}
+
+
+.flip-container, .front, .back {
+	  height: 200px;
+	  width: 95%;
+}
+
+
+
+
+.flipper.frontcard {
+    position:absolute;
+	  transform: translateX(0px) rotateY(0deg) translateZ(20px);
+    z-index: 10;
+}
+
+.flipper.backcard {
+    filter: brightness(90%);
+    opacity:0;
+    position:absolute;
+    transform: translateX(0px) translateZ(-20px);
+    z-index: -10;
+}
+
+
+
+
+/* flip speed goes here */
+.flipper {
+    cursor:pointer;
+	  height: 200px;
+    margin-left:10px;
+	  position: absolute;
+    top: 0;
+	  transform-style: preserve-3d;
+	  transition: 0.6s;
+    /* width: 95%; */
+    width: 100%;
+}
+
+.flashcardtext{
+    color: var(--snow);
+    margin-left:3%;
+    position:absolute;
+    text-align:center;
+    top: 50%;
+    transform: translate(0, -50%);
+    width:90%;
+    font-size: 1.5em;
+}
+
+.back .flashcardtext{
+    font-size: 1.2em;
+}
+
+
+
+/* hide back of pane during swap */
+.front, .back {
+    -webkit-backface-visibility: hidden;
+	  backface-visibility: hidden;
+	  left: 0;
+	  position: absolute;
+	  top: 0;
+}
+
+/* front pane, placed above back */
+.front {
+	  backface-visibility: hidden;
+    background: var(--asparagus);
+    transform: rotateY(0deg);
+	  z-index: 2;
+}
+
+/* back, initially hidden pane */
+.back {
+	  backface-visibility: hidden;
+    background: var(--dark-blue-gray);
+	  transform: rotateY(180deg);
+}
+
+.jp-OutputArea-output .back {
+	  transform: rotateY(180deg) translateX(7.5%);
+}
+
+.next {
+    color: var(--rich-black-fogra-39);
+    cursor:pointer;
+    font-size: 1.5em;
+    /*left:90%; */
+    margin-left: 70%;
+    width: 55pt;
+    height: 22pt;
+    opacity:0.3;
+    position:relative; 
+    top:-1em;
+}
+
+.next svg {
+    height:16pt;
+    width:16pt;
+    position:relative;
+    top:-2pt;
+}
+
+.jp-OutputArea-output .next svg {
+    top: 1pt;
+}
+
+.next.flipped {
+    opacity:1;
+}
+
+.next.hide {
+    opacity:0;
+}
+
+
+.flashcard{
+    border-radius: 10px;
+    outline: none;
+    color: #fafafa;
+    display:block;
+    padding:10px;
+  
+}
+
+.flashcardtext li{
+    text-align: left;
+}
+
+@media only screen and (min-width:1000px) {
+
+    .flip-container, .front, .back {
+	      height: 300px;
+	      width: min(95%, 640px);
+    }
+
+    .flipper {
+        margin-left:20px;
+	      height: 300px;
+    }
+
+    .flashcardtext{
+        font-size: 20pt;
+    }
+
+    .next {
+        font-size: 16pt;
+        left:min(80%, 450pt);
+        margin-left: 0;
+        width: 55pt;
+        height: 22pt;
+        top:-0.5em;
+    }
+
+    .back .flashcardtext{
+        font-size: 1.5em;
+    }
+
+}
+
+@media only screen and (min-width:660px) and (max-width:999px) {
+    .next {
+        left:0;
+        margin-left: 80%;
+    }
+
+}
+
+@media only screen and (max-width:680px) and (min-height:376px) {
+    .flip-container, .front, .back {
+	      height: 300px;
+    }
+
+    .flipper {
+	      height: 300px;
+    }
+
+}
+
+@media only screen and (max-width:330px) and (max-height:600px) {
+
+    .back .flashcardtext{
+        font-size: 1em;
+    }
+    .next {
+        margin-left: 65%;
+    }
+
+}
+
+</style></div><div class="output text_html"><div style="height:40px"></div><div class="flip-container" id="BjCVTHhArreA" tabindex="0" style="outline:none;"></div><div style="height:40px"></div><div class="next" id="BjCVTHhArreA-next" onclick="window.checkFlip('BjCVTHhArreA')"> </div> <div style="height:40px"></div></div><script type="application/javascript">/*!
+ * swiped-events.js - v1.1.4
+ * Pure JavaScript swipe events
+ * https://github.com/john-doherty/swiped-events
+ * @inspiration https://stackoverflow.com/questions/16348031/disable-scrolling-when-touch-moving-certain-element
+ * @author John Doherty <www.johndoherty.info>
+ * @license MIT
+ */
+!function(t,e){"use strict";"function"!=typeof t.CustomEvent&&(t.CustomEvent=function(t,n){n=n||{bubbles:!1,cancelable:!1,detail:void 0};var a=e.createEvent("CustomEvent");return a.initCustomEvent(t,n.bubbles,n.cancelable,n.detail),a},t.CustomEvent.prototype=t.Event.prototype),e.addEventListener("touchstart",function(t){if("true"===t.target.getAttribute("data-swipe-ignore"))return;s=t.target,r=Date.now(),n=t.touches[0].clientX,a=t.touches[0].clientY,u=0,i=0},!1),e.addEventListener("touchmove",function(t){if(!n||!a)return;var e=t.touches[0].clientX,r=t.touches[0].clientY;u=n-e,i=a-r},!1),e.addEventListener("touchend",function(t){if(s!==t.target)return;var e=parseInt(l(s,"data-swipe-threshold","20"),10),o=parseInt(l(s,"data-swipe-timeout","500"),10),c=Date.now()-r,d="",p=t.changedTouches||t.touches||[];Math.abs(u)>Math.abs(i)?Math.abs(u)>e&&c<o&&(d=u>0?"swiped-left":"swiped-right"):Math.abs(i)>e&&c<o&&(d=i>0?"swiped-up":"swiped-down");if(""!==d){var b={dir:d.replace(/swiped-/,""),xStart:parseInt(n,10),xEnd:parseInt((p[0]||{}).clientX||-1,10),yStart:parseInt(a,10),yEnd:parseInt((p[0]||{}).clientY||-1,10)};s.dispatchEvent(new CustomEvent("swiped",{bubbles:!0,cancelable:!0,detail:b})),s.dispatchEvent(new CustomEvent(d,{bubbles:!0,cancelable:!0,detail:b}))}n=null,a=null,r=null},!1);var n=null,a=null,u=null,i=null,r=null,s=null;function l(t,n,a){for(;t&&t!==e.documentElement;){var u=t.getAttribute(n);if(u)return u;t=t.parentNode}return a}}(window,document);
+
+function jaxify(string) {
+    var mystring = string;
+    //console.log(mystring);
+
+    var count = 0;
+    var loc = mystring.search(/([^\\]|^)(\$)/);
+
+    var count2 = 0;
+    var loc2 = mystring.search(/([^\\]|^)(\$\$)/);
+
+    //console.log(loc);
+
+    while ((loc >= 0) || (loc2 >= 0)) {
+
+        /* Have to replace all the double $$ first with current implementation */
+        if (loc2 >= 0) {
+            if (count2 % 2 == 0) {
+                mystring = mystring.replace(/([^\\]|^)(\$\$)/, "$1\\[");
+            } else {
+                mystring = mystring.replace(/([^\\]|^)(\$\$)/, "$1\\]");
+            }
+            count2++;
+        } else {
+            if (count % 2 == 0) {
+                mystring = mystring.replace(/([^\\]|^)(\$)/, "$1\\(");
+            } else {
+                mystring = mystring.replace(/([^\\]|^)(\$)/, "$1\\)");
+            }
+            count++;
+        }
+        loc = mystring.search(/([^\\]|^)(\$)/);
+        loc2 = mystring.search(/([^\\]|^)(\$\$)/);
+        //console.log(mystring,", loc:",loc,", loc2:",loc2);
+    }
+
+    //console.log(mystring);
+    return mystring;
+}
+
+window.flipCard = function flipCard(ths) {
+    //console.log(ths);
+    //console.log(ths.id);
+    ths.classList.toggle("flip"); 
+    ths.focus();
+    var next=document.getElementById(ths.id+'-next');
+    next.style.pointerEvents='none';
+    /* ths.blur(); */
+    next.classList.add('flipped');
+    if (typeof MathJax != 'undefined') {
+        var version = MathJax.version;
+        //console.log('MathJax version', version);
+        if (version[0] == "2") {
+            MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+        } else if (version[0] == "3") {
+            MathJax.typeset([ths]);
+        }
+    } else {
+        //console.log('MathJax not detected');
+    }
+
+
+    setTimeout(reenableNext, 600, ths, next);
+}
+
+window.checkKey = function checkKey(container, event) {
+    event.stopPropagation();
+    /*
+    console.log(container);
+    console.log(event.key);
+    console.log(event.code);
+    */
+    /* JMS:  Working here*/
+    var next=document.getElementById(container.id+'-next');
+    /* Only react if not already sliding */
+    if (! next.classList.contains("hide")) {
+        if ((event.key == "j") || (event.key == "Enter") || (event.key == "ArrowRight")) {
+            window.checkFlip(container.id);
+        }
+        if (event.key == " ") {
+            window.flipCard(container);
+        }
+    }
+    event.preventDefault();
+}
+
+
+function reenableNext(ths, next) {
+    next.style.pointerEvents='auto';
+    /* ths.tabIndex= 0;*/
+    /* ths.focus(); */
+}
+
+
+
+function slide2(containerId) {
+    var container = document.getElementById(containerId);
+    var next=document.getElementById(containerId+'-next');
+    var frontcard = container.children[0];
+    var backcard = container.children[1];
+    container.style.pointerEvents='none';
+    /* container.removeAttribute("tabindex");*/
+    /* container.blur(); */
+    //backcard.style.pointerEvents='none';
+    next.style.pointerEvents='none';
+    next.classList.remove('flipped');
+    next.classList.add('hide');
+
+    //container.classList.add("prepare");
+    
+    container.className="flip-container slide";
+    backcard.parentElement.removeChild(frontcard);
+    backcard.parentElement.appendChild(frontcard);
+    setTimeout(slideback, 600, container, frontcard, backcard, next);
+    
+}
+
+
+window.checkFlip = function checkFlip(containerId) {
+    var container = document.getElementById(containerId);
+
+
+    if (container.classList.contains('flip')) {
+        container.classList.remove('flip');
+        setTimeout(slide2, 600, containerId);
+    } 
+    else {
+        slide2(containerId);
+    }
+}
+
+
+function slideback(container, frontcard, backcard, next) {
+    container.className="flip-container slideback";
+    setTimeout(cleanup, 550, container, frontcard, backcard, next);
+}
+
+function cleanup(container, frontcard, backcard, next) {
+    container.removeChild(frontcard);
+    backcard.className="flipper frontcard";
+    container.className="flip-container";
+
+    var cardnum=parseInt(container.dataset.cardnum);
+    var cards=eval('cards'+container.id);
+    var flipper=createOneCard(container, false, cards, cardnum);
+    container.append(flipper);
+    cardnum= (cardnum+1) % parseInt(container.dataset.numCards);
+    container.dataset.cardnum=cardnum;
+    if (cardnum != 1){
+        next.innerHTML="Next >";
+    } else {
+        //next.innerHTML="Reload \\(\\circlearrowleft\\) ";
+        next.innerHTML='Reload <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewbox="0 0 25 26"> <path d="M7,6a10,10,0,1,0,9,0" style="fill:none;stroke:black;stroke-width:2px" id="e2_circleArc"/> <line id="e3_line" x1="17" y1="6.5" x2="17.5" y2="15" style="stroke:black;fill:none;stroke-width:2px"/> <line id="e4_line" x1="16.5" y1="6.5" x2="26" y2="8" style="stroke:black;fill:none;stroke-width:2px"/> </svg> '
+        if (typeof MathJax != 'undefined') {
+            var version = MathJax.version;
+            //console.log('MathJax version', version);
+            if (version[0] == "2") {
+                MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+            } else if (version[0] == "3") {
+                MathJax.typeset([next]);
+            }
+        } else {
+            //console.log('MathJax not detected');
+        }
+
+
+    }
+
+    if (typeof MathJax != 'undefined') {
+        var version = MathJax.version;
+        //console.log('MathJax version', version);
+        if (version[0] == "2") {
+            MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+        } else if (version[0] == "3") {
+            MathJax.typeset();
+        }
+    } else {
+        //console.log('MathJax not detected');
+    }
+
+
+    next.style.pointerEvents='auto';
+    container.style.pointerEvents='auto';
+    /* container.tabIndex= 0; */
+    /* container.focus(); */
+    next.classList.remove('hide');
+    container.addEventListener('swiped-left', function(e) {
+        /*
+          console.log(e.detail);
+          console.log(id);
+        */
+        checkFlip(container.id);
+    }, {once: true });
+
+
+}
+
+
+function createOneCard  (mydiv, frontCard, cards, cardnum) {
+    var colors=eval('frontColors'+mydiv.id);
+    var backColors=eval('backColors'+mydiv.id);
+    var textColors=eval('textColors'+mydiv.id);
+    //console.log(backColors)
+
+    var flipper = document.createElement('div');
+    if (frontCard){
+        flipper.className="flipper frontcard";    
+    }
+    else {
+        flipper.className="flipper backcard";   
+    }
+
+    var front = document.createElement('div');
+    front.className='front flashcard';
+
+    var frontSpan= document.createElement('span');
+    frontSpan.className='flashcardtext';
+    frontSpan.innerHTML=jaxify(cards[cardnum]['front']);
+    frontSpan.style.color=textColors[cardnum % textColors.length];
+    //frontSpan.textContent=jaxify(cards[cardnum]['front']);
+    //front.style.background='var(' + colors[cardnum % colors.length] + ')';
+    front.style.background=colors[cardnum % colors.length];
+
+    front.append(frontSpan);
+    flipper.append(front);
+
+    var back = document.createElement('div');
+    back.className='back flashcard';
+    back.style.background=backColors[cardnum % backColors.length];
+
+    var backSpan= document.createElement('span');
+    backSpan.className='flashcardtext';
+    backSpan.innerHTML=jaxify(cards[cardnum]['back']);
+    backSpan.style.color=textColors[cardnum % textColors.length];
+    back.append(backSpan);
+
+    flipper.append(back);
+
+    return flipper;
+
+}
+
+
+
+
+
+function createCards(id, keyControl, grabFocus) {
+    console.log(id);
+
+    var mydiv=document.getElementById(id);
+    /*mydiv.onclick = window.flipCard(mydiv);*/
+    /*
+    mydiv.addEventListener('click', function(){window.flipCard(mydiv);}, false);
+    mydiv.addEventListener('keydown', function(event){window.checkKey(mydiv,event);}, true);
+    */
+    mydiv.onclick = function(){window.flipCard(mydiv);};
+    //console.log(keyControl);
+    if (keyControl == "True"){
+        mydiv.onkeydown = function(event){window.checkKey(mydiv,event);};
+    }
+    /* mydiv.addEventListener('keydown', function(event){event.stopPropagation(); console.log(event); event.preventDefault();}, true); */
+    /*mydiv.onkeypress = function(event){console.log(event); event.preventDefault();};*/
+
+    //console.log(mydiv);
+
+    var cards=eval('cards'+id);
+    mydiv.dataset.cardnum=0;
+    mydiv.dataset.numCards=cards.length;
+    mydiv.addEventListener('swiped-left', function(e) {
+        /*
+          console.log(e.detail);
+          console.log(id);
+        */
+        checkFlip(id);
+    }, {once: true});
+
+    var cardnum=0;
+    
+    for (var i=0; i<2; i++) {
+    
+        var flipper;
+        if (i==0){
+            flipper=createOneCard(mydiv, true, cards, cardnum);
+        }
+        else {
+            flipper=createOneCard(mydiv, false, cards, cardnum);
+        }
+
+        mydiv.append(flipper);
+        if (typeof MathJax != 'undefined') {
+            var version = MathJax.version;
+            if (typeof version == 'undefined') {
+                setTimeout(function(){
+                    var version = MathJax.version;
+                    console.log('After sleep, MathJax version', version);
+                    if (version[0] == "2") {
+                        MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+                    } else if (version[0] == "3") {
+                        MathJax.typeset([flipper]);
+                    }
+                }, 500);
+            } else{
+                console.log('MathJax version', version);
+                if (version[0] == "2") {
+                    MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+                } else if (version[0] == "3") {
+                    MathJax.typeset([flipper]);
+                }
+            }
+        } else {
+            console.log('MathJax not detected');
+        }
+
+
+        cardnum = (cardnum + 1) % mydiv.dataset.numCards;
+    }
+    mydiv.dataset.cardnum = cardnum;
+
+    var next=document.getElementById(id+'-next');
+    if (cards.length==1) {
+        // Don't show next if no other cards!
+        next.style.pointerEvents='none';
+        next.classList.add('hide');
+    } else {
+        next.innerHTML="Next >";
+    }
+
+    if (grabFocus == "True" )
+        mydiv.focus();
+
+    return flipper;
+}
+
+
+
+
+
+        function try_create() {
+          if(document.getElementById("BjCVTHhArreA")) {
+            createCards("BjCVTHhArreA", "True", "False");
+          } else {
+             setTimeout(try_create, 200);
+          }
+        };
+    
+var cardsBjCVTHhArreA=[{"front": "numpy.array()", "back": "numpy.array(object, dtype=None, *, copy=True, order='K', subok=False, ndmin=0, like=None)"}, {"front": "numpy.arange()", "back": "numpy.arange([start,] stop[, step,], dtype=None, *, like=None)"}, {"front": "numpy.linspace()", "back": "numpy.linspace(start, stop, num=50, endpoint=True, retstep=False, dtype=None, axis=0)"}, {"front": "numpy.zeros()", "back": "numpy.zeros(shape, dtype=float, order='C', *, like=None)"}, {"front": "numpy.ones()", "back": "numpy.ones(shape, dtype=None, order='C', *, like=None)"}, {"front": "numpy.eye()", "back": "numpy.eye(N, M=None, k=0, dtype=<class 'float'>, order='C', *, like=None)"}, {"front": "numpy.reshape()", "back": "numpy.reshape(a, newshape, order='C')"}, {"front": "numpy.transpose()", "back": "numpy.transpose(a, axes=None)"}, {"front": "numpy.dot()", "back": "numpy.dot(a, b, *, out=None)"}, {"front": "numpy.sum()", "back": "numpy.sum(a, axis=None, dtype=None, out=None, keepdims=False, initial=0, where=True)"}, {"front": "numpy.mean()", "back": "numpy.mean(a, axis=None, dtype=None, out=None, keepdims=False, *, where=True)"}, {"front": "numpy.std()", "back": "numpy.std(a, axis=None, dtype=None, out=None, ddof=0, keepdims=False, *, where=True)"}, {"front": "numpy.max()", "back": "numpy.max(a, axis=None, out=None, keepdims=False, initial=None, where=True)"}, {"front": "numpy.min()", "back": "numpy.min(a, axis=None, out=None, keepdims=False, initial=None, where=True)"}, {"front": "numpy.sort()", "back": "numpy.sort(a, axis=-1, kind=None, order=None)"}, {"front": "numpy.concatenate()", "back": "numpy.concatenate((a1, a2, ...), axis=0, out=None, dtype=None, casting='same_kind')"}];
+var frontColorsBjCVTHhArreA= ["var(--asparagus)", "var(--terra-cotta)", "var(--cyan-process)" ];
+var backColorsBjCVTHhArreA= ["var(--dark-blue-gray)" ];
+var textColorsBjCVTHhArreA= ["var(--snow)" ];
+try_create(); </script></div>
+</div>
+</section>
+<section id="generate-short-stories-to-help-you-study">
+<h2>Generate short stories to help you study<a class="headerlink" href="#generate-short-stories-to-help-you-study" title="Link to this heading">#</a></h2>
+<p>The idea here is to make a short story based on a notebook.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>If you get an error about exceeding the length of the context window it means you have run too many ai magic cells and the accumulated chat history is too long. You may need to restart the kernel and just run this code.</p>
+</div>
+<p>To do this we need to get the notebook in a form the LLM can use. That form is plain text, and we use the Markdown formatted version here. First we export the notebook to Markdown format using the <code class="docutils literal notranslate"><span class="pre">nbconvert</span></code> library.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">nbconvert</span><span class="w"> </span><span class="kn">import</span> <span class="n">MarkdownExporter</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nbformat</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;../03-fode-1/03-fode-1.ipynb&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">nb</span> <span class="o">=</span> <span class="n">nbformat</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">as_version</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+    
+    <span class="n">exporter</span> <span class="o">=</span> <span class="n">MarkdownExporter</span><span class="p">()</span>
+    <span class="p">(</span><span class="n">md</span><span class="p">,</span> <span class="n">_</span><span class="p">)</span> <span class="o">=</span> <span class="n">exporter</span><span class="o">.</span><span class="n">from_notebook_node</span><span class="p">(</span><span class="n">nb</span><span class="p">)</span>
+
+<span class="c1"># As we saw before</span>
+<span class="n">md</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;{&#39;</span><span class="p">,</span> <span class="s1">&#39;{{{{&#39;</span><span class="p">)</span>
+<span class="n">md</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;}&#39;</span><span class="p">,</span> <span class="s1">&#39;}}}}&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We use {md} to include the text we defined in the <code class="docutils literal notranslate"><span class="pre">md</span></code> variable above in the prompt below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">ai</span> gemini:gemini-1.5-flash
+
+ {md}
+
+Use the text above to write a short story that summarizes the content
+in a short dramatic story. Use characters like Becky Boa and Ricky Rattlesnake.
+
+Create some mnemonic sayings to help me remember 
+the main points of the notebook.
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="highlight-markdown notranslate"><div class="highlight"><pre><span></span><span class="gh"># Pyter Python&#39;s Differential Equation Adventure: A Short Story</span>
+
+Becky Boa, a bright but overwhelmed student, was struggling with her differential equations homework.  Ricky Rattlesnake, a seasoned mathematician, slithered over, noticing her furrowed brow.
+
+&quot;Having trouble, Becky?&quot; Ricky asked, his voice a low hiss.
+
+Becky sighed. &quot;These first-order ODEs are a tangled mess!  Homogeneous, non-homogeneous, integration, numerical methods... I can&#39;t keep it straight!&quot;
+
+Ricky chuckled, his scales shimmering. &quot;Think of it like navigating a jungle.  Homogeneous linear equations, like <span class="sb">`y&#39; + p(x)y = 0`</span>, are a clear path.  You can solve them by integration, using <span class="sb">`scipy.integrate.quad`</span> like a trusty machete to clear the way.  <span class="sb">`y(x) = b * exp(-∫p(ξ)dξ)`</span> is your compass.  But remember, you&#39;ll need your <span class="sb">`enumerate`</span> and <span class="sb">`np.zeros`</span> to make solution arrays.&quot;
+
+
+Becky nodded, visualizing the path.
+
+&quot;Non-homogeneous equations, like <span class="sb">`y&#39; + p(x)y = q(x)`</span>, are a dense thicket. Variation of parameters is needed – a more challenging integration requiring careful planning and execution.&quot;
+
+Ricky continued, &quot;When the jungle gets too thick, you need numerical methods. Euler&#39;s method is like inching forward carefully, but it&#39;s slow and prone to error.  Runge-Kutta is a much faster, more accurate method – think of it as a powerful vine swing that gets you across quickly.&quot;
+
+&quot;And <span class="sb">`scipy.integrate.solve_ivp`</span>?&quot; Becky asked.
+
+&quot;That&#39;s your ultimate jungle guide!  It handles all the tough terrain, chooses the best method, adapts to the challenges, and can even detect specific events – like finding where <span class="sb">`y = 4`</span> – using event functions.&quot;
+
+Becky smiled, a newfound understanding dawning. &quot;So, integration for simple linear equations, <span class="sb">`solve_ivp`</span> for everything else, and always remember <span class="sb">`enumerate`</span> and <span class="sb">`np.zeros`</span> for array solutions!&quot;
+
+&quot;Precisely!&quot; Ricky grinned. &quot;Now go forth and conquer those ODEs!&quot;
+
+
+<span class="gu">## Mnemonic Sayings:</span>
+
+<span class="k">*</span><span class="w"> </span><span class="gs">**Linear ODEs:**</span>  &quot;Linear&#39;s a breeze, integrate with ease!&quot; (Remember to use <span class="sb">`scipy.integrate.quad`</span> and the solution formula)
+<span class="k">*</span><span class="w"> </span><span class="gs">**Non-linear ODEs:**</span>  &quot;Non-linear&#39;s a fight, <span class="sb">`solve_ivp`</span> makes it right!&quot; (Remember to use <span class="sb">`scipy.integrate.solve_ivp`</span>)
+<span class="k">*</span><span class="w"> </span><span class="gs">**Array Solutions:**</span> &quot;<span class="sb">`Enumerate`</span> and <span class="sb">`zeros`</span>, build your arrays like heroes!&quot; (Remember to use <span class="sb">`enumerate`</span> and <span class="sb">`np.zeros`</span> to create solution arrays)
+<span class="k">*</span><span class="w"> </span><span class="gs">**`solve_ivp` Power:**</span> &quot;<span class="sb">`solve_ivp`</span>&#39;s the key, adaptive and free!&quot;  (Remember <span class="sb">`solve_ivp`</span>&#39;s adaptive step size and multiple methods)
+<span class="k">*</span><span class="w"> </span><span class="gs">**Event Detection:**</span> &quot;Events are found, when functions hit ground!&quot; (Remember that events are detected when an event function equals zero)
+</pre></div>
+</div>
+</div>
+</div>
+<p>This model is not multimodal, and it cannot create images.</p>
+</section>
+<section id="get-answers-in-a-language-you-prefer">
+<h2>Get answers in a language you prefer<a class="headerlink" href="#get-answers-in-a-language-you-prefer" title="Link to this heading">#</a></h2>
+<p>LLMs are pretty phenomenal. You can use other languages than English! I don’t have a lot of experience with this how accurate this is, so remember LLMs only output text that resembles what someone might say!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> jupyter_ai
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The jupyter_ai extension is already loaded. To reload it, use:
+  %reload_ext jupyter_ai
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">ai</span> gemini:gemini-1.5-flash
+
+Explícame el álgebra lineal.
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="highlight-markdown notranslate"><div class="highlight"><pre><span></span><span class="gh"># Álgebra Lineal: Una Explicación</span>
+
+El álgebra lineal es una rama de las matemáticas que estudia conceptos como vectores, matrices, espacios vectoriales, sistemas de ecuaciones lineales, transformaciones lineales, y sus propiedades.  Es fundamental en muchas áreas de la ciencia, la ingeniería y la informática.  Vamos a desglosar algunos conceptos clave:
+
+<span class="gs">**1. Vectores:**</span>
+
+<span class="k">*</span><span class="w"> </span><span class="gs">**Definición:**</span> Un vector es un objeto matemático que tiene magnitud (longitud) y dirección.  Se puede representar visualmente como una flecha.  En álgebra lineal, a menudo se representan como listas ordenadas de números (componentes).  Por ejemplo, en dos dimensiones:  <span class="sb">`v = [2, 3]`</span> representa un vector que se extiende 2 unidades en el eje x y 3 unidades en el eje y.
+
+<span class="k">*</span><span class="w"> </span><span class="gs">**Operaciones:**</span>  Las operaciones comunes con vectores incluyen:
+<span class="w">    </span><span class="k">*</span><span class="w"> </span><span class="gs">**Suma:**</span> Se suman componente a componente.  <span class="sb">`[1, 2] + [3, 4] = [4, 6]`</span>
+<span class="w">    </span><span class="k">*</span><span class="w"> </span><span class="gs">**Multiplicación por un escalar:**</span> Se multiplica cada componente por el escalar.  <span class="sb">`2 * [1, 2] = [2, 4]`</span>
+<span class="w">    </span><span class="k">*</span><span class="w"> </span><span class="gs">**Producto punto (o escalar):**</span>  Produce un escalar.  <span class="sb">`[1, 2] ⋅ [3, 4] = (1*3) + (2*4) = 11`</span>
+<span class="w">    </span><span class="k">*</span><span class="w"> </span><span class="gs">**Producto cruz (solo en 3D):**</span>  Produce un vector perpendicular a los dos vectores originales.
+
+<span class="gs">**2. Matrices:**</span>
+
+<span class="k">*</span><span class="w"> </span><span class="gs">**Definición:**</span> Una matriz es una colección rectangular de números dispuestos en filas y columnas.  Se pueden usar para representar sistemas de ecuaciones lineales, transformaciones lineales, y mucho más.
+
+<span class="k">*</span><span class="w"> </span><span class="gs">**Operaciones:**</span>  Las operaciones comunes con matrices incluyen:
+<span class="w">    </span><span class="k">*</span><span class="w"> </span><span class="gs">**Suma:**</span> Se suman elemento a elemento (solo si las matrices tienen las mismas dimensiones).
+<span class="w">    </span><span class="k">*</span><span class="w"> </span><span class="gs">**Multiplicación por un escalar:**</span> Se multiplica cada elemento por el escalar.
+<span class="w">    </span><span class="k">*</span><span class="w"> </span><span class="gs">**Multiplicación de matrices:**</span>  Es una operación más compleja que requiere que el número de columnas de la primera matriz sea igual al número de filas de la segunda matriz.  El resultado es una nueva matriz.
+<span class="w">    </span><span class="k">*</span><span class="w"> </span><span class="gs">**Transpuesta:**</span>  Intercambia las filas y las columnas de una matriz.
+<span class="w">    </span><span class="k">*</span><span class="w"> </span><span class="gs">**Inversa:**</span>  Solo existe para matrices cuadradas no singulares (determinante diferente de cero).  La multiplicación de una matriz por su inversa resulta en la matriz identidad.
+<span class="w">    </span><span class="k">*</span><span class="w"> </span><span class="gs">**Determinante:**</span> Un número que se calcula a partir de una matriz cuadrada y que proporciona información sobre las propiedades de la matriz (ej: si es invertible).
+
+<span class="gs">**3. Espacios Vectoriales:**</span>
+
+<span class="k">*</span><span class="w"> </span><span class="gs">**Definición:**</span> Un espacio vectorial es una colección de vectores que se cierra bajo la suma vectorial y la multiplicación escalar.  Esto significa que si sumas dos vectores del espacio, el resultado también está en el espacio, y si multiplicas un vector del espacio por un escalar, el resultado también está en el espacio.  Ejemplos comunes incluyen el espacio bidimensional (R²) y el espacio tridimensional (R³).
+
+<span class="gs">**4. Sistemas de Ecuaciones Lineales:**</span>
+
+<span class="k">*</span><span class="w"> </span><span class="gs">**Definición:**</span> Un sistema de ecuaciones lineales es un conjunto de ecuaciones donde cada ecuación es lineal (es decir, las variables solo están elevadas a la potencia 1).  Se pueden representar usando matrices y vectores.
+
+<span class="k">*</span><span class="w"> </span><span class="gs">**Solución:**</span>  Se busca encontrar los valores de las variables que satisfacen todas las ecuaciones simultáneamente.  Métodos para resolverlos incluyen eliminación gaussiana, eliminación de Gauss-Jordan, y la regla de Cramer (para sistemas pequeños).
+
+<span class="gs">**5. Transformaciones Lineales:**</span>
+
+<span class="k">*</span><span class="w"> </span><span class="gs">**Definición:**</span> Una transformación lineal es una función que mapea vectores de un espacio vectorial a otro, preservando la suma vectorial y la multiplicación escalar.  Se pueden representar usando matrices.
+
+<span class="gs">**Aplicaciones:**</span>
+
+El álgebra lineal se utiliza en una amplia gama de campos, incluyendo:
+
+<span class="k">*</span><span class="w"> </span><span class="gs">**Gráficos por computadora:**</span>  Representación de objetos 3D, transformaciones (rotación, escalado, traslación).
+<span class="k">*</span><span class="w"> </span><span class="gs">**Aprendizaje automático:**</span>  Análisis de datos, algoritmos de regresión y clasificación.
+<span class="k">*</span><span class="w"> </span><span class="gs">**Ingeniería:**</span>  Análisis de estructuras, circuitos eléctricos, procesamiento de señales.
+<span class="k">*</span><span class="w"> </span><span class="gs">**Física:**</span>  Mecánica cuántica, electromagnetismo.
+<span class="k">*</span><span class="w"> </span><span class="gs">**Economía:**</span>  Modelado económico, análisis de datos financieros.
+
+
+Este es un resumen general. Cada uno de estos conceptos tiene una profundidad considerable y requiere un estudio más detallado para una comprensión completa.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="summary">
+<h1>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h1>
+<p>GenAI offers many ways to interact with AI models, including the ability to generate flashcards, summarize content, and create mnemonics. In this example, we used the Gemini model to generate flashcards for Python’s NumPy library functions, displayed them, and then summarized a Jupyter notebook’s content into a short story with mnemonic sayings.</p>
+<p>You can use Gemini in a web app (and others like Claude Desktop and ChatGPT). Remember what you are here for; it is not simply to get an answer. We are here to learn. GenAI has a role in doing that, but it is not a replacement for learning. It is a tool to help you learn more effectively.</p>
+<p>In general, using LLMs costs money and comes with usage limitations. You have to consider if you are sharing privileged information with cloud servers. There is a risk the generated code could be plagiarized; you never know what the model has been trained on.</p>
+<a class="reference internal image-reference" href="../../_images/pp-genai.png"><img alt="../../_images/pp-genai.png" src="../../_images/pp-genai.png" style="width: 300px;" />
+</a>
+<div class="admonition warning" name="html-admonition" style="background: #FFF3CD; padding: 12px; border: 1px solid #F5C16C; border-radius: 8px">
+  <h1 class="title">⚠️ The Danger of Taking Shortcuts</h1>
+  <p>
+    As the semester wound down, the final project loomed: a challenging assignment that required creativity, analysis, and careful coding.
+  </p>
+  <p>
+    Lazlo Python, true to form, leaned back in his chair, yawning as he typed a quick prompt into a generative AI tool:  
+    <em>“Write my project code for me.”</em>
+  </p>
+  <p>
+    The AI dutifully gave him a neat solution. Lazlo copied it straight into his notebook without reading a line. He didn’t test it, didn’t ask why it worked, and didn’t bother to understand the logic. Satisfied, he slithered off to nap, confident that AI had “handled” the problem.
+  </p>
+  <p>
+    Pyter Python, meanwhile, sat upright with his glasses perched neatly on his nose. His coils tightened around his notebook as he asked the AI:  
+    <em>“Can you explain why this algorithm converges? What happens if I change this parameter? Show me three variations of the approach.”</em>
+  </p>
+  <p>
+    He read each response carefully, sketched diagrams in his notebook, and tested small bits of code on his laptop. Whenever something broke, he asked the AI to explain the error and then fixed it himself. Slowly, Pyter built not just a project, but an understanding.
+  </p>
+  <p>
+    On the final presentation day, Lazlo’s copied code sputtered out with errors he couldn’t explain. He looked panicked, mumbling excuses about the AI giving him “bad answers.”  
+  </p>
+  <p>
+    Pyter’s project, by contrast, ran smoothly. He confidently explained his methods, showing how he’d experimented with ideas and refined them. His professors nodded with approval.
+  </p>
+  <p>
+    As grades were posted, Lazlo sighed, realizing too late that AI hadn’t been a shortcut after all—it was a tool for learning, but only if you used it wisely. Pyter slithered past, cheerful as ever, notebook in tow.  
+  </p>
+  <p>
+    <strong>“Next time,” Pyter said with a grin, “try asking <em>why</em>, not just <em>what</em>.”</strong>
+  </p>
+</div></section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./lectures/06-genAI"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../05-nth-odes/05-nth-odes.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Higher order differential equations</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../07-nla-1/07-nla-1.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Introduction to nonlinear algebra</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Generative AI aka LLMs in scientific programming</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#llm-powered-tools-you-have-access-to-through-cmu">LLM-powered tools you have access to through CMU</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#pyter-python-and-discord">Pyter Python and Discord</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#github-copilot">GitHUB Copilot</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#jupyter-ai">Jupyter AI</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generate-flash-cards">Generate flash cards</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generate-short-stories-to-help-you-study">Generate short stories to help you study</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#get-answers-in-a-language-you-prefer">Get answers in a language you prefer</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By John Kitchin
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <script src="https://cdn.jsdelivr.net/npm/@widgetbot/crate@3" async defer>
+new Crate({
+server: '1408876219008553041',
+channel: '1425580151521153064'
+})
+</script>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
